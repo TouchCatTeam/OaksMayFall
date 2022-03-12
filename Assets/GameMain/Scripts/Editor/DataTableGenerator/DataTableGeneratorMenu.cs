@@ -13,7 +13,7 @@ namespace OaksMayFall.Editor.DataTableTools
 {
     public sealed class DataTableGeneratorMenu
     {
-        [MenuItem("Star Force/Generate DataTables")]
+        [MenuItem("GameFrameworkDataTable/Generate DataTables")]
         private static void GenerateDataTables()
         {
             foreach (string dataTableName in ProcedurePreload.DataTableNames)
