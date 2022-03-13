@@ -60,6 +60,8 @@ namespace OaksMayFall
             int sceneId = procedureOwner.GetData<VarInt32>("NextSceneId");
             m_ChangeToMenu = sceneId == MenuSceneId;
             IDataTable<DRScene> dtScene = GameEntry.DataTable.GetDataTable<DRScene>();
+            if(dtScene == null)
+                GameFramework.GameFrameworkLog.Debug("配置场景表出错 GameEntry.DataTable.GetDataTable<DRScene>() 返回 null\n请检查 Assets\\GameMain\\Scripts\\Procedure\\ProcedurePreload.cs 中 DataTableNames 是否包含 \"Scene\"");
             DRScene drScene = dtScene.GetDataRow(sceneId);
             if (drScene == null)
             {
@@ -126,7 +128,8 @@ namespace OaksMayFall
                 return;
             }
 
-            Log.Error("Load scene '{0}' failure, error message '{1}'.", ne.SceneAssetName, ne.ErrorMessage);
+            // 不知道为啥 Log.Error 没用
+            GameFramework.GameFrameworkLog.Debug("Load scene '{0}' failure, error message '{1}'.", ne.SceneAssetName, ne.ErrorMessage);
         }
 
         private void OnLoadSceneUpdate(object sender, GameEventArgs e)

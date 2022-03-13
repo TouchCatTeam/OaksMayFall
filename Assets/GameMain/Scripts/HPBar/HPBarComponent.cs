@@ -29,9 +29,20 @@ namespace OaksMayFall
 
         private void Start()
         {
+            // 检查配置
+            if (m_HPBarItemTemplate == null)
+            {
+                GameFramework.GameFrameworkLog.Debug("没有配置血量条的原型 m_HPBarItemTemplate");
+                return;
+            }
             if (m_HPBarInstanceRoot == null)
             {
-                Log.Error("You must set HP bar instance root first.");
+                GameFramework.GameFrameworkLog.Debug("没有配置血量条的根节点 m_HPBarInstanceRoot");
+                return;
+            }
+            if(GameEntry.ObjectPool == null)
+            {
+                GameFramework.GameFrameworkLog.Debug("没有初始化对象池 GameEntry.ObjectPool\n你可能需要检查是否放置了 GameEntry 脚本\n以及项目设置 Project Setting 中 GameEntry 脚本的执行顺序是否在 HPBarComponent 脚本之前");
                 return;
             }
 
@@ -46,15 +57,19 @@ namespace OaksMayFall
 
         private void Update()
         {
-            for (int i = m_ActiveHPBarItems.Count - 1; i >= 0; i--)
+            // 如果配置正常，那么 m_ActiveHPBarItems 将会指向一个列表，否则指向 null
+            if (m_ActiveHPBarItems != null)
             {
-                HPBarItem hpBarItem = m_ActiveHPBarItems[i];
-                if (hpBarItem.Refresh())
+                for (int i = m_ActiveHPBarItems.Count - 1; i >= 0; i--)
                 {
-                    continue;
-                }
+                    HPBarItem hpBarItem = m_ActiveHPBarItems[i];
+                    if (hpBarItem.Refresh())
+                    {
+                        continue;
+                    }
 
-                HideHPBar(hpBarItem);
+                    HideHPBar(hpBarItem);
+                }
             }
         }
 

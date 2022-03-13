@@ -59,15 +59,15 @@ namespace OaksMayFall
                 return;
             }
 
-            IDataTable<DREntity> dtEntity = GameEntry.DataTable.GetDataTable<DREntity>();
-            DREntity drEntity = dtEntity.GetDataRow(data.TypeId);
-            if (drEntity == null)
+            IDataTable<DRUEntity> dtUEntity = GameEntry.DataTable.GetDataTable<DRUEntity>();
+            DRUEntity drUEntity = dtUEntity.GetDataRow(data.TypeId);
+            if (drUEntity == null)
             {
                 Log.Warning("Can not load entity id '{0}' from data table.", data.TypeId.ToString());
                 return;
             }
 
-            entityComponent.ShowEntity(data.Id, logicType, AssetUtility.GetEntityAsset(drEntity.AssetName), entityGroup, priority, data);
+            entityComponent.ShowEntity(data.Id, logicType, AssetUtility.GetEntityAsset(drUEntity.AssetName), entityGroup, priority, data);
         }
 
         public static int GenerateSerialId(this EntityComponent entityComponent)

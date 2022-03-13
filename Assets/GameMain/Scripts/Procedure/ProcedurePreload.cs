@@ -19,17 +19,12 @@ namespace OaksMayFall
     {
         public static readonly string[] DataTableNames = new string[]
         {
-            "Aircraft",
-            "Armor",
-            "Asteroid",
-            "Entity",
+            "UEntity",
             "Music",
             "Scene",
             "Sound",
-            "Thruster",
             "UIForm",
             "UISound",
-            "Weapon",
         };
 
         private Dictionary<string, bool> m_LoadedFlag = new Dictionary<string, bool>();
@@ -78,6 +73,7 @@ namespace OaksMayFall
             {
                 if (!loadedFlag.Value)
                 {
+                    //GameFramework.GameFrameworkLog.Debug(loadedFlag.Key);
                     return;
                 }
             }
@@ -133,12 +129,12 @@ namespace OaksMayFall
                 {
                     m_LoadedFlag[Utility.Text.Format("Font.{0}", fontName)] = true;
                     UGuiForm.SetMainFont((Font)asset);
-                    Log.Info("Load font '{0}' OK.", fontName);
+                    GameFramework.GameFrameworkLog.Debug("Load font '{0}' OK.", fontName);
                 },
 
                 (assetName, status, errorMessage, userData) =>
                 {
-                    Log.Error("Can not load font '{0}' from '{1}' with error message '{2}'.", fontName, assetName, errorMessage);
+                    GameFramework.GameFrameworkLog.Debug("Can not load font '{0}' from '{1}' with error message '{2}'.", fontName, assetName, errorMessage);
                 }));
         }
 
@@ -151,7 +147,7 @@ namespace OaksMayFall
             }
 
             m_LoadedFlag[ne.ConfigAssetName] = true;
-            Log.Info("Load config '{0}' OK.", ne.ConfigAssetName);
+            GameFramework.GameFrameworkLog.Debug("Load config '{0}' OK.", ne.ConfigAssetName);
         }
 
         private void OnLoadConfigFailure(object sender, GameEventArgs e)
@@ -162,7 +158,7 @@ namespace OaksMayFall
                 return;
             }
 
-            Log.Error("Can not load config '{0}' from '{1}' with error message '{2}'.", ne.ConfigAssetName, ne.ConfigAssetName, ne.ErrorMessage);
+            GameFramework.GameFrameworkLog.Debug("Can not load config '{0}' from '{1}' with error message '{2}'.", ne.ConfigAssetName, ne.ConfigAssetName, ne.ErrorMessage);
         }
 
         private void OnLoadDataTableSuccess(object sender, GameEventArgs e)
@@ -174,7 +170,7 @@ namespace OaksMayFall
             }
 
             m_LoadedFlag[ne.DataTableAssetName] = true;
-            Log.Info("Load data table '{0}' OK.", ne.DataTableAssetName);
+            GameFramework.GameFrameworkLog.Debug("Load data table '{0}' OK.", ne.DataTableAssetName);
         }
 
         private void OnLoadDataTableFailure(object sender, GameEventArgs e)
@@ -185,7 +181,7 @@ namespace OaksMayFall
                 return;
             }
 
-            Log.Error("Can not load data table '{0}' from '{1}' with error message '{2}'.", ne.DataTableAssetName, ne.DataTableAssetName, ne.ErrorMessage);
+            GameFramework.GameFrameworkLog.Debug("Can not load data table '{0}' from '{1}' with error message '{2}'.", ne.DataTableAssetName, ne.DataTableAssetName, ne.ErrorMessage);
         }
 
         private void OnLoadDictionarySuccess(object sender, GameEventArgs e)
@@ -197,7 +193,7 @@ namespace OaksMayFall
             }
 
             m_LoadedFlag[ne.DictionaryAssetName] = true;
-            Log.Info("Load dictionary '{0}' OK.", ne.DictionaryAssetName);
+            GameFramework.GameFrameworkLog.Debug("Load dictionary '{0}' OK.", ne.DictionaryAssetName);
         }
 
         private void OnLoadDictionaryFailure(object sender, GameEventArgs e)
@@ -208,7 +204,7 @@ namespace OaksMayFall
                 return;
             }
 
-            Log.Error("Can not load dictionary '{0}' from '{1}' with error message '{2}'.", ne.DictionaryAssetName, ne.DictionaryAssetName, ne.ErrorMessage);
+            GameFramework.GameFrameworkLog.Debug("Can not load dictionary '{0}' from '{1}' with error message '{2}'.", ne.DictionaryAssetName, ne.DictionaryAssetName, ne.ErrorMessage);
         }
     }
 }

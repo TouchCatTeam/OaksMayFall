@@ -13,8 +13,8 @@ namespace OaksMayFall
     public enum GameMode : byte
     {
         /// <summary>
-        /// 生存模式。
+        /// 测试模式。
         /// </summary>
-        Survival,
+        Test,
     }
 }

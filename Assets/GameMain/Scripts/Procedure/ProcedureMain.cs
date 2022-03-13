@@ -37,7 +37,9 @@ namespace OaksMayFall
         {
             base.OnInit(procedureOwner);
 
-            //m_Games.Add(GameMode.Survival, new SurvivalGame());
+            // 添加一个游戏模式-游戏实例的字典
+            // 此时被创建出来的游戏实例不会运行
+            m_Games.Add(GameMode.Test, new TestGame());
         }
 
         protected override void OnDestroy(ProcedureOwner procedureOwner)
