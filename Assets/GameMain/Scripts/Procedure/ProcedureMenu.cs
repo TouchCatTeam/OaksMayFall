@@ -28,5 +28,15 @@ namespace OaksMayFall
         {
             m_StartGame = true;
         }
+
+        protected override void OnEnter(ProcedureOwner procedureOwner)
+        {
+            base.OnEnter(procedureOwner);
+
+            // 暂时先直接进入 Main
+            procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Main"));
+            procedureOwner.SetData<VarByte>("GameMode", (byte)GameMode.Test);
+            ChangeState<ProcedureChangeScene>(procedureOwner);
+        }
     }
 }

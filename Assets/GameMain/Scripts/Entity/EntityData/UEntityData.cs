@@ -13,58 +13,40 @@ namespace OaksMayFall
     [Serializable]
     public abstract class UEntityData    {
         [SerializeField]
-        private int m_Id = 0;
+        private int id = 0;
 
         [SerializeField]
-        private int m_TypeId = 0;
+        private int typeId = 0;
 
         [SerializeField]
-        private Vector3 m_Position = Vector3.zero;
+        private Vector3 position = Vector3.zero;
 
         [SerializeField]
-        private Quaternion m_Rotation = Quaternion.identity;
+        private Quaternion rotation = Quaternion.identity;
 
         public UEntityData(int entityId, int typeId)
         {
-            m_Id = entityId;
-            m_TypeId = typeId;
+            id = entityId;
+            this.typeId = typeId;
         }
 
         /// <summary>
         /// 实体编号。
         /// </summary>
-        public int Id
-        {
-            get
-            {
-                return m_Id;
-            }
-        }
+        public int Id => id;
 
         /// <summary>
         /// 实体类型编号。
         /// </summary>
-        public int TypeId
-        {
-            get
-            {
-                return m_TypeId;
-            }
-        }
+        public int TypeId => typeId;
 
         /// <summary>
         /// 实体位置。
         /// </summary>
         public Vector3 Position
         {
-            get
-            {
-                return m_Position;
-            }
-            set
-            {
-                m_Position = value;
-            }
+            get => position;
+            set => position = value;
         }
 
         /// <summary>
@@ -72,14 +54,8 @@ namespace OaksMayFall
         /// </summary>
         public Quaternion Rotation
         {
-            get
-            {
-                return m_Rotation;
-            }
-            set
-            {
-                m_Rotation = value;
-            }
+            get => rotation;
+            set => rotation = value;
         }
     }
 }

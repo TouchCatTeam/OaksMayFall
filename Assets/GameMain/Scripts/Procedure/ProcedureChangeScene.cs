@@ -7,6 +7,7 @@
 
 using GameFramework.DataTable;
 using GameFramework.Event;
+using UnityEngine;
 using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
@@ -70,6 +71,7 @@ namespace OaksMayFall
             }
 
             GameEntry.Scene.LoadScene(AssetUtility.GetSceneAsset(drScene.AssetName), Constant.AssetPriority.SceneAsset, this);
+
             m_BackgroundMusicId = drScene.BackgroundMusicId;
         }
 

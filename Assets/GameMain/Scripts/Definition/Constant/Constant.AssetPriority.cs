@@ -1,11 +1,4 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
-
-namespace OaksMayFall
+﻿namespace OaksMayFall
 {
     public static partial class Constant
     {
@@ -24,14 +17,7 @@ namespace OaksMayFall
             public const int UIFormAsset = 50;
             public const int UISoundAsset = 30;
 
-            public const int MyAircraftAsset = 90;
-            public const int AircraftAsset = 80;
-            public const int ThrusterAsset = 30;
-            public const int WeaponAsset = 30;
-            public const int ArmorAsset = 30;
-            public const int BulletAsset = 80;
-            public const int AsteroiAsset = 80;
-            public const int EffectAsset = 80;
+            public const int PlayerArmatureAsset = 90;
         }
     }
 }

@@ -53,19 +53,20 @@ namespace OaksMayFall
         {
             base.OnEnter(procedureOwner);
 
-            //m_GotoMenu = false;
-            //GameMode gameMode = (GameMode)procedureOwner.GetData<VarByte>("GameMode").Value;
-            //m_CurrentGame = m_Games[gameMode];
-            //m_CurrentGame.Initialize();
+            m_GotoMenu = false;
+            GameMode gameMode = (GameMode)procedureOwner.GetData<VarByte>("GameMode").Value;
+            m_CurrentGame = m_Games[gameMode];
+            m_CurrentGame.Initialize();
+
         }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
         {
-            //if (m_CurrentGame != null)
-            //{
-            //    m_CurrentGame.Shutdown();
-            //    m_CurrentGame = null;
-            //}
+            if (m_CurrentGame != null)
+            {
+                m_CurrentGame.Shutdown();
+                m_CurrentGame = null;
+            }
 
             base.OnLeave(procedureOwner, isShutdown);
         }
@@ -74,24 +75,24 @@ namespace OaksMayFall
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
-            //if (m_CurrentGame != null && !m_CurrentGame.GameOver)
-            //{
-            //    m_CurrentGame.Update(elapseSeconds, realElapseSeconds);
-            //    return;
-            //}
+            if (m_CurrentGame != null && !m_CurrentGame.GameOver)
+            {
+                m_CurrentGame.Update(elapseSeconds, realElapseSeconds);
+                return;
+            }
 
-            //if (!m_GotoMenu)
-            //{
-            //    m_GotoMenu = true;
-            //    m_GotoMenuDelaySeconds = 0;
-            //}
+            if (!m_GotoMenu)
+            {
+                m_GotoMenu = true;
+                m_GotoMenuDelaySeconds = 0;
+            }
 
-            //m_GotoMenuDelaySeconds += elapseSeconds;
-            //if (m_GotoMenuDelaySeconds >= GameOverDelayedSeconds)
-            //{
-            //    procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Menu"));
-            //    ChangeState<ProcedureChangeScene>(procedureOwner);
-            //}
+            m_GotoMenuDelaySeconds += elapseSeconds;
+            if (m_GotoMenuDelaySeconds >= GameOverDelayedSeconds)
+            {
+                procedureOwner.SetData<VarInt32>("NextSceneId", GameEntry.Config.GetInt("Scene.Menu"));
+                ChangeState<ProcedureChangeScene>(procedureOwner);
+            }
         }
     }
 }

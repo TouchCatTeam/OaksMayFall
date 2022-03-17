@@ -41,10 +41,10 @@ namespace OaksMayFall
             entityComponent.AttachEntity(entity.Entity, ownerId, parentTransformPath, userData);
         }
 
-        //public static void ShowBullet(this EntityComponent entityCompoennt, BulletData data)
-        //{
-        //    entityCompoennt.ShowEntity(typeof(Bullet), "Bullet", Constant.AssetPriority.BulletAsset, data);
-        //}
+        public static void ShowPlayerArmature(this EntityComponent entityCompoennt, PlayerArmatureData data)
+        {
+            entityCompoennt.ShowEntity(typeof(PlayerArmature), "PlayerArmature", Constant.AssetPriority.PlayerArmatureAsset, data);
+        }
 
         //public static void ShowEffect(this EntityComponent entityComponent, EffectData data)
         //{

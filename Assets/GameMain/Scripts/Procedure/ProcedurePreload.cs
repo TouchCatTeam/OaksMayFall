@@ -20,6 +20,7 @@ namespace OaksMayFall
         public static readonly string[] DataTableNames = new string[]
         {
             "UEntity",
+            "PlayerArmature",
             "Music",
             "Scene",
             "Sound",

@@ -14,20 +14,14 @@ namespace OaksMayFall
     public class EffectData : UEntityData
     {
         [SerializeField]
-        private float m_KeepTime = 0f;
+        private float keepTime = 0f;
 
         public EffectData(int entityId, int typeId)
             : base(entityId, typeId)
         {
-            m_KeepTime = 3f;
+            keepTime = 3f;
         }
 
-        public float KeepTime
-        {
-            get
-            {
-                return m_KeepTime;
-            }
-        }
+        public float KeepTime => keepTime;
     }
 }

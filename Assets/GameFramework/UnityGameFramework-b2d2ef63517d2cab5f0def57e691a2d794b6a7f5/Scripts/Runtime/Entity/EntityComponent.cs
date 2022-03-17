@@ -83,6 +83,7 @@ namespace UnityGameFramework.Runtime
             base.Awake();
 
             m_EntityManager = GameFrameworkEntry.GetModule<IEntityManager>();
+            
             if (m_EntityManager == null)
             {
                 Log.Fatal("Entity manager is invalid.");
