@@ -100,10 +100,13 @@ namespace OaksMayFall
             if (_hasAnimator)
                 SetAnimatorValue();
             
-            // 跳跃
-            ThirdPersonControllerUtility.JumpAndGravity(_input, _isGrounded, ref _fallTimeoutDelta, ref _jumpTimeoutDelta,
-                playerArmatureData.FallTimeout, playerArmatureData.JumpTimeout,
-                ref _verticalVelocity, playerArmatureData.JumpHeight, playerArmatureData.Gravity, _terminalVelocity);
+            // // 跳跃和重力
+            // ThirdPersonControllerUtility.JumpAndGravity(_input, _isGrounded, ref _fallTimeoutDelta, ref _jumpTimeoutDelta,
+            //     playerArmatureData.FallTimeout, playerArmatureData.JumpTimeout,
+            //     ref _verticalVelocity, playerArmatureData.JumpHeight, playerArmatureData.Gravity, _terminalVelocity);
+            
+            // 重力
+            ThirdPersonControllerUtility.Gravity(_isGrounded, ref _verticalVelocity, playerArmatureData.Gravity, playerArmatureData.TerminalVelocity);
             
             // 着地
             _isGrounded = ThirdPersonControllerUtility.IsGrounded(transform, playerArmatureData.GroundedOffset,
@@ -144,6 +147,30 @@ namespace OaksMayFall
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
         
+        // private void SetAnimatorValue()
+        // {
+        //     // 着地
+        //     _animator.SetBool(_animIDGrounded, _isGrounded);
+        //     
+        //     // 跳跃
+        //     if (_isGrounded)
+        //     {
+        //         _animator.SetBool(_animIDJump, false);
+        //         _animator.SetBool(_animIDFreeFall, false);
+        //         
+        //         // Jump
+        //         if (_input.Jump && _jumpTimeoutDelta <= 0.0f)
+        //             _animator.SetBool(_animIDJump, true);
+        //     }
+        //     // 自由下落
+        //     else if(_fallTimeoutDelta < 0.0f)
+        //         _animator.SetBool(_animIDFreeFall, true);
+        //     
+        //     // 移动
+        //     _animator.SetFloat(_animIDSpeed, _animationBlend);
+        //     _animator.SetFloat(_animIDMotionSpeed, _inputMagnitude);
+        // }
+        
         private void SetAnimatorValue()
         {
             // 着地
@@ -154,13 +181,9 @@ namespace OaksMayFall
             {
                 _animator.SetBool(_animIDJump, false);
                 _animator.SetBool(_animIDFreeFall, false);
-                
-                // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-                    _animator.SetBool(_animIDJump, true);
             }
             // 自由下落
-            else if(_fallTimeoutDelta < 0.0f)
+            else
                 _animator.SetBool(_animIDFreeFall, true);
             
             // 移动

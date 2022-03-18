@@ -27,6 +27,9 @@ namespace OaksMayFall
         private float gravity = 0f;
 
         [SerializeField]
+        private float terminalVelocity = 0f;
+        
+        [SerializeField]
         private float jumpTimeout = 0f;
 
         [SerializeField]
@@ -62,6 +65,7 @@ namespace OaksMayFall
             speedChangeRate = drPlayerArmature.SpeedChangeRate;
             jumpHeight = drPlayerArmature.JumpHeight;
             gravity = drPlayerArmature.Gravity;
+            terminalVelocity = drPlayerArmature.TerminalVelocity;
             jumpTimeout = drPlayerArmature.JumpTimeout;
             fallTimeout = drPlayerArmature.FallTimeout;
             groundedOffset = drPlayerArmature.GroundedOffset;
@@ -80,6 +84,8 @@ namespace OaksMayFall
 
         public float SpeedChangeRate => speedChangeRate;
 
+        public float TerminalVelocity => terminalVelocity;
+        
         public float JumpHeight => jumpHeight;
 
         public float Gravity => gravity;

@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2022-03-18 11:23:42.145
+// 生成时间：2022-03-18 22:22:43.783
 //------------------------------------------------------------
 
 using GameFramework;
@@ -76,6 +76,15 @@ namespace OaksMayFall
         /// 获取重力系数。
         /// </summary>
         public float Gravity
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取下落极限速度。
+        /// </summary>
+        public float TerminalVelocity
         {
             get;
             private set;
@@ -170,6 +179,7 @@ namespace OaksMayFall
             SpeedChangeRate = float.Parse(columnStrings[index++]);
             JumpHeight = float.Parse(columnStrings[index++]);
             Gravity = float.Parse(columnStrings[index++]);
+            TerminalVelocity = float.Parse(columnStrings[index++]);
             JumpTimeout = float.Parse(columnStrings[index++]);
             FallTimeout = float.Parse(columnStrings[index++]);
             GroundedOffset = float.Parse(columnStrings[index++]);
@@ -195,6 +205,7 @@ namespace OaksMayFall
                     SpeedChangeRate = binaryReader.ReadSingle();
                     JumpHeight = binaryReader.ReadSingle();
                     Gravity = binaryReader.ReadSingle();
+                    TerminalVelocity = binaryReader.ReadSingle();
                     JumpTimeout = binaryReader.ReadSingle();
                     FallTimeout = binaryReader.ReadSingle();
                     GroundedOffset = binaryReader.ReadSingle();

@@ -7,15 +7,18 @@ namespace OaksMayFall
 {
 	public class OaksMayFallInputController : MonoBehaviour
 	{
-		[Header("Character Input Values")]
-		public Vector2 move;
-		public Vector2 look;
-		public bool jump;
-		public bool sprint;
+		private Vector2 move;
+		private Vector2 look;
+		private bool jump;
+		private bool sprint;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
+		public Vector2 Move => move;
+		public Vector2 Look => look;
+		public bool Sprint => sprint;
+		
 #if !UNITY_IOS || !UNITY_ANDROID
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
@@ -23,52 +26,24 @@ namespace OaksMayFall
 #endif
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-		public void OnMove(InputValue value)
+		private void OnMove(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+			move = value.Get<Vector2>();
 		}
 
-		public void OnLook(InputValue value)
+		private void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
-			{
-				LookInput(value.Get<Vector2>());
-			}
+			if (cursorInputForLook)
+				look = value.Get<Vector2>();
 		}
 
-		public void OnJump(InputValue value)
+		private void OnSprint(InputValue value)
 		{
-			JumpInput(value.isPressed);
-		}
-
-		public void OnSprint(InputValue value)
-		{
-			SprintInput(value.isPressed);
+			sprint = value.isPressed;
 		}
 #else
 	// old input sys if we do decide to have it (most likely wont)...
 #endif
-
-
-		private void MoveInput(Vector2 newMoveDirection)
-		{
-			move = newMoveDirection;
-		}
-
-		private void LookInput(Vector2 newLookDirection)
-		{
-			look = newLookDirection;
-		}
-
-		private void JumpInput(bool newJumpState)
-		{
-			jump = newJumpState;
-		}
-
-		private void SprintInput(bool newSprintState)
-		{
-			sprint = newSprintState;
-		}
 
 #if !UNITY_IOS || !UNITY_ANDROID
 
