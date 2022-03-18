@@ -27,7 +27,6 @@ namespace OaksMayFall
         private float _inputMagnitude = 0f;
         private float _rotationVelocity = 0f;
         private float _verticalVelocity = 0f;
-        private float _terminalVelocity = 53.0f;
 
         // timeout deltatime
         private float _jumpTimeoutDelta = 0f;
