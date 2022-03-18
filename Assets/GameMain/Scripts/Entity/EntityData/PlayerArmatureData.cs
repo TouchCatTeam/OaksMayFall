@@ -40,7 +40,10 @@ namespace OaksMayFall
 
         [SerializeField]
         private int groundLayers = 0;
-
+        
+        [SerializeField]
+        private float cameraRotSpeed = 0f;
+        
         [SerializeField]
         private float topClamp = 0f;
 
@@ -64,6 +67,7 @@ namespace OaksMayFall
             groundedOffset = drPlayerArmature.GroundedOffset;
             groundedRadius = drPlayerArmature.GroundedRadius;
             groundLayers = drPlayerArmature.GroundLayers;
+            cameraRotSpeed = drPlayerArmature.CameraRotSpeed;
             topClamp = drPlayerArmature.TopClamp;
             bottomClamp = drPlayerArmature.BottomClamp;
         }
@@ -90,6 +94,8 @@ namespace OaksMayFall
 
         public int GroundLayers => groundLayers;
 
+        public float CameraRotSpeed => cameraRotSpeed;
+        
         public float TopClamp => topClamp;
 
         public float BottomClamp => bottomClamp;

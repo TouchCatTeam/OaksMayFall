@@ -113,13 +113,13 @@ namespace OaksMayFall
 		}
         
         public static void CameraRotation(OaksMayFallInputController input, GameObject cinemachineCameraTarget, float threshold, bool isCameraFixed,
-	        ref float cinemachineTargetYaw, ref float cinemachineTargetPitch, float bottomClamp, float topClamp, float cameraAngleOverride)
+	        ref float cinemachineTargetYaw, ref float cinemachineTargetPitch, float cameraRotSpeed, float bottomClamp, float topClamp, float cameraAngleOverride)
         {
 	        // if there is an input and camera position is not fixed
 	        if (input.look.sqrMagnitude >= threshold && !isCameraFixed)
 	        {
-		        cinemachineTargetYaw += input.look.x * Time.deltaTime;
-		        cinemachineTargetPitch += input.look.y * Time.deltaTime;
+		        cinemachineTargetYaw += input.look.x * Time.deltaTime * cameraRotSpeed / 100.0f;
+		        cinemachineTargetPitch += input.look.y * Time.deltaTime * cameraRotSpeed / 100.0f;
 	        }
 
 	        // clamp our rotations so our values are limited 360 degrees

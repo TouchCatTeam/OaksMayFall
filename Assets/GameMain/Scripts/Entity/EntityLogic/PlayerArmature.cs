@@ -119,7 +119,7 @@ namespace OaksMayFall
         {
             // 摄像机运动
             ThirdPersonControllerUtility.CameraRotation(_input, _cinemachineCameraTarget, Threshold, _isCameraFixed,
-                ref _cinemachineTargetYaw, ref _cinemachineTargetPitch, playerArmatureData.BottomClamp,
+                ref _cinemachineTargetYaw, ref _cinemachineTargetPitch, playerArmatureData.CameraRotSpeed, playerArmatureData.BottomClamp,
                 playerArmatureData.TopClamp, _cameraAngleOverride);
         }
         

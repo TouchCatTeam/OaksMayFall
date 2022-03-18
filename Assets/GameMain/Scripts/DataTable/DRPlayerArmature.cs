@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2022-03-16 14:29:50.154
+// 生成时间：2022-03-18 11:23:42.145
 //------------------------------------------------------------
 
 using GameFramework;
@@ -127,6 +127,15 @@ namespace OaksMayFall
         }
 
         /// <summary>
+        /// 获取摄像机转动的速度。
+        /// </summary>
+        public float CameraRotSpeed
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 获取摄像机最大俯仰角。
         /// </summary>
         public float TopClamp
@@ -166,6 +175,7 @@ namespace OaksMayFall
             GroundedOffset = float.Parse(columnStrings[index++]);
             GroundedRadius = float.Parse(columnStrings[index++]);
             GroundLayers = int.Parse(columnStrings[index++]);
+            CameraRotSpeed = float.Parse(columnStrings[index++]);
             TopClamp = float.Parse(columnStrings[index++]);
             BottomClamp = float.Parse(columnStrings[index++]);
 
@@ -190,6 +200,7 @@ namespace OaksMayFall
                     GroundedOffset = binaryReader.ReadSingle();
                     GroundedRadius = binaryReader.ReadSingle();
                     GroundLayers = binaryReader.Read7BitEncodedInt32();
+                    CameraRotSpeed = binaryReader.ReadSingle();
                     TopClamp = binaryReader.ReadSingle();
                     BottomClamp = binaryReader.ReadSingle();
                 }
