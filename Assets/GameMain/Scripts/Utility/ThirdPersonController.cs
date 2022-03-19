@@ -21,14 +21,18 @@ namespace OaksMayFall
 	    /// 冲刺速度
 	    /// </summary>
 	    private float _sprintSpeed = 30f;
-		/// <summary>
-		/// 玩家附加速度的过渡时间
-		/// </summary>
-	    private float _additionalVelocitySmoothTime = 0.2f;
 	    /// <summary>
 	    /// 玩家旋转的的过渡时间
 	    /// </summary>
 	    private float _rotationSmoothTime = 0.2f;
+	    /// <summary>
+	    /// 玩家附加速度的过渡时间
+	    /// </summary>
+	    private float _additionalVelocitySmoothTime = 0.2f;
+		/// <summary>
+		/// 摄像机跟随点的当前俯仰角和摄像机跟随点的当前偏航角组成的向量的过渡时间
+		/// </summary>
+	    private float _cinemachinePYSmoothTime = 0.2f;
 	    /// <summary>
 	    /// 移动速度的变化速率
 	    /// </summary>
@@ -81,7 +85,7 @@ namespace OaksMayFall
 	    /// <summary>
 	    /// 摄像机转动的速度
 	    /// </summary>
-	    private float _cameraRotSpeed = 30f;
+	    private float _cameraRotSpeed = 20f;
 	    /// <summary>
 	    /// 摄像机最大俯仰角
 	    /// </summary>
@@ -145,10 +149,6 @@ namespace OaksMayFall
 	    /// </summary>
 	    private float _speedOffset = 0.1f;
 		/// <summary>
-		/// 冲刺速度的过渡速度
-		/// </summary>
-		private Vector3 _additionalVelocitySmoothVelocity;
-	    /// <summary>
 	    /// 旋转角的过渡速度
 	    /// </summary>
 	    private float _rotationSmoothVelocity;
@@ -156,26 +156,34 @@ namespace OaksMayFall
 	    /// 竖向速度
 	    /// </summary>
 	    private float _verticalVelocity;
-		/// <summary>
-		/// 冲刺速度
-		/// </summary>
-	    private Vector3 _sprintVelocity = Vector3.zero;
 	    /// <summary>
 	    /// 附加速度
 	    /// </summary>
 	    private Vector3 _additionalVelocity = Vector3.zero;
 	    /// <summary>
+	    /// 附加速度的过渡速度
+	    /// </summary>
+	    private Vector3 _additionalVelocitySmoothVelocity;
+	    /// <summary>
 	    /// 摄像机是否固定
 	    /// </summary>
 	    private bool _isCameraFixed = false;
 	    /// <summary>
-	    /// 摄像机偏航角
-	    /// </summary>
-	    private float _cinemachineTargetYaw;
-	    /// <summary>
-	    /// 摄像机俯仰角
+	    /// 摄像机跟随点的期望俯仰角
 	    /// </summary>
 	    private float _cinemachineTargetPitch;
+	    /// <summary>
+	    /// 摄像机跟随点的期望偏航角
+	    /// </summary>
+	    private float _cinemachineTargetYaw;
+		/// <summary>
+		/// 摄像机跟随点的当前俯仰角和摄像机跟随点的当前偏航角组成的向量
+		/// </summary>
+	    private Vector2 _cinemachineCurrPY;
+		/// <summary>
+		/// 摄像机跟随点的当前俯仰角和摄像机跟随点的当前偏航角组成的向量的过渡速度
+		/// </summary>
+		private Vector2 _cinemachinePYSmoothVelocity;
 
 	    /// <summary>
 	    /// 构造函数
@@ -238,10 +246,8 @@ namespace OaksMayFall
 	        if (_userInput.Sprint && _sprintTimeoutDelta <= 0f)
 	        {
 		        _sprintTimeoutDelta = _sprintTimeout;
-		        // 冲刺速度
-		        _sprintVelocity = targetDirection.normalized * _sprintSpeed;
 		        // 当前附加速度初始化为冲刺速度
-		        _additionalVelocity = _sprintVelocity;
+		        _additionalVelocity = targetDirection.normalized * _sprintSpeed;
 	        }
 	        
 	        // 如果冲刺计时器大于 0，说明当前正在冲刺
@@ -325,9 +331,14 @@ namespace OaksMayFall
 	        // clamp our rotations so our values are limited 360 degrees
 	        _cinemachineTargetYaw = MathUtility.ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
 	        _cinemachineTargetPitch = MathUtility.ClampAngle(_cinemachineTargetPitch, _bottomClamp, _topClamp);
-
+	        
+	        // 过渡
+	        _cinemachineCurrPY = Vector2.SmoothDamp(_cinemachineCurrPY,
+		        new Vector2(_cinemachineTargetPitch, _cinemachineTargetYaw), ref _cinemachinePYSmoothVelocity,
+		        _cinemachinePYSmoothTime);
+	        
 	        // Cinemachine will follow this target
-	        _cinemachineCameraFollowTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + _cameraAngleOverride, _cinemachineTargetYaw, 0.0f);
+	        _cinemachineCameraFollowTarget.transform.rotation = Quaternion.Euler(_cinemachineCurrPY.x + _cameraAngleOverride, _cinemachineCurrPY.y, 0.0f);
         }
         
         /// <summary>
