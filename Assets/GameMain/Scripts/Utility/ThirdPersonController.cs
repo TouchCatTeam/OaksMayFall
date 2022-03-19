@@ -19,28 +19,49 @@ namespace OaksMayFall
 	    /// </summary>
 	    private float _walkSpeed = 7f;
 	    /// <summary>
-	    /// 冲刺速度
-	    /// </summary>
-	    private float _sprintSpeed = 30f;
-	    /// <summary>
-	    /// 玩家旋转的的过渡时间
+	    /// 玩家旋转的过渡时间
 	    /// </summary>
 	    private float _rotationSmoothTime = 0.2f;
 	    /// <summary>
-	    /// 玩家附加速度的过渡时间
+	    /// 水平速度
 	    /// </summary>
-	    private float _additionalVelocitySmoothTime = 0.2f;
+	    /// <returns></returns>
+	    private Vector3 _horizontalVelocity;
 	    /// <summary>
-	    /// 移动速度的变化速率
+	    /// 竖向速度
 	    /// </summary>
-	    private float _moveSpeedChangeRate = 10f;
-	    
+	    private Vector3 _verticalVelocity;
+	    /// <summary>
+	    /// 旋转角的过渡速度
+	    /// </summary>
+	    private float _rotationSmoothVelocity;
+	    /// <summary>
+	    /// 行走速度的过渡速度
+	    /// </summary>
+	    private Vector3 _walkSmoothVelocity;
+	    /// <summary>
+	    /// 玩家行走的过渡时间
+	    /// </summary>
+	    private float _walkSmoothTime = 0.2f;
+
 	    // 冲刺相关
 	    
+	    /// <summary>
+	    /// 冲刺速度
+	    /// </summary>
+	    private float _sprintSpeed = 20f;
 	    // 冲刺计时器
 	    private float _sprintTimeoutDelta;
-	    // 冲刺速度的过渡时间
+	    // 冲刺的冷却时间
 	    private float _sprintTimeout = 0.25f;
+	    /// <summary>
+	    /// 冲刺速度的过渡速度
+	    /// </summary>
+	    private Vector3 _sprintSmoothVelocity;
+	    /// <summary>
+	    /// 玩家冲刺速度的过渡时间
+	    /// </summary>
+	    private float _sprintSmoothTime = 0.2f;
 	    
 	    // 物理相关
 	    
@@ -99,6 +120,30 @@ namespace OaksMayFall
 	    /// 摄像机跟随点的当前偏航角的过渡时间
 	    /// </summary>
 	    private float _cinemachineYawSmoothTime = 0.1f;
+	    /// <summary>
+	    /// 摄像机是否固定
+	    /// </summary>
+	    private bool _isCameraFixed = false;
+	    /// <summary>
+	    /// 摄像机跟随点的期望俯仰角
+	    /// </summary>
+	    private float _cinemachineTargetPitch;
+	    /// <summary>
+	    /// 摄像机跟随点的期望偏航角
+	    /// </summary>
+	    private float _cinemachineTargetYaw;
+	    /// <summary>
+	    /// 摄像机跟随点的当前俯仰角和摄像机跟随点的当前偏航角组成的向量
+	    /// </summary>
+	    private Vector2 _cinemachineCurrPY;
+	    /// <summary>
+	    /// 摄像机跟随点的当前俯仰角的过渡速度
+	    /// </summary>
+	    private float _cinemachinePitchSmoothVelocity;
+	    /// <summary>
+	    /// 摄像机跟随点的当前俯仰角的过渡速度
+	    /// </summary>
+	    private float _cinemachineYawSmoothVelocity;
 	    
 	    // 动画相关
 	    
@@ -114,8 +159,20 @@ namespace OaksMayFall
 	    /// 动画状态机的自由落体参数的 id
 	    /// </summary>
 	    private int _animIDFreeFall;
-	    
-	    // 控制缓存
+		/// <summary>
+		/// 跑步动画混合值
+		/// </summary>
+	    private float _moveAnimBlend;
+		/// <summary>
+		/// 跑步动画混合值的过渡速度
+		/// </summary>
+		private float _moveAnimBlendSmoothVelocity;
+		/// <summary>
+		/// 跑步动画混合值的过渡时间
+		/// </summary>
+		private float _moveAnimBlendSmoothTime = 0.2f;
+		
+	    // 组件
 
 	    /// <summary>
 	    /// 第三人称控制器的使用者的变换
@@ -141,60 +198,8 @@ namespace OaksMayFall
 		/// 主摄像机
 		/// </summary>
 		private GameObject _mainCamera;
+
 		/// <summary>
-		/// 角色当前速度
-		/// </summary>
-		private float _currSpeed;
-		/// <summary>
-		/// 行走动画的混合值
-		/// </summary>
-		private float _animationBlend;
-		/// <summary>
-	    /// 速度容差
-	    /// </summary>
-	    private float _speedOffset = 0.1f;
-		/// <summary>
-	    /// 旋转角的过渡速度
-	    /// </summary>
-	    private float _rotationSmoothVelocity;
-	    /// <summary>
-	    /// 竖向速度
-	    /// </summary>
-	    private float _verticalVelocity;
-	    /// <summary>
-	    /// 附加速度
-	    /// </summary>
-	    private Vector3 _additionalVelocity = Vector3.zero;
-	    /// <summary>
-	    /// 附加速度的过渡速度
-	    /// </summary>
-	    private Vector3 _additionalVelocitySmoothVelocity;
-	    /// <summary>
-	    /// 摄像机是否固定
-	    /// </summary>
-	    private bool _isCameraFixed = false;
-	    /// <summary>
-	    /// 摄像机跟随点的期望俯仰角
-	    /// </summary>
-	    private float _cinemachineTargetPitch;
-	    /// <summary>
-	    /// 摄像机跟随点的期望偏航角
-	    /// </summary>
-	    private float _cinemachineTargetYaw;
-		/// <summary>
-		/// 摄像机跟随点的当前俯仰角和摄像机跟随点的当前偏航角组成的向量
-		/// </summary>
-	    private Vector2 _cinemachineCurrPY;
-		/// <summary>
-		/// 摄像机跟随点的当前俯仰角的过渡速度
-		/// </summary>
-		private float _cinemachinePitchSmoothVelocity;
-		/// <summary>
-		/// 摄像机跟随点的当前俯仰角的过渡速度
-		/// </summary>
-		private float _cinemachineYawSmoothVelocity;
-		
-	    /// <summary>
 	    /// 构造函数
 	    /// </summary>
 	    /// <param name="userTransform">第三人称控制器的使用者的变换</param>
@@ -229,10 +234,10 @@ namespace OaksMayFall
 	    /// </summary>
         public void ApplyGravity()
         {
-	        if (_isGrounded && _verticalVelocity < 0.0f)
-		        _verticalVelocity = -2f;
-	        else if (_verticalVelocity < _terminalVelocity)
-		        _verticalVelocity += _gravity * Time.deltaTime;
+	        if (_isGrounded && _verticalVelocity.y < 0.0f)
+		        _verticalVelocity.y = -2f;
+	        else if (_verticalVelocity.y < _terminalVelocity)
+		        _verticalVelocity.y += _gravity * Time.deltaTime;
         }
 
         /// <summary>
@@ -240,8 +245,18 @@ namespace OaksMayFall
         /// </summary>
         public void Move()
         {
-	        // 期望速度默认为行走速度
-	        float targetSpeed = _walkSpeed;
+	        // 一开始的想法是，想把冲刺做成一个常规速度之外的附加速度
+	        // 之后 debug 的时候发现不好调，还是要做成分离的
+	        // 只要正在冲刺，就只使用冲刺速度
+	        
+	        UpdateSprintTimeout();
+	        
+	        _horizontalVelocity = _sprintTimeoutDelta > 0f ? GetSprintSpeed() : GetNormalSpeed();
+	        _userCharacterController.Move((_horizontalVelocity + _verticalVelocity) * Time.deltaTime);
+        }
+
+        private Vector3 GetSprintSpeed()
+        {
 	        // 输入移动方向
 	        Vector3 inputDirection = new Vector3(_userInput.Move.x, 0.0f, _userInput.Move.y).normalized;
 	        // 期望旋转
@@ -251,51 +266,50 @@ namespace OaksMayFall
 	        // 期望移动方向
 	        Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 	        
-	        // 如果按下冲刺，并且不在冲刺，那么就重置冲刺计时器
-	        if (_userInput.Sprint && _sprintTimeoutDelta <= 0f)
+	        
+	        // 如果按下冲刺，并且不在冲刺，那么开始冲刺
+	        if (_userInput.Sprint)
 	        {
-		        _sprintTimeoutDelta = _sprintTimeout;
 		        // 当前附加速度初始化为冲刺速度
-		        _additionalVelocity = targetDirection.normalized * _sprintSpeed;
+		        // 不需要 SmoothDamp，这是突变的
+		        // 如果没有运动输入的话，那么冲刺方向为角色当前朝向
+		        if (_userInput.Move == Vector2.zero)
+			        return _userTransform.forward * _sprintSpeed;
+		        // 有运动的输入的话，那么冲刺方向为运动输入的方向
+		        else
+			        return targetDirection.normalized * _sprintSpeed;
 	        }
-	        
-	        // 如果冲刺计时器大于 0，说明当前正在冲刺
-	        if (_sprintTimeoutDelta > 0f)
-	        {
-		        // 冲刺计时器工作
-		        _sprintTimeoutDelta -= Time.deltaTime;
-	        }
-	        // 如果不在冲刺，并且移动输入为 0，那么期望速度为 0
-			else if (_userInput.Move == Vector2.zero)
-		        targetSpeed = 0.0f;
-	        
-			// 当前速度与目标速度相差较大时，当前速度需要变化
-			if (_currSpeed < targetSpeed - _speedOffset || _currSpeed > targetSpeed + _speedOffset)
-			{
-				// 取当前速度
-				_currSpeed = new Vector3(_userCharacterController.velocity.x, 0.0f, _userCharacterController.velocity.z).magnitude;
-				// 当前速度向期望速度插值
-				_currSpeed = Mathf.Lerp(_currSpeed, targetSpeed, Time.deltaTime * _moveSpeedChangeRate);
-				// 取三位小数
-				_currSpeed = Mathf.Round(_currSpeed * 1000f) / 1000f;
-			}
-			// 当前速度与目标速度相差较小时，当前速度就是目标速度
-			else
-			{
-				_currSpeed = targetSpeed;
-			}
-
-			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * _moveSpeedChangeRate);
-			
-			// 冲刺速度过渡
-			_additionalVelocity = Vector3.SmoothDamp(_additionalVelocity, Vector3.zero, ref _additionalVelocitySmoothVelocity, _additionalVelocitySmoothTime);
-
-			// 玩家移动
-			_userCharacterController.Move(targetDirection.normalized * (_currSpeed * Time.deltaTime) +
-			                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime +
-			                              _additionalVelocity * Time.deltaTime);
+	        // 否则冲刺速度趋向 0
+	        else
+				return Vector3.SmoothDamp(_horizontalVelocity, Vector3.zero, ref _sprintSmoothVelocity, _sprintSmoothTime);
         }
 
+        private Vector3 GetNormalSpeed()
+        {
+	        // 输入移动方向
+	        Vector3 inputDirection = new Vector3(_userInput.Move.x, 0.0f, _userInput.Move.y).normalized;
+	        // 期望旋转
+	        // 因为摄像机呼吸，_mainCamera.transform.eulerAngles.y 会发生抖动，进而导致玩家在起步的时候有一个微小抖动
+	        // 而 _cinemachineTargetYaw 不会抖动，因此采用 _cinemachineTargetYaw
+	        float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _cinemachineTargetYaw;
+	        // 期望移动方向
+	        Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
+
+	        Vector3 targetVelocity = (_userInput.Move == Vector2.zero) ? Vector3.zero : targetDirection * _walkSpeed;
+	        
+	        return Vector3.SmoothDamp(_horizontalVelocity, targetVelocity, ref _walkSmoothVelocity, _walkSmoothTime);
+        }
+        private void UpdateSprintTimeout()
+        {
+	        // 如果正在冲刺，并且计时器小于 0，说明可以开始冲刺
+	        if (_userInput.Sprint && _sprintTimeoutDelta <= 0f)
+		        _sprintTimeoutDelta = _sprintTimeout;
+
+	        // 如果冲刺计时器大于 0，说明当前正在冲刺
+	        if (_sprintTimeoutDelta > 0f)
+		        // 冲刺计时器工作
+		        _sprintTimeoutDelta -= Time.deltaTime;
+        }
         /// <summary>
         /// 向移动方向旋转
         /// </summary>
@@ -378,7 +392,8 @@ namespace OaksMayFall
 		        _userAnimator.SetBool(_animIDFreeFall, true);
             
 	        // 移动
-	        _userAnimator.SetFloat(_animIDSpeed, _animationBlend);
+	        _moveAnimBlend = Mathf.SmoothDamp(_moveAnimBlend, _horizontalVelocity.magnitude, ref _moveAnimBlendSmoothVelocity, _moveAnimBlendSmoothTime);
+	        _userAnimator.SetFloat(_animIDSpeed, _moveAnimBlend);
         }
     }
 }
