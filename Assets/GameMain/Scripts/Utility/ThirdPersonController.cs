@@ -21,6 +21,10 @@ namespace OaksMayFall
 	    /// 冲刺速度
 	    /// </summary>
 	    private float _sprintSpeed = 30f;
+		/// <summary>
+		/// 玩家附加速度的过渡时间
+		/// </summary>
+	    private float _additionalVelocitySmoothTime = 0.2f;
 	    /// <summary>
 	    /// 玩家旋转的的过渡时间
 	    /// </summary>
@@ -143,7 +147,7 @@ namespace OaksMayFall
 		/// <summary>
 		/// 冲刺速度的过渡速度
 		/// </summary>
-		private Vector3 _sprintSmoothVelocity;
+		private Vector3 _additionalVelocitySmoothVelocity;
 	    /// <summary>
 	    /// 旋转角的过渡速度
 	    /// </summary>
@@ -224,7 +228,9 @@ namespace OaksMayFall
 	        // 输入移动方向
 	        Vector3 inputDirection = new Vector3(_userInput.Move.x, 0.0f, _userInput.Move.y).normalized;
 	        // 期望旋转
-	        float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+	        // 因为摄像机呼吸，_mainCamera.transform.eulerAngles.y 会发生抖动，进而导致玩家在起步的时候有一个微小抖动
+	        // 而 _cinemachineTargetYaw 不会抖动，因此采用 _cinemachineTargetYaw
+	        float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _cinemachineTargetYaw;
 	        // 期望移动方向
 	        Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 	        
@@ -234,6 +240,7 @@ namespace OaksMayFall
 		        _sprintTimeoutDelta = _sprintTimeout;
 		        // 冲刺速度
 		        _sprintVelocity = targetDirection.normalized * _sprintSpeed;
+		        // 当前附加速度初始化为冲刺速度
 		        _additionalVelocity = _sprintVelocity;
 	        }
 	        
@@ -266,9 +273,8 @@ namespace OaksMayFall
 			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * _moveSpeedChangeRate);
 			
 			// 冲刺速度过渡
-			_additionalVelocity = Vector3.SmoothDamp(_additionalVelocity, Vector3.zero, ref _sprintSmoothVelocity, _sprintTimeout);
-			Debug.Log(_additionalVelocity);
-			
+			_additionalVelocity = Vector3.SmoothDamp(_additionalVelocity, Vector3.zero, ref _additionalVelocitySmoothVelocity, _additionalVelocitySmoothTime);
+
 			// 玩家移动
 			_userCharacterController.Move(targetDirection.normalized * (_currSpeed * Time.deltaTime) +
 			                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime +
