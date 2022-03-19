@@ -47,7 +47,7 @@ namespace OaksMayFall
 	    /// <summary>
 	    /// 重力系数
 	    /// </summary>
-	    private float _gravity = -15f;
+	    private float _gravity = -9.8f;
 	    /// <summary>
 	    /// 最大下落速度
 	    /// </summary>
