@@ -11,10 +11,7 @@ namespace OaksMayFall
 		private Vector2 look;
 		private bool jump;
 		private bool sprint;
-
-		[Header("Movement Settings")]
-		public bool analogMovement;
-
+		
 		public Vector2 Move => move;
 		public Vector2 Look => look;
 		public bool Sprint => sprint;
