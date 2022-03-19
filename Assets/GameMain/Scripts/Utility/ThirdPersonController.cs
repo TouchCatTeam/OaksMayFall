@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace OaksMayFall
 {
@@ -30,9 +31,13 @@ namespace OaksMayFall
 	    /// </summary>
 	    private float _additionalVelocitySmoothTime = 0.2f;
 		/// <summary>
-		/// 摄像机跟随点的当前俯仰角和摄像机跟随点的当前偏航角组成的向量的过渡时间
+		/// 摄像机跟随点的当前俯仰角的过渡时间
 		/// </summary>
-	    private float _cinemachinePYSmoothTime = 0.2f;
+	    private float _cinemachinePitchSmoothTime = 0.1f;
+		/// <summary>
+		/// 摄像机跟随点的当前偏航角的过渡时间
+		/// </summary>
+		private float _cinemachineYawSmoothTime = 0.1f;
 	    /// <summary>
 	    /// 移动速度的变化速率
 	    /// </summary>
@@ -181,10 +186,14 @@ namespace OaksMayFall
 		/// </summary>
 	    private Vector2 _cinemachineCurrPY;
 		/// <summary>
-		/// 摄像机跟随点的当前俯仰角和摄像机跟随点的当前偏航角组成的向量的过渡速度
+		/// 摄像机跟随点的当前俯仰角的过渡速度
 		/// </summary>
-		private Vector2 _cinemachinePYSmoothVelocity;
-
+		private float _cinemachinePitchSmoothVelocity;
+		/// <summary>
+		/// 摄像机跟随点的当前俯仰角的过渡速度
+		/// </summary>
+		private float _cinemachineYawSmoothVelocity;
+		
 	    /// <summary>
 	    /// 构造函数
 	    /// </summary>
@@ -324,22 +333,24 @@ namespace OaksMayFall
 	        // if there is an input and camera position is not fixed
 	        if (_userInput.Look.sqrMagnitude >= Threshold && !_isCameraFixed)
 	        {
-		        _cinemachineTargetYaw += _userInput.Look.x * Time.deltaTime * _cameraRotSpeed / 100.0f;
 		        _cinemachineTargetPitch += _userInput.Look.y * Time.deltaTime * _cameraRotSpeed / 100.0f;
+		        _cinemachineTargetYaw += _userInput.Look.x * Time.deltaTime * _cameraRotSpeed / 100.0f;
 	        }
 
 	        // clamp our rotations so our values are limited 360 degrees
-	        _cinemachineTargetYaw = MathUtility.ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
 	        _cinemachineTargetPitch = MathUtility.ClampAngle(_cinemachineTargetPitch, _bottomClamp, _topClamp);
-	        
-	        // 过渡
-	        _cinemachineCurrPY = Vector2.SmoothDamp(_cinemachineCurrPY,
-		        new Vector2(_cinemachineTargetPitch, _cinemachineTargetYaw), ref _cinemachinePYSmoothVelocity,
-		        _cinemachinePYSmoothTime);
-	        
+	        _cinemachineTargetYaw = MathUtility.ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+
+	        // 平滑
+	        _cinemachineCurrPY.x = Mathf.SmoothDampAngle(_cinemachineCurrPY.x, _cinemachineTargetPitch,
+		        ref _cinemachinePitchSmoothVelocity, _cinemachinePitchSmoothTime);
+	        _cinemachineCurrPY.y = Mathf.SmoothDampAngle(_cinemachineCurrPY.y, _cinemachineTargetYaw,
+		        ref _cinemachineYawSmoothVelocity, _cinemachineYawSmoothTime);
+	  
 	        // Cinemachine will follow this target
 	        _cinemachineCameraFollowTarget.transform.rotation = Quaternion.Euler(_cinemachineCurrPY.x + _cameraAngleOverride, _cinemachineCurrPY.y, 0.0f);
-        }
+	        
+	    }
         
         /// <summary>
         /// 初始化动画状态机参数
