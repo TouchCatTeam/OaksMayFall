@@ -17,7 +17,7 @@ namespace OaksMayFall
 	    /// <summary>
 	    /// 移动速度
 	    /// </summary>
-	    private float _walkSpeed = 5f;
+	    private float _walkSpeed = 7f;
 	    /// <summary>
 	    /// 冲刺速度
 	    /// </summary>
@@ -30,14 +30,6 @@ namespace OaksMayFall
 	    /// 玩家附加速度的过渡时间
 	    /// </summary>
 	    private float _additionalVelocitySmoothTime = 0.2f;
-		/// <summary>
-		/// 摄像机跟随点的当前俯仰角的过渡时间
-		/// </summary>
-	    private float _cinemachinePitchSmoothTime = 0.1f;
-		/// <summary>
-		/// 摄像机跟随点的当前偏航角的过渡时间
-		/// </summary>
-		private float _cinemachineYawSmoothTime = 0.1f;
 	    /// <summary>
 	    /// 移动速度的变化速率
 	    /// </summary>
@@ -90,7 +82,7 @@ namespace OaksMayFall
 	    /// <summary>
 	    /// 摄像机转动的速度
 	    /// </summary>
-	    private float _cameraRotSpeed = 20f;
+	    private float _cameraRotSpeed = 25f;
 	    /// <summary>
 	    /// 摄像机最大俯仰角
 	    /// </summary>
@@ -99,6 +91,14 @@ namespace OaksMayFall
 	    /// 摄像机最小俯仰角
 	    /// </summary>
 	    private float _bottomClamp = -30f;
+	    /// <summary>
+	    /// 摄像机跟随点的当前俯仰角的过渡时间
+	    /// </summary>
+	    private float _cinemachinePitchSmoothTime = 0.1f;
+	    /// <summary>
+	    /// 摄像机跟随点的当前偏航角的过渡时间
+	    /// </summary>
+	    private float _cinemachineYawSmoothTime = 0.1f;
 	    
 	    // 动画相关
 	    
