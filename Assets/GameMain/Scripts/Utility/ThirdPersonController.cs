@@ -22,7 +22,7 @@ namespace OaksMayFall
 	    /// </summary>
 	    private float _sprintSpeed = 30f;
 	    /// <summary>
-	    /// 转身速度
+	    /// 玩家旋转的的过渡时间
 	    /// </summary>
 	    private float _rotationSmoothTime = 0.2f;
 	    /// <summary>
@@ -34,7 +34,7 @@ namespace OaksMayFall
 	    
 	    // 冲刺计时器
 	    private float _sprintTimeoutDelta;
-	    // 冲刺时间
+	    // 冲刺速度的过渡时间
 	    private float _sprintTimeout = 0.25f;
 	    
 	    // 物理相关
@@ -140,18 +140,26 @@ namespace OaksMayFall
 	    /// 速度容差
 	    /// </summary>
 	    private float _speedOffset = 0.1f;
+		/// <summary>
+		/// 冲刺速度的过渡速度
+		/// </summary>
+		private Vector3 _sprintSmoothVelocity;
 	    /// <summary>
-	    /// 旋转速度
+	    /// 旋转角的过渡速度
 	    /// </summary>
-	    private float _rotationVelocity;
+	    private float _rotationSmoothVelocity;
 	    /// <summary>
 	    /// 竖向速度
 	    /// </summary>
 	    private float _verticalVelocity;
+		/// <summary>
+		/// 冲刺速度
+		/// </summary>
+	    private Vector3 _sprintVelocity = Vector3.zero;
 	    /// <summary>
-	    /// 最后一次运动的速度
+	    /// 附加速度
 	    /// </summary>
-	    private Vector3 _lastTargetDirection = Vector3.zero;
+	    private Vector3 _additionalVelocity = Vector3.zero;
 	    /// <summary>
 	    /// 摄像机是否固定
 	    /// </summary>
@@ -221,18 +229,20 @@ namespace OaksMayFall
 	        Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 	        
 	        // 如果按下冲刺，并且不在冲刺，那么就重置冲刺计时器
-	        if (_userInput.Sprint && _sprintTimeoutDelta < 0f)
+	        if (_userInput.Sprint && _sprintTimeoutDelta <= 0f)
+	        {
 		        _sprintTimeoutDelta = _sprintTimeout;
+		        // 冲刺速度
+		        _sprintVelocity = targetDirection.normalized * _sprintSpeed;
+		        _additionalVelocity = _sprintVelocity;
+	        }
 	        
 	        // 如果冲刺计时器大于 0，说明当前正在冲刺
 	        if (_sprintTimeoutDelta > 0f)
 	        {
 		        // 冲刺计时器工作
 		        _sprintTimeoutDelta -= Time.deltaTime;
-		        // 期望速度为冲刺速度
-		        targetSpeed = _sprintSpeed;
 	        }
-	        // 否则说明不在冲刺
 	        // 如果不在冲刺，并且移动输入为 0，那么期望速度为 0
 			else if (_userInput.Move == Vector2.zero)
 		        targetSpeed = 0.0f;
@@ -255,9 +265,15 @@ namespace OaksMayFall
 
 			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * _moveSpeedChangeRate);
 			
+			// 冲刺速度过渡
+			_additionalVelocity = Vector3.SmoothDamp(_additionalVelocity, Vector3.zero, ref _sprintSmoothVelocity, _sprintTimeout);
+			Debug.Log(_additionalVelocity);
+			
 			// 玩家移动
-			_userCharacterController.Move(targetDirection.normalized * (_currSpeed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-		}
+			_userCharacterController.Move(targetDirection.normalized * (_currSpeed * Time.deltaTime) +
+			                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime +
+			                              _additionalVelocity * Time.deltaTime);
+        }
 
         /// <summary>
         /// 向移动方向旋转
@@ -272,7 +288,7 @@ namespace OaksMayFall
 	        if (_userInput.Move != Vector2.zero)
 	        {
 		        float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
-		        float rotation = Mathf.SmoothDampAngle(_userTransform.eulerAngles.y, targetRotation, ref _rotationVelocity, _rotationSmoothTime);
+		        float rotation = Mathf.SmoothDampAngle(_userTransform.eulerAngles.y, targetRotation, ref _rotationSmoothVelocity, _rotationSmoothTime);
 
 		        // 玩家旋转
 		        _userTransform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
@@ -282,7 +298,7 @@ namespace OaksMayFall
         public void RotateToCameraDir()
         {
 	        float targetRotation = _mainCamera.transform.eulerAngles.y;
-	        float rotation = Mathf.SmoothDampAngle(_userTransform.eulerAngles.y, targetRotation, ref _rotationVelocity, _rotationSmoothTime);
+	        float rotation = Mathf.SmoothDampAngle(_userTransform.eulerAngles.y, targetRotation, ref _rotationSmoothVelocity, _rotationSmoothTime);
 
 	        // 玩家旋转
 	        _userTransform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
