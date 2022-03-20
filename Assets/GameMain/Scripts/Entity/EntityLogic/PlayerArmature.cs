@@ -19,7 +19,7 @@ namespace OaksMayFall
         private GameObject _mainCamera;
         private SimRigidBodyPush _simRigidBodyPush;
         
-        private ThirdPersonController _thirdPersonController;
+        private ThirdPersonLocomotion _thirdPersonLocomotion;
 
         protected override void OnShow(object userData)
         {
@@ -41,10 +41,10 @@ namespace OaksMayFall
             _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             _simRigidBodyPush = gameObject.AddComponent<SimRigidBodyPush>();
             
-            _thirdPersonController = new ThirdPersonController(transform, _controller, _animator, _input,
+            _thirdPersonLocomotion = new ThirdPersonLocomotion(transform, _controller, _animator, _input,
                 _cinemachineCameraTarget, _mainCamera);
 
-            _thirdPersonController.AssignAnimationIDs();
+            _thirdPersonLocomotion.AssignAnimationIDs();
             
         }
         
@@ -52,16 +52,16 @@ namespace OaksMayFall
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
             
-            _thirdPersonController.ApplyGravity();
-            _thirdPersonController.GroundedCheck();
-            _thirdPersonController.Move();
-            _thirdPersonController.RotateToMoveDir();
-            _thirdPersonController.SetAnimatorValue();
+            _thirdPersonLocomotion.ApplyGravity();
+            _thirdPersonLocomotion.GroundedCheck();
+            _thirdPersonLocomotion.Move();
+            _thirdPersonLocomotion.RotateToMoveDir();
+            _thirdPersonLocomotion.SetAnimatorValue();
         }
 
         protected void LateUpdate()
         {
-            _thirdPersonController.CameraRotate();
+            _thirdPersonLocomotion.CameraRotate();
         }
     }
 }
