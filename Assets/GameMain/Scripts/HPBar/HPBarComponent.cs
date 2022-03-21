@@ -73,21 +73,35 @@ namespace OaksMayFall
             }
         }
 
+        /// <summary>
+        /// 显示某个实体的血条从某一值变化到另一值，如果这个实体没有血条，就自动创建一个血条对象
+        /// </summary>
+        /// <param name="entity">血条的主人</param>
+        /// <param name="fromHPRatio">血条初始值</param>
+        /// <param name="toHPRatio">血条终点值</param>
         public void ShowHPBar(UEntity entity, float fromHPRatio, float toHPRatio)
         {
+            // 如果输入的实体为空，则不需要血条
             if (entity == null)
             {
                 Log.Warning("Entity is invalid.");
                 return;
             }
 
+            // 根据实体得到这个实体对应的可用血条
             HPBarItem hpBarItem = GetActiveHPBarItem(entity);
+            // 如果得不到，就创建一个血条对象
             if (hpBarItem == null)
             {
+                // 创建一个可用血条对象，血条的主人是输入的实体
                 hpBarItem = CreateHPBarItem(entity);
+                // 将这个创建出来的血条对象加入到可用血条列表中
                 m_ActiveHPBarItems.Add(hpBarItem);
             }
 
+            // 初始化这个血条
+            // 但是这个初始化又像是，刷新状态，但是刷新这个词已经被 Refresh() 占据了
+            // 那应该用一个更加离散的词
             hpBarItem.Init(entity, m_CachedCanvas, fromHPRatio, toHPRatio);
         }
 
@@ -98,6 +112,11 @@ namespace OaksMayFall
             m_HPBarItemObjectPool.Unspawn(hpBarItem);
         }
 
+        /// <summary>
+        /// 得到实体对应的可用血条
+        /// </summary>
+        /// <param name="entity">血条的实体主人</param>
+        /// <returns></returns>
         private HPBarItem GetActiveHPBarItem(UEntity entity)
         {
             if (entity == null)
@@ -116,20 +135,32 @@ namespace OaksMayFall
             return null;
         }
 
+        /// <summary>
+        /// 创建血条实例
+        /// </summary>
+        /// <param name="entity">血条的实体主人</param>
+        /// <returns></returns>
         private HPBarItem CreateHPBarItem(UEntity entity)
         {
             HPBarItem hpBarItem = null;
+            // 从对象池中拿一个血条对象出来
             HPBarItemObject hpBarItemObject = m_HPBarItemObjectPool.Spawn();
+            // 从对象池中拿到了血条对象，那么
             if (hpBarItemObject != null)
             {
                 hpBarItem = (HPBarItem)hpBarItemObject.Target;
             }
+            // 要是从对象池中拿不到，说明需要新建血条对象
             else
             {
+                // 实例化血条 Perfab
                 hpBarItem = Instantiate(m_HPBarItemTemplate);
+                // 血条挂在框架中的血条组件下
                 Transform transform = hpBarItem.GetComponent<Transform>();
                 transform.SetParent(m_HPBarInstanceRoot);
+                // 调整血条缩放
                 transform.localScale = Vector3.one;
+                // 创建的血条对象加入对象池
                 m_HPBarItemObjectPool.Register(HPBarItemObject.Create(hpBarItem), true);
             }
 

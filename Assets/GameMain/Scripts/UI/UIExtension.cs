@@ -30,14 +30,15 @@ namespace OaksMayFall
             canvasGroup.alpha = alpha;
         }
 
-        public static IEnumerator SmoothValue(this Slider slider, float value, float duration)
+        public static IEnumerator SmoothValue(this Slider slider, float value, float duration, float smoothTime)
         {
             float time = 0f;
-            float originalValue = slider.value;
+            float smoothVelocity = 0f;
             while (time < duration)
             {
                 time += Time.deltaTime;
-                slider.value = Mathf.Lerp(originalValue, value, time / duration);
+                slider.value = Mathf.SmoothDamp(slider.value, value, ref smoothVelocity, smoothTime);
+                
                 yield return new WaitForEndOfFrame();
             }
 

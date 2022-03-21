@@ -1,6 +1,7 @@
 ﻿using Cinemachine;
 using UnityEngine;
 using UnityGameFramework.Runtime;
+using System.Collections;
 
 namespace OaksMayFall
 {
@@ -45,9 +46,17 @@ namespace OaksMayFall
                 _cinemachineCameraTarget, _mainCamera);
 
             _thirdPersonLocomotion.AssignAnimationIDs();
-            
+
+            StartCoroutine(HPCo());
         }
-        
+
+        private IEnumerator HPCo()
+        {
+            yield return new WaitForSeconds(5);
+            Debug.Log(11111111111111);
+            GameEntry.HPBar.ShowHPBar(this, 1.0f,0.5f);
+            yield return null;
+        }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);

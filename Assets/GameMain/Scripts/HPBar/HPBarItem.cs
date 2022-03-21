@@ -14,9 +14,10 @@ namespace OaksMayFall
 {
     public class HPBarItem : MonoBehaviour
     {
-        private const float AnimationSeconds = 0.3f;
+        private const float AnimationSeconds = 1f;
+        private const float AnimationSmoothTime = 0.2f;
         private const float KeepSeconds = 0.4f;
-        private const float FadeOutSeconds = 0.3f;
+        private const float FadeOutSeconds = 1f;
 
         [SerializeField]
         private Slider m_HPBar = null;
@@ -35,6 +36,13 @@ namespace OaksMayFall
             }
         }
 
+        /// <summary>
+        /// 血条物体的初始化
+        /// </summary>
+        /// <param name="owner">血条的实体主人</param>
+        /// <param name="parentCanvas">血条画布</param>
+        /// <param name="fromHPRatio">血条初始值</param>
+        /// <param name="toHPRatio">血条终点值</param>
         public void Init(UEntity owner, Canvas parentCanvas, float fromHPRatio, float toHPRatio)
         {
             if (owner == null)
@@ -46,6 +54,8 @@ namespace OaksMayFall
             m_ParentCanvas = parentCanvas;
 
             gameObject.SetActive(true);
+            // 停掉当前 MonoBehavior 的所有协程
+            // 这就停掉了之前的血条的变化
             StopAllCoroutines();
 
             m_CachedCanvasGroup.alpha = 1f;
@@ -58,7 +68,8 @@ namespace OaksMayFall
 
             Refresh();
 
-            StartCoroutine(HPBarCo(toHPRatio, AnimationSeconds, KeepSeconds, FadeOutSeconds));
+            // 开始血条变化协程
+            StartCoroutine(HPBarCo(toHPRatio, AnimationSeconds, AnimationSmoothTime,KeepSeconds, FadeOutSeconds));
         }
 
         public bool Refresh()
@@ -110,9 +121,9 @@ namespace OaksMayFall
             }
         }
 
-        private IEnumerator HPBarCo(float value, float animationDuration, float keepDuration, float fadeOutDuration)
+        private IEnumerator HPBarCo(float value, float animationDuration, float animationSmoothTime, float keepDuration, float fadeOutDuration)
         {
-            yield return m_HPBar.SmoothValue(value, animationDuration);
+            yield return m_HPBar.SmoothValue(value, animationDuration, animationSmoothTime);
             yield return new WaitForSeconds(keepDuration);
             yield return m_CachedCanvasGroup.FadeToAlpha(0f, fadeOutDuration);
         }
