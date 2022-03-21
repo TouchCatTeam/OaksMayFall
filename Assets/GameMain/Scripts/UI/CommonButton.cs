@@ -16,7 +16,8 @@ namespace OaksMayFall
         private const float FadeTime = 0.3f;
         private const float OnHoverAlpha = 0.7f;
         private const float OnClickAlpha = 0.6f;
-
+        private const float FadeOutSmoothTime = 0.2f;
+        
         [SerializeField]
         private UnityEvent m_OnHover = null;
 
@@ -43,7 +44,7 @@ namespace OaksMayFall
             }
 
             StopAllCoroutines();
-            StartCoroutine(m_CanvasGroup.FadeToAlpha(OnHoverAlpha, FadeTime));
+            StartCoroutine(m_CanvasGroup.FadeToAlpha(OnHoverAlpha, FadeTime, FadeOutSmoothTime));
             m_OnHover.Invoke();
         }
 
@@ -55,7 +56,7 @@ namespace OaksMayFall
             }
 
             StopAllCoroutines();
-            StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
+            StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime, FadeOutSmoothTime));
         }
 
         public void OnPointerDown(PointerEventData eventData)

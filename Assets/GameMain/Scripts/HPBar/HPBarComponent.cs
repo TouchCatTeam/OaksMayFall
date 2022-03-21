@@ -25,7 +25,6 @@ namespace OaksMayFall
 
         private IObjectPool<HPBarItemObject> m_HPBarItemObjectPool = null;
         private List<HPBarItem> m_ActiveHPBarItems = null;
-        private Canvas m_CachedCanvas = null;
 
         private void Start()
         {
@@ -46,7 +45,6 @@ namespace OaksMayFall
                 return;
             }
 
-            m_CachedCanvas = m_HPBarInstanceRoot.GetComponent<Canvas>();
             m_HPBarItemObjectPool = GameEntry.ObjectPool.CreateSingleSpawnObjectPool<HPBarItemObject>("HPBarItem", m_InstancePoolCapacity);
             m_ActiveHPBarItems = new List<HPBarItem>();
         }
@@ -102,7 +100,7 @@ namespace OaksMayFall
             // 初始化这个血条
             // 但是这个初始化又像是，刷新状态，但是刷新这个词已经被 Refresh() 占据了
             // 那应该用一个更加离散的词
-            hpBarItem.Init(entity, m_CachedCanvas, fromHPRatio, toHPRatio);
+            hpBarItem.Init(entity, fromHPRatio, toHPRatio);
         }
 
         private void HideHPBar(HPBarItem hpBarItem)
@@ -155,11 +153,15 @@ namespace OaksMayFall
             {
                 // 实例化血条 Perfab
                 hpBarItem = Instantiate(m_HPBarItemTemplate);
-                // 血条挂在框架中的血条组件下
-                Transform transform = hpBarItem.GetComponent<Transform>();
-                transform.SetParent(m_HPBarInstanceRoot);
-                // 调整血条缩放
-                transform.localScale = Vector3.one;
+                // 血条挂在 entity 的 HPBarRoot 下
+                var hpBarRoot = entity.transform.Find("HPBarRoot");
+                if(hpBarRoot == null)
+                    Debug.LogError("要显示血条的实体的身上没有 HPBarRoot 用于挂载血条实例");
+                hpBarItem.transform.SetParent(hpBarRoot);
+                hpBarItem.GetComponent<Canvas>().worldCamera = Camera.main;
+                hpBarItem.transform.localPosition = Vector3.zero;
+                hpBarItem.transform.localEulerAngles = Vector3.zero;
+                hpBarItem.transform.localScale = Vector3.one;
                 // 创建的血条对象加入对象池
                 m_HPBarItemObjectPool.Register(HPBarItemObject.Create(hpBarItem), true);
             }

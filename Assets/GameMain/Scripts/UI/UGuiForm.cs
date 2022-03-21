@@ -17,7 +17,8 @@ namespace OaksMayFall
     {
         public const int DepthFactor = 100;
         private const float FadeTime = 0.3f;
-
+        private const float FadeOutSmoothTime = 0.2f;
+        
         private static Font s_MainFont = null;
         private Canvas m_CachedCanvas = null;
         private CanvasGroup m_CanvasGroup = null;
@@ -124,7 +125,7 @@ namespace OaksMayFall
 
             m_CanvasGroup.alpha = 0f;
             StopAllCoroutines();
-            StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
+            StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime, FadeOutSmoothTime));
         }
 
 #if UNITY_2017_3_OR_NEWER
@@ -155,7 +156,7 @@ namespace OaksMayFall
 
             m_CanvasGroup.alpha = 0f;
             StopAllCoroutines();
-            StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
+            StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime, FadeOutSmoothTime));
         }
 
 #if UNITY_2017_3_OR_NEWER
@@ -214,7 +215,7 @@ namespace OaksMayFall
 
         private IEnumerator CloseCo(float duration)
         {
-            yield return m_CanvasGroup.FadeToAlpha(0f, duration);
+            yield return m_CanvasGroup.FadeToAlpha(0f, duration, FadeOutSmoothTime);
             GameEntry.UI.CloseUIForm(this);
         }
     }

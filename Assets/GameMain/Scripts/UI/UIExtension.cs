@@ -16,14 +16,14 @@ namespace OaksMayFall
 {
     public static class UIExtension
     {
-        public static IEnumerator FadeToAlpha(this CanvasGroup canvasGroup, float alpha, float duration)
+        public static IEnumerator FadeToAlpha(this CanvasGroup canvasGroup, float alpha, float duration, float smoothTime)
         {
             float time = 0f;
-            float originalAlpha = canvasGroup.alpha;
+            float smoothVelocity = 0f;
             while (time < duration)
             {
                 time += Time.deltaTime;
-                canvasGroup.alpha = Mathf.Lerp(originalAlpha, alpha, time / duration);
+                canvasGroup.alpha = Mathf.SmoothDamp(canvasGroup.alpha, alpha, ref smoothVelocity, smoothTime);
                 yield return new WaitForEndOfFrame();
             }
 

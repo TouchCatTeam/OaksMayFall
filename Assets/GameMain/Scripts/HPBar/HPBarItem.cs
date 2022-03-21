@@ -14,10 +14,11 @@ namespace OaksMayFall
 {
     public class HPBarItem : MonoBehaviour
     {
-        private const float AnimationSeconds = 1f;
+        private const float AnimationDuration = 1f;
         private const float AnimationSmoothTime = 0.2f;
         private const float KeepSeconds = 0.4f;
-        private const float FadeOutSeconds = 1f;
+        private const float FadeOutDuration = 1f;
+        private const float FadeOutSmoothTime = 0.2f;
 
         [SerializeField]
         private Slider m_HPBar = null;
@@ -28,81 +29,7 @@ namespace OaksMayFall
         private UEntity m_Owner = null;
         private int m_OwnerId = 0;
 
-        public UEntity Owner
-        {
-            get
-            {
-                return m_Owner;
-            }
-        }
-
-        /// <summary>
-        /// 血条物体的初始化
-        /// </summary>
-        /// <param name="owner">血条的实体主人</param>
-        /// <param name="parentCanvas">血条画布</param>
-        /// <param name="fromHPRatio">血条初始值</param>
-        /// <param name="toHPRatio">血条终点值</param>
-        public void Init(UEntity owner, Canvas parentCanvas, float fromHPRatio, float toHPRatio)
-        {
-            if (owner == null)
-            {
-                Log.Error("Owner is invalid.");
-                return;
-            }
-
-            m_ParentCanvas = parentCanvas;
-
-            gameObject.SetActive(true);
-            // 停掉当前 MonoBehavior 的所有协程
-            // 这就停掉了之前的血条的变化
-            StopAllCoroutines();
-
-            m_CachedCanvasGroup.alpha = 1f;
-            if (m_Owner != owner || m_OwnerId != owner.Id)
-            {
-                m_HPBar.value = fromHPRatio;
-                m_Owner = owner;
-                m_OwnerId = owner.Id;
-            }
-
-            Refresh();
-
-            // 开始血条变化协程
-            StartCoroutine(HPBarCo(toHPRatio, AnimationSeconds, AnimationSmoothTime,KeepSeconds, FadeOutSeconds));
-        }
-
-        public bool Refresh()
-        {
-            if (m_CachedCanvasGroup.alpha <= 0f)
-            {
-                return false;
-            }
-
-            if (m_Owner != null && Owner.Available && Owner.Id == m_OwnerId)
-            {
-                Vector3 worldPosition = m_Owner.CachedTransform.position + Vector3.forward;
-                Vector3 screenPosition = GameEntry.Scene.MainCamera.WorldToScreenPoint(worldPosition);
-
-                Vector2 position;
-                if (RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)m_ParentCanvas.transform, screenPosition,
-                    m_ParentCanvas.worldCamera, out position))
-                {
-                    m_CachedTransform.localPosition = position;
-                }
-            }
-
-            return true;
-        }
-
-        public void Reset()
-        {
-            StopAllCoroutines();
-            m_CachedCanvasGroup.alpha = 1f;
-            m_HPBar.value = 1f;
-            m_Owner = null;
-            gameObject.SetActive(false);
-        }
+        public UEntity Owner => m_Owner;
 
         private void Awake()
         {
@@ -120,12 +47,65 @@ namespace OaksMayFall
                 return;
             }
         }
+        /// <summary>
+        /// 血条物体的初始化
+        /// </summary>
+        /// <param name="owner">血条的实体主人</param>
+        /// <param name="fromHPRatio">血条初始值</param>
+        /// <param name="toHPRatio">血条终点值</param>
+        public void Init(UEntity owner, float fromHPRatio, float toHPRatio)
+        {
+            if (owner == null)
+            {
+                Log.Error("Owner is invalid.");
+                return;
+            }
 
-        private IEnumerator HPBarCo(float value, float animationDuration, float animationSmoothTime, float keepDuration, float fadeOutDuration)
+            gameObject.SetActive(true);
+            // 停掉当前 MonoBehavior 的所有协程
+            // 这就停掉了之前的血条的变化
+            StopAllCoroutines();
+
+            m_CachedCanvasGroup.alpha = 1f;
+            if (m_Owner != owner || m_OwnerId != owner.Id)
+            {
+                m_HPBar.value = fromHPRatio;
+                m_Owner = owner;
+                m_OwnerId = owner.Id;
+            }
+
+            Refresh();
+
+            // 开始血条变化协程
+            StartCoroutine(HPBarCo(toHPRatio, AnimationDuration, AnimationSmoothTime, KeepSeconds, FadeOutDuration,
+                FadeOutSmoothTime));
+        }
+
+        public bool Refresh()
+        {
+            if (m_CachedCanvasGroup.alpha <= 0f)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void Reset()
+        {
+            StopAllCoroutines();
+            m_CachedCanvasGroup.alpha = 1f;
+            m_HPBar.value = 1f;
+            m_Owner = null;
+            gameObject.SetActive(false);
+        }
+
+        private IEnumerator HPBarCo(float value, float animationDuration, float animationSmoothTime, float keepDuration,
+            float fadeOutDuration, float fadeOutSmoothTime)
         {
             yield return m_HPBar.SmoothValue(value, animationDuration, animationSmoothTime);
             yield return new WaitForSeconds(keepDuration);
-            yield return m_CachedCanvasGroup.FadeToAlpha(0f, fadeOutDuration);
+            yield return m_CachedCanvasGroup.FadeToAlpha(0f, fadeOutDuration, fadeOutSmoothTime);
         }
     }
 }
