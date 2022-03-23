@@ -51,7 +51,7 @@ namespace OaksMayFall
 
             _nrgBarItem = transform.Find("NRGBarRoot").GetComponentInChildren<NRGBarItem>();
             
-            StartCoroutine(HPCo());
+            // StartCoroutine(HPCo());
         }
 
         private IEnumerator HPCo()
@@ -69,7 +69,8 @@ namespace OaksMayFall
             _thirdPersonLocomotion.Move();
             _thirdPersonLocomotion.RotateToMoveDir();
             _thirdPersonLocomotion.SetAnimatorValue();
-            
+            if(_input.Sprint)
+                _nrgBarItem.AddFillAmount(-0.25f);
         }
 
         protected void LateUpdate()

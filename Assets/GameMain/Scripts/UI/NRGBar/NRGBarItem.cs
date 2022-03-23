@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
@@ -38,6 +39,11 @@ namespace OaksMayFall
                 Log.Error("CanvasGroup is invalid.");
                 return;
             }
+        }
+
+        public void AddFillAmount(float add)
+        {
+            Process(_fillImage.fillAmount, Mathf.Clamp(_fillImage.fillAmount + add, 0, 1));
         }
         /// <summary>
         /// 体力条物体的初始化
