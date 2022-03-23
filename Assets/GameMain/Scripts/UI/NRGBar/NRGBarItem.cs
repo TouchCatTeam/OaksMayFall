@@ -45,6 +45,7 @@ namespace OaksMayFall
         {
             Process(_fillImage.fillAmount, Mathf.Clamp(_fillImage.fillAmount + add, 0, 1));
         }
+        
         /// <summary>
         /// 体力条物体的初始化
         /// </summary>
@@ -92,6 +93,7 @@ namespace OaksMayFall
         {
             yield return _fillImage.SmoothFillAmount(value, animationDuration, animationSmoothTime);
             yield return new WaitForSeconds(keepDuration);
+            yield return _fillImage.SmoothFillAmount(1, animationDuration, animationSmoothTime);
             yield return m_CachedCanvasGroup.FadeToAlpha(0f, fadeOutDuration, fadeOutSmoothTime);
         }
     }
