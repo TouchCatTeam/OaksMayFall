@@ -48,12 +48,12 @@ namespace OaksMayFall
             }
         }
         /// <summary>
-        /// 血条物体的初始化
+        /// 血条物体的进度处理
         /// </summary>
         /// <param name="owner">血条的实体主人</param>
         /// <param name="fromHPRatio">血条初始值</param>
         /// <param name="toHPRatio">血条终点值</param>
-        public void Init(UEntity owner, float fromHPRatio, float toHPRatio)
+        public void Process(UEntity owner, float fromHPRatio, float toHPRatio)
         {
             if (owner == null)
             {

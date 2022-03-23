@@ -44,6 +44,21 @@ namespace OaksMayFall
 
             slider.value = value;
         }
+        
+        public static IEnumerator SmoothFillAmount(this Image image, float value, float duration, float smoothTime)
+        {
+            float time = 0f;
+            float smoothVelocity = 0f;
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                image.fillAmount = Mathf.SmoothDamp(image.fillAmount, value, ref smoothVelocity, smoothTime);
+                
+                yield return new WaitForEndOfFrame();
+            }
+
+            image.fillAmount = value;
+        }
 
         public static bool HasUIForm(this UIComponent uiComponent, UIFormId uiFormId, string uiGroupName = null)
         {

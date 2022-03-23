@@ -18,9 +18,6 @@ namespace OaksMayFall
         private HPBarItem m_HPBarItemTemplate = null;
 
         [SerializeField]
-        private Transform m_HPBarInstanceRoot = null;
-
-        [SerializeField]
         private int m_InstancePoolCapacity = 16;
 
         private IObjectPool<HPBarItemObject> m_HPBarItemObjectPool = null;
@@ -32,11 +29,6 @@ namespace OaksMayFall
             if (m_HPBarItemTemplate == null)
             {
                 GameFramework.GameFrameworkLog.Debug("没有配置血量条的原型 m_HPBarItemTemplate");
-                return;
-            }
-            if (m_HPBarInstanceRoot == null)
-            {
-                GameFramework.GameFrameworkLog.Debug("没有配置血量条的根节点 m_HPBarInstanceRoot");
                 return;
             }
             if(GameEntry.ObjectPool == null)
@@ -96,11 +88,8 @@ namespace OaksMayFall
                 // 将这个创建出来的血条对象加入到可用血条列表中
                 m_ActiveHPBarItems.Add(hpBarItem);
             }
-
-            // 初始化这个血条
-            // 但是这个初始化又像是，刷新状态，但是刷新这个词已经被 Refresh() 占据了
-            // 那应该用一个更加离散的词
-            hpBarItem.Init(entity, fromHPRatio, toHPRatio);
+            
+            hpBarItem.Process(entity, fromHPRatio, toHPRatio);
         }
 
         private void HideHPBar(HPBarItem hpBarItem)

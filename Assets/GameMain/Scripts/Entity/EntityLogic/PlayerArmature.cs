@@ -22,6 +22,8 @@ namespace OaksMayFall
         
         private ThirdPersonLocomotion _thirdPersonLocomotion;
 
+        private NRGBarItem _nrgBarItem;
+        
         protected override void OnShow(object userData)
         {
             base.OnShow(userData);
@@ -47,14 +49,15 @@ namespace OaksMayFall
 
             _thirdPersonLocomotion.AssignAnimationIDs();
 
+            _nrgBarItem = transform.Find("NRGBarRoot").GetComponentInChildren<NRGBarItem>();
+            
             StartCoroutine(HPCo());
         }
 
         private IEnumerator HPCo()
         {
             yield return new WaitForSeconds(5);
-            Debug.Log(11111111111111);
-            GameEntry.HPBar.ShowHPBar(this, 1.0f,0.5f);
+            _nrgBarItem.Process(1f,0.5f);
             yield return null;
         }
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -66,6 +69,7 @@ namespace OaksMayFall
             _thirdPersonLocomotion.Move();
             _thirdPersonLocomotion.RotateToMoveDir();
             _thirdPersonLocomotion.SetAnimatorValue();
+            
         }
 
         protected void LateUpdate()
