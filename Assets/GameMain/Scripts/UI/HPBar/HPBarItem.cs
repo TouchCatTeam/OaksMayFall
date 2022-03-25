@@ -31,6 +31,8 @@ namespace OaksMayFall
 
         public UEntity Owner => m_Owner;
 
+        public float HP => m_HPBar.value;
+        
         private void Awake()
         {
             m_CachedTransform = GetComponent<RectTransform>();
@@ -47,6 +49,7 @@ namespace OaksMayFall
                 return;
             }
         }
+        
         /// <summary>
         /// 血条物体的进度处理
         /// </summary>
@@ -81,6 +84,38 @@ namespace OaksMayFall
                 FadeOutSmoothTime));
         }
 
+        /// <summary>
+        /// 血条物体的进度处理
+        /// </summary>
+        /// <param name="owner">血条的实体主人</param>
+        /// <param name="toHPRatio">血条终点值</param>
+        public void Process(UEntity owner, float toHPRatio)
+        {
+            if (owner == null)
+            {
+                Log.Error("Owner is invalid.");
+                return;
+            }
+
+            gameObject.SetActive(true);
+            // 停掉当前 MonoBehavior 的所有协程
+            // 这就停掉了之前的血条的变化
+            StopAllCoroutines();
+
+            m_CachedCanvasGroup.alpha = 1f;
+            if (m_Owner != owner || m_OwnerId != owner.Id)
+            {
+                m_Owner = owner;
+                m_OwnerId = owner.Id;
+            }
+
+            Refresh();
+
+            // 开始血条变化协程
+            StartCoroutine(HPBarCo(toHPRatio, AnimationDuration, AnimationSmoothTime, KeepSeconds, FadeOutDuration,
+                FadeOutSmoothTime));
+        }
+        
         public bool Refresh()
         {
             if (m_CachedCanvasGroup.alpha <= 0f)

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
@@ -14,16 +13,13 @@ namespace OaksMayFall
         private const float FadeOutDuration = 1f;
         private const float FadeOutSmoothTime = 0.2f;
 
-        [SerializeField] private Image _fillImage = null;
+        [SerializeField] private Image _fillImage;
+        
+        private RectTransform m_CachedTransform;
+        private CanvasGroup m_CachedCanvasGroup;
 
-        private Canvas m_ParentCanvas = null;
-        private RectTransform m_CachedTransform = null;
-        private CanvasGroup m_CachedCanvasGroup = null;
-        private UEntity m_Owner = null;
-        private int m_OwnerId = 0;
-
-        public UEntity Owner => m_Owner;
-
+        public float FillAmount => _fillImage.fillAmount;
+        
         private void Awake()
         {
             m_CachedTransform = GetComponent<RectTransform>();
@@ -37,7 +33,6 @@ namespace OaksMayFall
             if (m_CachedCanvasGroup == null)
             {
                 Log.Error("CanvasGroup is invalid.");
-                return;
             }
         }
 
@@ -49,7 +44,6 @@ namespace OaksMayFall
         /// <summary>
         /// 体力条物体的初始化
         /// </summary>
-        /// <param name="owner">体力条的实体主人</param>
         /// <param name="fromNRGRatio">体力条初始值</param>
         /// <param name="toNRGRatio">体力条终点值</param>
         public void Process(float fromNRGRatio, float toNRGRatio)
@@ -84,7 +78,6 @@ namespace OaksMayFall
             StopAllCoroutines();
             m_CachedCanvasGroup.alpha = 1f;
             _fillImage.fillAmount = 1f;
-            m_Owner = null;
             gameObject.SetActive(false);
         }
 

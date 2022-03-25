@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace OaksMayFall
@@ -97,6 +98,38 @@ namespace OaksMayFall
 	    /// </summary>
 	    private int _groundLayers = 1;
 
+	    // 攻击相关
+	    
+	    /// <summary>
+	    /// 攻击计时器
+	    /// </summary>
+	    private bool _isAttacking = false;
+		/// <summary>
+		/// 攻击的冷却时间
+		/// </summary>
+	    private float _attackTimeout = 1f;
+	    /// <summary>
+	    /// 是否能够攻击
+	    /// </summary>
+	    private bool ShouldAttack
+	    {
+		    get
+		    {
+			    if (_userInput.Attack && !_isAttacking)
+			    {
+				    _isAttacking = true;
+				    var timer = GameEntry.Timer.CreateTimer(_attackTimeout, false,
+					    delegate(object[] args) { _isAttacking = false; Debug.Log("_isAttacking = false");});
+				    timer.Start();
+				    return true;
+			    }
+			    else
+			    {
+				    return false;
+			    }
+		    }
+	    }
+
 	    // 摄像机相关
 		
 		private float _cameraAngleOverride = 0f;
@@ -160,6 +193,10 @@ namespace OaksMayFall
 	    /// </summary>
 	    private int _animIDFreeFall;
 		/// <summary>
+		/// 动画状态机的攻击参数的 id
+		/// </summary>
+	    private int _animIDAttack;
+		/// <summary>
 		/// 跑步动画混合值
 		/// </summary>
 	    private float _moveAnimBlend;
@@ -212,20 +249,20 @@ namespace OaksMayFall
 		    Animator userAnimator, OaksMayFallInputController userInput, GameObject cinemachineCameraFollowTarget,
 		    GameObject mainCamera)
 	    {
-	    _userTransform = userTransform;
-	    _userCharacterController = userCharacterController;
-	    _userAnimator = userAnimator;
-	    _userInput = userInput;
-	    _cinemachineCameraFollowTarget = cinemachineCameraFollowTarget;
-	    _mainCamera = mainCamera;
+		    _userTransform = userTransform;
+		    _userCharacterController = userCharacterController;
+		    _userAnimator = userAnimator;
+		    _userInput = userInput;
+		    _cinemachineCameraFollowTarget = cinemachineCameraFollowTarget;
+		    _mainCamera = mainCamera;
 	    }
-	    
-	    /// <summary>
+
+		/// <summary>
 	    /// 落地检查
 	    /// </summary>
 	    public void GroundedCheck()
         {
-            var spherePosition = new Vector3(_userTransform.position.x, _userTransform.position.y - _groundedOffset, _userTransform.position.z);
+	        var spherePosition = new Vector3(_userTransform.position.x, _userTransform.position.y - _groundedOffset, _userTransform.position.z);
             _isGrounded = Physics.CheckSphere(spherePosition, _groundedRadius, _groundLayers, QueryTriggerInteraction.Ignore);
         }
 	    
@@ -373,6 +410,12 @@ namespace OaksMayFall
 	        _animIDSpeed = Animator.StringToHash("ForwardSpeed");
 	        _animIDGrounded = Animator.StringToHash("Grounded");
 	        _animIDFreeFall = Animator.StringToHash("FreeFall");
+	        _animIDAttack = Animator.StringToHash("Attack");
+        }
+
+        public void Attack()
+        {
+	        _userAnimator.SetTrigger(_animIDAttack);
         }
 
         /// <summary>
@@ -393,6 +436,12 @@ namespace OaksMayFall
 	        // 移动
 	        _moveAnimBlend = Mathf.SmoothDamp(_moveAnimBlend, _horizontalVelocity.magnitude, ref _moveAnimBlendSmoothVelocity, _moveAnimBlendSmoothTime);
 	        _userAnimator.SetFloat(_animIDSpeed, _moveAnimBlend);
+	        
+	        // 攻击
+	        if (ShouldAttack)
+	        {
+		        Attack();
+	        }
         }
     }
 }

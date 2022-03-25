@@ -26,10 +26,16 @@ namespace OaksMayFall
             private set;
         }
 
+        public static TimerComponent Timer
+        {
+            get;
+            private set;
+        }
         private static void InitCustomComponents()
         {
             BuiltinData = UnityGameFramework.Runtime.GameEntry.GetComponent<BuiltinDataComponent>();
             HPBar = UnityGameFramework.Runtime.GameEntry.GetComponent<HPBarComponent>();
+            Timer = UnityGameFramework.Runtime.GameEntry.GetComponent<TimerComponent>();
         }
     }
 }

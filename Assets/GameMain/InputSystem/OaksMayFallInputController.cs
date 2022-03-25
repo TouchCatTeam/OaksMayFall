@@ -11,10 +11,12 @@ namespace OaksMayFall
 		private Vector2 look;
 		private bool jump;
 		private bool sprint;
+		private bool attack;
 		
 		public Vector2 Move => move;
 		public Vector2 Look => look;
 		public bool Sprint => sprint;
+		public bool Attack => attack;
 		
 #if !UNITY_IOS || !UNITY_ANDROID
 		[Header("Mouse Cursor Settings")]
@@ -37,6 +39,11 @@ namespace OaksMayFall
 		private void OnSprint(InputValue value)
 		{
 			sprint = value.isPressed;
+		}
+
+		private void OnAttack(InputValue value)
+		{
+			attack = value.isPressed;
 		}
 #else
 	// old input sys if we do decide to have it (most likely wont)...

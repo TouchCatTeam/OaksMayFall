@@ -91,6 +91,35 @@ namespace OaksMayFall
             
             hpBarItem.Process(entity, fromHPRatio, toHPRatio);
         }
+        
+        /// <summary>
+        /// 显示某个实体的血条从当前值变化到另一值，如果这个实体没有血条，就自动创建一个血条对象
+        /// </summary>
+        /// <param name="entity">血条的主人</param>
+        /// <param name="toHPRatio">血条终点值</param>
+        public void ShowHPBar(UEntity entity, float toHPRatio)
+        {
+            Debug.Log("ShowHPBar");
+            // 如果输入的实体为空，则不需要血条
+            if (entity == null)
+            {
+                Log.Warning("Entity is invalid.");
+                return;
+            }
+
+            // 根据实体得到这个实体对应的可用血条
+            HPBarItem hpBarItem = GetActiveHPBarItem(entity);
+            // 如果得不到，就创建一个血条对象
+            if (hpBarItem == null)
+            {
+                // 创建一个可用血条对象，血条的主人是输入的实体
+                hpBarItem = CreateHPBarItem(entity);
+                // 将这个创建出来的血条对象加入到可用血条列表中
+                m_ActiveHPBarItems.Add(hpBarItem);
+            }
+            
+            hpBarItem.Process(entity, toHPRatio);
+        }
 
         private void HideHPBar(HPBarItem hpBarItem)
         {
@@ -104,7 +133,7 @@ namespace OaksMayFall
         /// </summary>
         /// <param name="entity">血条的实体主人</param>
         /// <returns></returns>
-        private HPBarItem GetActiveHPBarItem(UEntity entity)
+        public HPBarItem GetActiveHPBarItem(UEntity entity)
         {
             if (entity == null)
             {
