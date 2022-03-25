@@ -16,6 +16,7 @@ namespace OaksMayFall
     {
         private void Start()
         {
+            Application.targetFrameRate = 60;
             InitBuiltinComponents();
             InitCustomComponents();
         }

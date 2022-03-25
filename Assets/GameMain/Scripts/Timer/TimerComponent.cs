@@ -25,10 +25,8 @@ namespace OaksMayFall
         {
             foreach (TimerHandler timerHandler in TimerHandler.TimerHandlerList)
             {
-                Debug.Log(timerHandler.ElapsedTime);
                 timerHandler.ElapsedTime += Time.deltaTime * _timeScale;
             }
-            TimerHandler.TimerHandlerList.collection.Reset();
         }
     }
 }

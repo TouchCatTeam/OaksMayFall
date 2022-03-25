@@ -36,6 +36,7 @@ namespace OaksMayFall
         {
             if (icout >= list.Count)
             {
+                Reset();
                 return false;
             }
             else

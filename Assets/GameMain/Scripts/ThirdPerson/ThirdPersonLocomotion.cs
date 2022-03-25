@@ -13,7 +13,15 @@ namespace OaksMayFall
 	    /// </summary>
 	    private const float Threshold = 0.01f;
 	    
-	    // 移动相关
+	    
+	    // 运动相关
+
+	    /// <summary>
+	    /// 是否正在静止运动
+	    /// </summary>
+	    private bool _isFreezingMove = false;
+	    
+	    // 行走相关
 	    
 	    /// <summary>
 	    /// 移动速度
@@ -50,11 +58,59 @@ namespace OaksMayFall
 	    /// <summary>
 	    /// 冲刺速度
 	    /// </summary>
-	    private float _sprintSpeed = 20f;
-	    // 冲刺计时器
-	    private float _sprintTimeoutDelta;
-	    // 冲刺的冷却时间
-	    private float _sprintTimeout = 0.25f;
+	    private float _sprintSpeed = 15f;
+	    /// <summary>
+	    /// 冲刺计时器
+	    /// </summary>
+	    private bool _isSprinting = false;
+		/// <summary>
+		/// 是否开始冲刺
+		/// </summary>
+	    private bool _isSprintBegin = false;
+		/// <summary>
+		/// 是否开始冲刺
+		/// </summary>
+		private bool IsSprintBegin
+		{
+			get
+			{
+				if (_isSprintBegin)
+				{
+					_isSprintBegin = false;
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+	    /// <summary>
+	    /// 冲刺的冷却时间
+	    /// </summary>
+	    private float _sprintTimeout = 0.5f;
+	    /// <summary>
+	    /// 是否能够冲刺
+	    /// </summary>
+	    private bool ShouldSprint
+	    {
+		    get
+		    {
+			    if (_userInput.Sprint && !_isSprinting)
+			    {
+				    _isSprinting = true;
+				    _isSprintBegin = true;
+				    var timer = GameEntry.Timer.CreateTimer(_sprintTimeout, false,
+					    delegate(object[] args) { _isSprinting = false;});
+				    timer.Start();
+				    return true;
+			    }
+			    else
+			    {
+				    return false;
+			    }
+		    }
+	    }
 	    /// <summary>
 	    /// 冲刺速度的过渡速度
 	    /// </summary>
@@ -62,7 +118,7 @@ namespace OaksMayFall
 	    /// <summary>
 	    /// 玩家冲刺速度的过渡时间
 	    /// </summary>
-	    private float _sprintSmoothTime = 0.2f;
+	    private float _sprintSmoothTime = 0.5f;
 	    
 	    // 物理相关
 	    
@@ -118,8 +174,13 @@ namespace OaksMayFall
 			    if (_userInput.Attack && !_isAttacking)
 			    {
 				    _isAttacking = true;
+				    _isFreezingMove = true;
 				    var timer = GameEntry.Timer.CreateTimer(_attackTimeout, false,
-					    delegate(object[] args) { _isAttacking = false; Debug.Log("_isAttacking = false");});
+					    delegate(object[] args)
+					    {
+						    _isAttacking = false;
+						    _isFreezingMove = false;
+					    });
 				    timer.Start();
 				    return true;
 			    }
@@ -282,13 +343,14 @@ namespace OaksMayFall
         /// </summary>
         public void Move()
         {
+	        if(_isFreezingMove)
+				return;
+	        
 	        // 一开始的想法是，想把冲刺做成一个常规速度之外的附加速度
 	        // 之后 debug 的时候发现不好调，还是要做成分离的
 	        // 只要正在冲刺，就只使用冲刺速度
-	        
-	        UpdateSprintTimeout();
-	        
-	        _horizontalVelocity = _sprintTimeoutDelta > 0f ? GetSprintSpeed() : GetNormalSpeed();
+
+	        _horizontalVelocity = (ShouldSprint || _isSprinting) ? GetSprintSpeed() : GetNormalSpeed();
 	        _userCharacterController.Move((_horizontalVelocity + _verticalVelocity) * Time.deltaTime);
         }
 
@@ -304,7 +366,7 @@ namespace OaksMayFall
 	        Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 	        
 	        // 如果按下冲刺，那么初始化冲刺
-	        if (_userInput.Sprint)
+	        if (IsSprintBegin)
 	        {
 		        // 当前附加速度初始化为冲刺速度
 		        // 不需要 SmoothDamp，这是突变的
@@ -335,17 +397,7 @@ namespace OaksMayFall
 	        
 	        return Vector3.SmoothDamp(_horizontalVelocity, targetVelocity, ref _walkSmoothVelocity, _walkSmoothTime);
         }
-        private void UpdateSprintTimeout()
-        {
-	        // 如果正在冲刺，并且计时器小于 0，说明可以开始冲刺
-	        if (_userInput.Sprint && _sprintTimeoutDelta <= 0f)
-		        _sprintTimeoutDelta = _sprintTimeout;
 
-	        // 如果冲刺计时器大于 0，说明当前正在冲刺
-	        if (_sprintTimeoutDelta > 0f)
-		        // 冲刺计时器工作
-		        _sprintTimeoutDelta -= Time.deltaTime;
-        }
         /// <summary>
         /// 向移动方向旋转
         /// </summary>

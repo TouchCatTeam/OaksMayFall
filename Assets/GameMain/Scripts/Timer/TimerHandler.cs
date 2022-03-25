@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace OaksMayFall
 {
     public class TimerHandler
@@ -46,8 +44,6 @@ namespace OaksMayFall
             _args = args;
 
             TimerHandlerList.Add(this);
-            
-            Debug.Log("add");
         }
 
         public void Reset()
@@ -58,7 +54,6 @@ namespace OaksMayFall
         public void Start()
         {
             _isPasue = false;
-            Debug.Log("Start");
         }
         
         public void Pause()
@@ -68,7 +63,6 @@ namespace OaksMayFall
         
         public void Stop()
         {
-            Debug.Log("Stop");
             _callback?.Invoke(_args);
             if (_isLoop)
             {

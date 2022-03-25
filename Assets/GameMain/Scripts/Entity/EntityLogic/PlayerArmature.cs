@@ -19,10 +19,11 @@ namespace OaksMayFall
         private GameObject _cinemachineCameraTarget;
         private GameObject _playerFollowCamera;
         private GameObject _mainCamera;
-        private SimRigidBodyPush _simRigidBodyPush;
         
-        private ThirdPersonLocomotion _thirdPersonLocomotion;
-
+        private SimRigidBodyPush _simRigidBodyPush;
+        private ThirdPersonLocomotion _locomotion;
+        private ThirdPersonBattleManager _battleManager;
+        
         private float _currHP;
         public float CurrHP
         {
@@ -61,13 +62,15 @@ namespace OaksMayFall
             _playerFollowCamera = GameObject.Find("PlayerFollowCamera");
             _playerFollowCamera.GetComponent<CinemachineVirtualCamera>().Follow = _cinemachineCameraTarget.transform;
             _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            
             _simRigidBodyPush = gameObject.AddComponent<SimRigidBodyPush>();
 
-            _thirdPersonLocomotion = new ThirdPersonLocomotion(transform, _controller, _animator, _input,
+            _locomotion = new ThirdPersonLocomotion(transform, _controller, _animator, _input,
                 _cinemachineCameraTarget, _mainCamera);
-            
-            _thirdPersonLocomotion.AssignAnimationIDs();
+            _locomotion.AssignAnimationIDs();
 
+            _battleManager = new ThirdPersonBattleManager();
+            
             CurrHP = playerArmatureData.MaxHP;
             _nrgBarItem = transform.Find("NRGBarRoot").GetComponentInChildren<NRGBarItem>();
         }
@@ -76,16 +79,16 @@ namespace OaksMayFall
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
             
-            _thirdPersonLocomotion.ApplyGravity();
-            _thirdPersonLocomotion.GroundedCheck();
-            _thirdPersonLocomotion.Move();
-            _thirdPersonLocomotion.RotateToMoveDir();
-            _thirdPersonLocomotion.SetAnimatorValue();
+            _locomotion.ApplyGravity();
+            _locomotion.GroundedCheck();
+            _locomotion.Move();
+            _locomotion.RotateToMoveDir();
+            _locomotion.SetAnimatorValue();
         }
 
         protected void LateUpdate()
         {
-            _thirdPersonLocomotion.CameraRotate();
+            _locomotion.CameraRotate();
         }
     }
 }
