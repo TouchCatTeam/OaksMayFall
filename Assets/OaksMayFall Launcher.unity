@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879e921586721514f9f85de777050af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPBarItemTemplate: {fileID: 107322, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
+  HPBarItemTemplate: {fileID: 107322, guid: e1a69f59ea615714198d4a029152b79e, type: 3}
   instancePoolCapacity: 16
 --- !u!1 &2063016435
 GameObject:

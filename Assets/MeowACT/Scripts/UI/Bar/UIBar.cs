@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 12/03/2022 16:08
-// 最后一次修改于: 26/03/2022 16:43
+// 最后一次修改于: 26/03/2022 22:29
 // 版权所有: CheapMiaoStudio
 // 描述:
 // ----------------------------------------------
@@ -93,7 +93,7 @@ namespace MeowACT
 
             canvasGroup.alpha = 1f;
             fillImage.fillAmount = fromRatio;
-
+            
             // 开始值变化协程
             StartCoroutine(BarCo(toRatio, AnimationDuration, AnimationSmoothTime, KeepSeconds, FadeOutDuration,
                 FadeOutSmoothTime));

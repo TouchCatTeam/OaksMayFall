@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 26/03/2022 2:15
-// 最后一次修改于: 26/03/2022 21:26
+// 最后一次修改于: 26/03/2022 22:21
 // 版权所有: CheapMiaoStudio
 // 描述:
 // ----------------------------------------------
@@ -24,11 +24,12 @@ namespace MeowACT
         /// 冲刺的冷却时间
         /// </summary>
         private float sprintTimeout = 0.5f;
+
         /// <summary>
         /// 攻击的冷却时间
         /// </summary>
         private float attackTimeout = 1f;
-
+        
         /// <summary>
         /// 第三人称行为控制器的构造函数
         /// </summary>
@@ -85,8 +86,12 @@ namespace MeowACT
         {
             Owner.AttributeManager.IsSprinting = true;
             Owner.AttributeManager.IsSprintBegin = true;
+
+            // 开始冲刺进入霸体
+            Owner.AttributeManager.IsSuperArmor = true;
             
-            Owner.AttributeManager.NRG -= 10;
+            // 开始冲刺消耗体力
+            Owner.AttributeManager.NRG -= Owner.AttributeManager.SprintCost;
 
             Owner.EventManager.Fire("BeginSprintEvent", null);
         }
@@ -102,6 +107,9 @@ namespace MeowACT
         {
             Owner.AttributeManager.IsSprinting = false;
             
+            // 结束冲刺离开霸体
+            Owner.AttributeManager.IsSuperArmor = true;
+            
             Owner.EventManager.Fire("EndSprintEvent", null);
         }
         
@@ -110,6 +118,9 @@ namespace MeowACT
             Owner.AttributeManager.IsMeleeAttacking = true;
             Owner.AttributeManager.IsFreezingMove = true;
 
+            // 开始近战攻击消耗体力
+            Owner.AttributeManager.NRG -= Owner.AttributeManager.MeleeAttackCost;
+            
             Owner.EventManager.Fire("BeginMeleeAttackEvent", null);
         }
         

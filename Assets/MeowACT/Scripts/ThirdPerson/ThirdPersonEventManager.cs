@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 26/03/2022 14:46
-// 最后一次修改于: 26/03/2022 21:37
+// 最后一次修改于: 26/03/2022 22:21
 // 版权所有: CheapMiaoStudio
 // 描述:
 // ----------------------------------------------
@@ -157,7 +157,6 @@ namespace MeowACT
 
         public void Fire(string eventName, object[] args)
         {
-            Debug.Log(EventMap[eventName] == null);
             EventMap[eventName]?.Invoke(args);
         }
     }

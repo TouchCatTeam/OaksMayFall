@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 26/03/2022 15:00
-// 最后一次修改于: 26/03/2022 21:16
+// 最后一次修改于: 26/03/2022 22:15
 // 版权所有: CheapMiaoStudio
 // 描述:
 // ----------------------------------------------
@@ -80,6 +80,16 @@ namespace MeowACT
             }
         }
 
+        /// <summary>
+        /// 冲刺的体力消耗
+        /// </summary>
+        public float SprintCost = 10f;
+        
+        /// <summary>
+        /// 近战攻击的体力消耗
+        /// </summary>
+        public float MeleeAttackCost = 10f;
+        
         // 运动状态
 
         // 运动状态 - 冲刺相关
@@ -111,6 +121,11 @@ namespace MeowACT
         /// </summary>
         public bool IsMeleeAttacking = false;
 
+        /// <summary>
+        /// 是否霸体
+        /// </summary>
+        public bool IsSuperArmor = false;
+        
         /// <summary>
         /// 第三人称属性管理器的主人
         /// </summary>
