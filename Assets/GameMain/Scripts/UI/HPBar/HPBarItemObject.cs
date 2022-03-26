@@ -1,9 +1,10 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 12/03/2022 16:08
+// 最后一次修改于: 26/03/2022 7:13
+// 版权所有: ThinkDifferentStudio
+// 描述:
+// ----------------------------------------------
 
 using GameFramework;
 using GameFramework.ObjectPool;

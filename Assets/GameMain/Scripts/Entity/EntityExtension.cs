@@ -1,9 +1,10 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 12/03/2022 16:05
+// 最后一次修改于: 26/03/2022 8:18
+// 版权所有: ThinkDifferentStudio
+// 描述:
+// ----------------------------------------------
 
 using GameFramework.DataTable;
 using System;
@@ -39,11 +40,6 @@ namespace OaksMayFall
         public static void AttachEntity(this EntityComponent entityComponent, UEntity entity, int ownerId, string parentTransformPath = null, object userData = null)
         {
             entityComponent.AttachEntity(entity.Entity, ownerId, parentTransformPath, userData);
-        }
-
-        public static void ShowPlayerArmature(this EntityComponent entityCompoennt, PlayerArmatureData data)
-        {
-            entityCompoennt.ShowEntity(typeof(PlayerArmature), "PlayerArmature", Constant.AssetPriority.PlayerArmatureAsset, data);
         }
 
         //public static void ShowEffect(this EntityComponent entityComponent, EffectData data)

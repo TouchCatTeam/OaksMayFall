@@ -1,77 +1,85 @@
+// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 25/03/2022 16:50
+// 最后一次修改于: 26/03/2022 7:13
+// 版权所有: ThinkDifferentStudio
+// 描述:
+// ----------------------------------------------
+
 namespace OaksMayFall
 {
     public class TimerHandler
     {
-        private bool _isPasue;
-        public bool IsPasue => _isPasue;
+        private bool isPasue;
+        public bool IsPasue => isPasue;
         
-        private bool _isStop;
-        public bool IsStop => _isStop;
+        private bool isStop;
+        public bool IsStop => isStop;
         
-        private float _elapsedTime;
+        private float elapsedTime;
         public float ElapsedTime
         {
-            get => _elapsedTime;
+            get => elapsedTime;
             set
             {
-                if (!_isStop && !_isPasue) 
-                    _elapsedTime = value;
-                if (_elapsedTime >= _duration)
+                if (!isStop && !isPasue) 
+                    elapsedTime = value;
+                if (elapsedTime >= duration)
                     Stop();
             }
         }
 
-        private float _duration;
-        public float Duration => _duration;
+        private float duration;
+        public float Duration => duration;
 
-        private bool _isLoop;
-        public bool IsLoop => _isLoop;
+        private bool isLoop;
+        public bool IsLoop => isLoop;
         
-        public delegate void CallBackDelegate(params object[] args);
-        private CallBackDelegate _callback;
+        private TimerComponent.CallBackDelegate callback;
         
-        private object[] _args;
+        private object[] args;
 
         public static RList<TimerHandler> TimerHandlerList = new RList<TimerHandler>();
-        
-        public TimerHandler(float duration, bool isLoop, CallBackDelegate callback, params object[] args)
+
+        public TimerHandler(float duration, bool isLoop, TimerComponent.CallBackDelegate callback,
+            params object[] args)
         {
-            _isPasue = true;
-            _isStop = false;
-            _duration = duration;
-            _isLoop = isLoop;
-            _callback = callback;
-            _args = args;
+            this.isPasue = true;
+            this.isStop = false;
+            this.duration = duration;
+            this.isLoop = isLoop;
+            this.callback = callback;
+            this.args = args;
 
             TimerHandlerList.Add(this);
         }
 
         public void Reset()
         {
-            _elapsedTime = 0;
+            elapsedTime = 0;
         }
 
         public void Start()
         {
-            _isPasue = false;
+            isPasue = false;
         }
         
         public void Pause()
         {
-            _isPasue = true;
+            isPasue = true;
         }
         
         public void Stop()
         {
-            _callback?.Invoke(_args);
-            if (_isLoop)
+            callback?.Invoke(args);
+            if (isLoop)
             {
-                _elapsedTime -= _duration;
+                elapsedTime -= duration;
             }
             else
             {
-                _isPasue = true;
-                _isStop = true;
+                isPasue = true;
+                isStop = true;
                 TimerHandlerList.Remove(this);
             }
         }

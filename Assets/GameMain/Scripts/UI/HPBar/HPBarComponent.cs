@@ -1,13 +1,15 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 12/03/2022 16:08
+// 最后一次修改于: 26/03/2022 7:13
+// 版权所有: ThinkDifferentStudio
+// 描述:
+// ----------------------------------------------
 
 using GameFramework.ObjectPool;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityGameFramework.Runtime;
 
 namespace OaksMayFall
@@ -15,20 +17,20 @@ namespace OaksMayFall
     public class HPBarComponent : GameFrameworkComponent
     {
         [SerializeField]
-        private HPBarItem m_HPBarItemTemplate = null;
+        private HPBarItem HPBarItemTemplate = null;
 
-        [SerializeField]
-        private int m_InstancePoolCapacity = 16;
+        [FormerlySerializedAs("InstancePoolCapacity")] [SerializeField]
+        private int instancePoolCapacity = 16;
 
-        private IObjectPool<HPBarItemObject> m_HPBarItemObjectPool = null;
-        private List<HPBarItem> m_ActiveHPBarItems = null;
+        private IObjectPool<HPBarItemObject> HPBarItemObjectPool = null;
+        private List<HPBarItem> activeHpBarItems = null;
 
         private void Start()
         {
             // 检查配置
-            if (m_HPBarItemTemplate == null)
+            if (HPBarItemTemplate == null)
             {
-                GameFramework.GameFrameworkLog.Debug("没有配置血量条的原型 m_HPBarItemTemplate");
+                GameFramework.GameFrameworkLog.Debug("没有配置血量条的原型 HPBarItemTemplate");
                 return;
             }
             if(GameEntry.ObjectPool == null)
@@ -37,8 +39,8 @@ namespace OaksMayFall
                 return;
             }
 
-            m_HPBarItemObjectPool = GameEntry.ObjectPool.CreateSingleSpawnObjectPool<HPBarItemObject>("HPBarItem", m_InstancePoolCapacity);
-            m_ActiveHPBarItems = new List<HPBarItem>();
+            HPBarItemObjectPool = GameEntry.ObjectPool.CreateSingleSpawnObjectPool<HPBarItemObject>("HPBarItem", instancePoolCapacity);
+            activeHpBarItems = new List<HPBarItem>();
         }
 
         private void OnDestroy()
@@ -47,12 +49,12 @@ namespace OaksMayFall
 
         private void Update()
         {
-            // 如果配置正常，那么 m_ActiveHPBarItems 将会指向一个列表，否则指向 null
-            if (m_ActiveHPBarItems != null)
+            // 如果配置正常，那么 ActiveHPBarItems 将会指向一个列表，否则指向 null
+            if (activeHpBarItems != null)
             {
-                for (int i = m_ActiveHPBarItems.Count - 1; i >= 0; i--)
+                for (int i = activeHpBarItems.Count - 1; i >= 0; i--)
                 {
-                    HPBarItem hpBarItem = m_ActiveHPBarItems[i];
+                    HPBarItem hpBarItem = activeHpBarItems[i];
                     if (hpBarItem.Refresh())
                     {
                         continue;
@@ -86,7 +88,7 @@ namespace OaksMayFall
                 // 创建一个可用血条对象，血条的主人是输入的实体
                 hpBarItem = CreateHPBarItem(entity);
                 // 将这个创建出来的血条对象加入到可用血条列表中
-                m_ActiveHPBarItems.Add(hpBarItem);
+                activeHpBarItems.Add(hpBarItem);
             }
             
             hpBarItem.Process(entity, fromHPRatio, toHPRatio);
@@ -115,7 +117,7 @@ namespace OaksMayFall
                 // 创建一个可用血条对象，血条的主人是输入的实体
                 hpBarItem = CreateHPBarItem(entity);
                 // 将这个创建出来的血条对象加入到可用血条列表中
-                m_ActiveHPBarItems.Add(hpBarItem);
+                activeHpBarItems.Add(hpBarItem);
             }
             
             hpBarItem.Process(entity, toHPRatio);
@@ -124,8 +126,8 @@ namespace OaksMayFall
         private void HideHPBar(HPBarItem hpBarItem)
         {
             hpBarItem.Reset();
-            m_ActiveHPBarItems.Remove(hpBarItem);
-            m_HPBarItemObjectPool.Unspawn(hpBarItem);
+            activeHpBarItems.Remove(hpBarItem);
+            HPBarItemObjectPool.Unspawn(hpBarItem);
         }
 
         /// <summary>
@@ -140,11 +142,11 @@ namespace OaksMayFall
                 return null;
             }
 
-            for (int i = 0; i < m_ActiveHPBarItems.Count; i++)
+            for (int i = 0; i < activeHpBarItems.Count; i++)
             {
-                if (m_ActiveHPBarItems[i].Owner == entity)
+                if (activeHpBarItems[i].Owner == entity)
                 {
-                    return m_ActiveHPBarItems[i];
+                    return activeHpBarItems[i];
                 }
             }
 
@@ -160,7 +162,7 @@ namespace OaksMayFall
         {
             HPBarItem hpBarItem = null;
             // 从对象池中拿一个血条对象出来
-            HPBarItemObject hpBarItemObject = m_HPBarItemObjectPool.Spawn();
+            HPBarItemObject hpBarItemObject = HPBarItemObjectPool.Spawn();
             // 从对象池中拿到了血条对象，那么
             if (hpBarItemObject != null)
             {
@@ -170,7 +172,7 @@ namespace OaksMayFall
             else
             {
                 // 实例化血条 Perfab
-                hpBarItem = Instantiate(m_HPBarItemTemplate);
+                hpBarItem = Instantiate(HPBarItemTemplate);
                 // 血条挂在 entity 的 HPBarRoot 下
                 var hpBarRoot = entity.transform.Find("HPBarRoot");
                 if(hpBarRoot == null)
@@ -181,7 +183,7 @@ namespace OaksMayFall
                 hpBarItem.transform.localEulerAngles = Vector3.zero;
                 hpBarItem.transform.localScale = Vector3.one;
                 // 创建的血条对象加入对象池
-                m_HPBarItemObjectPool.Register(HPBarItemObject.Create(hpBarItem), true);
+                HPBarItemObjectPool.Register(HPBarItemObject.Create(hpBarItem), true);
             }
 
             return hpBarItem;

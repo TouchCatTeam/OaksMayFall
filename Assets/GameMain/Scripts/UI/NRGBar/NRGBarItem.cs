@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 23/03/2022 8:05
+// 最后一次修改于: 26/03/2022 7:13
+// 版权所有: ThinkDifferentStudio
+// 描述:
+// ----------------------------------------------
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
@@ -13,24 +21,24 @@ namespace OaksMayFall
         private const float FadeOutDuration = 1f;
         private const float FadeOutSmoothTime = 0.2f;
 
-        [SerializeField] private Image _fillImage;
+        [SerializeField] private Image fillImage;
         
-        private RectTransform m_CachedTransform;
-        private CanvasGroup m_CachedCanvasGroup;
+        private RectTransform cachedTransform;
+        private CanvasGroup cachedCanvasGroup;
 
-        public float FillAmount => _fillImage.fillAmount;
+        public float FillAmount => fillImage.fillAmount;
         
         private void Awake()
         {
-            m_CachedTransform = GetComponent<RectTransform>();
-            if (m_CachedTransform == null)
+            cachedTransform = GetComponent<RectTransform>();
+            if (cachedTransform == null)
             {
                 Log.Error("RectTransform is invalid.");
                 return;
             }
 
-            m_CachedCanvasGroup = GetComponent<CanvasGroup>();
-            if (m_CachedCanvasGroup == null)
+            cachedCanvasGroup = GetComponent<CanvasGroup>();
+            if (cachedCanvasGroup == null)
             {
                 Log.Error("CanvasGroup is invalid.");
             }
@@ -38,7 +46,7 @@ namespace OaksMayFall
 
         public void AddFillAmount(float add)
         {
-            Process(_fillImage.fillAmount, Mathf.Clamp(_fillImage.fillAmount + add, 0, 1));
+            Process(fillImage.fillAmount, Mathf.Clamp(fillImage.fillAmount + add, 0, 1));
         }
         
         /// <summary>
@@ -53,8 +61,8 @@ namespace OaksMayFall
             // 这就停掉了之前的体力条的变化
             StopAllCoroutines();
 
-            m_CachedCanvasGroup.alpha = 1f;
-            _fillImage.fillAmount = fromNRGRatio;
+            cachedCanvasGroup.alpha = 1f;
+            fillImage.fillAmount = fromNRGRatio;
 
             Refresh();
 
@@ -65,7 +73,7 @@ namespace OaksMayFall
 
         public bool Refresh()
         {
-            if (m_CachedCanvasGroup.alpha <= 0f)
+            if (cachedCanvasGroup.alpha <= 0f)
             {
                 return false;
             }
@@ -76,18 +84,18 @@ namespace OaksMayFall
         public void Reset()
         {
             StopAllCoroutines();
-            m_CachedCanvasGroup.alpha = 1f;
-            _fillImage.fillAmount = 1f;
+            cachedCanvasGroup.alpha = 1f;
+            fillImage.fillAmount = 1f;
             gameObject.SetActive(false);
         }
 
         private IEnumerator NRGBarCo(float value, float animationDuration, float animationSmoothTime, float keepDuration,
             float fadeOutDuration, float fadeOutSmoothTime)
         {
-            yield return _fillImage.SmoothFillAmount(value, animationDuration, animationSmoothTime);
+            yield return fillImage.SmoothFillAmount(value, animationDuration, animationSmoothTime);
             yield return new WaitForSeconds(keepDuration);
-            yield return _fillImage.SmoothFillAmount(1, animationDuration, animationSmoothTime);
-            yield return m_CachedCanvasGroup.FadeToAlpha(0f, fadeOutDuration, fadeOutSmoothTime);
+            yield return fillImage.SmoothFillAmount(1, animationDuration, animationSmoothTime);
+            yield return cachedCanvasGroup.FadeToAlpha(0f, fadeOutDuration, fadeOutSmoothTime);
         }
     }
 }

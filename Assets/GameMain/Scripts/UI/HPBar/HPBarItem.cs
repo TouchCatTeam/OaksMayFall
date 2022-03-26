@@ -1,9 +1,10 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 12/03/2022 16:08
+// 最后一次修改于: 26/03/2022 7:13
+// 版权所有: ThinkDifferentStudio
+// 描述:
+// ----------------------------------------------
 
 using System.Collections;
 using UnityEngine;
@@ -21,29 +22,28 @@ namespace OaksMayFall
         private const float FadeOutSmoothTime = 0.2f;
 
         [SerializeField]
-        private Slider m_HPBar = null;
+        private Slider HPBar = null;
 
-        private Canvas m_ParentCanvas = null;
-        private RectTransform m_CachedTransform = null;
-        private CanvasGroup m_CachedCanvasGroup = null;
-        private UEntity m_Owner = null;
-        private int m_OwnerId = 0;
+        private Canvas parentCanvas = null;
+        private RectTransform cachedTransform = null;
+        private CanvasGroup cachedCanvasGroup = null;
+        private int OwnerId = 0;
 
-        public UEntity Owner => m_Owner;
+        public UEntity Owner;
 
-        public float HP => m_HPBar.value;
+        public float HP => HPBar.value;
         
         private void Awake()
         {
-            m_CachedTransform = GetComponent<RectTransform>();
-            if (m_CachedTransform == null)
+            cachedTransform = GetComponent<RectTransform>();
+            if (cachedTransform == null)
             {
                 Log.Error("RectTransform is invalid.");
                 return;
             }
 
-            m_CachedCanvasGroup = GetComponent<CanvasGroup>();
-            if (m_CachedCanvasGroup == null)
+            cachedCanvasGroup = GetComponent<CanvasGroup>();
+            if (cachedCanvasGroup == null)
             {
                 Log.Error("CanvasGroup is invalid.");
                 return;
@@ -69,12 +69,12 @@ namespace OaksMayFall
             // 这就停掉了之前的血条的变化
             StopAllCoroutines();
 
-            m_CachedCanvasGroup.alpha = 1f;
-            if (m_Owner != owner || m_OwnerId != owner.Id)
+            cachedCanvasGroup.alpha = 1f;
+            if (Owner != owner || OwnerId != owner.Id)
             {
-                m_HPBar.value = fromHPRatio;
-                m_Owner = owner;
-                m_OwnerId = owner.Id;
+                HPBar.value = fromHPRatio;
+                Owner = owner;
+                OwnerId = owner.Id;
             }
 
             Refresh();
@@ -102,11 +102,11 @@ namespace OaksMayFall
             // 这就停掉了之前的血条的变化
             StopAllCoroutines();
 
-            m_CachedCanvasGroup.alpha = 1f;
-            if (m_Owner != owner || m_OwnerId != owner.Id)
+            cachedCanvasGroup.alpha = 1f;
+            if (Owner != owner || OwnerId != owner.Id)
             {
-                m_Owner = owner;
-                m_OwnerId = owner.Id;
+                Owner = owner;
+                OwnerId = owner.Id;
             }
 
             Refresh();
@@ -118,7 +118,7 @@ namespace OaksMayFall
         
         public bool Refresh()
         {
-            if (m_CachedCanvasGroup.alpha <= 0f)
+            if (cachedCanvasGroup.alpha <= 0f)
             {
                 return false;
             }
@@ -129,18 +129,18 @@ namespace OaksMayFall
         public void Reset()
         {
             StopAllCoroutines();
-            m_CachedCanvasGroup.alpha = 1f;
-            m_HPBar.value = 1f;
-            m_Owner = null;
+            cachedCanvasGroup.alpha = 1f;
+            HPBar.value = 1f;
+            Owner = null;
             gameObject.SetActive(false);
         }
 
         private IEnumerator HPBarCo(float value, float animationDuration, float animationSmoothTime, float keepDuration,
             float fadeOutDuration, float fadeOutSmoothTime)
         {
-            yield return m_HPBar.SmoothValue(value, animationDuration, animationSmoothTime);
+            yield return HPBar.SmoothValue(value, animationDuration, animationSmoothTime);
             yield return new WaitForSeconds(keepDuration);
-            yield return m_CachedCanvasGroup.FadeToAlpha(0f, fadeOutDuration, fadeOutSmoothTime);
+            yield return cachedCanvasGroup.FadeToAlpha(0f, fadeOutDuration, fadeOutSmoothTime);
         }
     }
 }

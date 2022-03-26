@@ -1,13 +1,10 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
-
-using GameFramework;
-using GameFramework.DataTable;
-using UnityEngine;
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 12/03/2022 15:05
+// 最后一次修改于: 26/03/2022 8:25
+// 版权所有: ThinkDifferentStudio
+// 描述:
+// ----------------------------------------------
 
 namespace OaksMayFall
 {
@@ -26,13 +23,8 @@ namespace OaksMayFall
         public override void Initialize()
         {
             base.Initialize();
-            IDataTable<DRPlayerArmature> dtPlayerArmature = GameEntry.DataTable.GetDataTable<DRPlayerArmature>();
-            GameEntry.Entity.ShowPlayerArmature(new PlayerArmatureData(GameEntry.Entity.GenerateSerialId(),10000, CampType.Player)
-            {
-                Position = new Vector3(0f, 1f, 0f),
-            });
-            
-            
+
+
         }
         
         public override void Update(float elapseSeconds, float realElapseSeconds)
