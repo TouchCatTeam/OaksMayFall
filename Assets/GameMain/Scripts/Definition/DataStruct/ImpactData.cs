@@ -1,11 +1,13 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 12/03/2022 14:58
+// 最后一次修改于: 26/03/2022 15:34
+// 版权所有: CheapMiaoStudio
+// 描述:
+// ----------------------------------------------
 
 using System.Runtime.InteropServices;
+using MeowACT;
 
 namespace OaksMayFall
 {

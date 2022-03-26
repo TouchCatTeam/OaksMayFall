@@ -1,10 +1,20 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 11/03/2022 23:25
+// 最后一次修改于: 26/03/2022 16:29
+// 版权所有: CheapMiaoStudio
+// 描述:
+// ----------------------------------------------
 
+// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 25/03/2022 16:50
+// 最后一次修改于: 26/03/2022 7:13
+// 版权所有: ThinkDifferentStudio
+// 描述:
+// ----------------------------------------------
+
+using OaksMayFall;
 using UnityEngine;
 
 namespace OaksMayFall
@@ -25,17 +35,11 @@ namespace OaksMayFall
             get;
             private set;
         }
-
-        public static TimerComponent Timer
-        {
-            get;
-            private set;
-        }
+        
         private static void InitCustomComponents()
         {
             BuiltinData = UnityGameFramework.Runtime.GameEntry.GetComponent<BuiltinDataComponent>();
             HPBar = UnityGameFramework.Runtime.GameEntry.GetComponent<HPBarComponent>();
-            Timer = UnityGameFramework.Runtime.GameEntry.GetComponent<TimerComponent>();
         }
     }
 }
