@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 26/03/2022 2:15
-// 最后一次修改于: 26/03/2022 22:21
+// 最后一次修改于: 26/03/2022 22:52
 // 版权所有: CheapMiaoStudio
 // 描述:
 // ----------------------------------------------
@@ -71,11 +71,7 @@ namespace MeowACT
             if (Owner.Input.Attack && !Owner.AttributeManager.IsMeleeAttacking)
             {
                 FireBeginMeleeAttackEvent();
-                
-                var timer = TimerManagerSingleton.SingleInstance.CreateTimer(attackTimeout, false,
-                    delegate(object[] args) { FireEndMeleeAttackEvent(); });
-                timer.Start();
-                
+
                 return true;
             }
 
@@ -124,7 +120,7 @@ namespace MeowACT
             Owner.EventManager.Fire("BeginMeleeAttackEvent", null);
         }
         
-        private void FireEndMeleeAttackEvent()
+        public void FireEndMeleeAttackEvent()
         {
             Owner.AttributeManager.IsMeleeAttacking = false;
             Owner.AttributeManager.IsFreezingMove = false;

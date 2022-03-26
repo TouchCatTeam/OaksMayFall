@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 16/03/2022 16:53
-// 最后一次修改于: 26/03/2022 16:29
+// 最后一次修改于: 26/03/2022 22:54
 // 版权所有: CheapMiaoStudio
 // 描述:
 // ----------------------------------------------
@@ -176,8 +176,11 @@ namespace MeowACT
         /// </summary>
         public void Move()
         {
-	        if(Owner.AttributeManager.IsFreezingMove)
-				return;
+	        if (Owner.AttributeManager.IsFreezingMove)
+	        {
+		        Owner.AttributeManager.HorizontalVelocity = Vector3.zero;
+		        return;
+	        }
 
 	        Owner.AttributeManager.HorizontalVelocity = Owner.AttributeManager.IsSprinting ? GetSprintSpeed() : GetNormalSpeed();
 	        Owner.CharacterCtr.Move((Owner.AttributeManager.HorizontalVelocity + Owner.AttributeManager.VerticalVelocity) * Time.deltaTime);

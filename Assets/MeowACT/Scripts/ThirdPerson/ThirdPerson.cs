@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 25/03/2022 23:35
-// 最后一次修改于: 26/03/2022 21:11
+// 最后一次修改于: 26/03/2022 22:52
 // 版权所有: CheapMiaoStudio
 // 描述:
 // ----------------------------------------------
@@ -99,19 +99,19 @@ namespace MeowACT
         }
 
         /// <summary>
-        /// 由动画触发的动画事件，还需要在 mgr 中触发事件：尝试攻击
+        /// 由动画触发的动画事件，还需要在 mgr 中触发事件：尝试造成伤害
         /// </summary>
-        public void FireTryDoDamageEvent()
+        public void OnTryDoDamageAnimEvent()
         {
             EventManager.Fire("TryDoDamageEvent", null);
         }
         
         /// <summary>
-        /// 由动画触发的动画事件，还需要在 mgr 中触发事件：结束连击
+        /// 由动画触发的动画事件，还需要在行为控制器中触发事件：结束近战攻击
         /// </summary>
-        public void FireEndComboEvent()
+        public void OnEndMeleeAttackAnimEvent()
         {
-            EventManager.Fire("EndComboEvent", null);
+            actionController.FireEndMeleeAttackEvent();
         }
     }
 }

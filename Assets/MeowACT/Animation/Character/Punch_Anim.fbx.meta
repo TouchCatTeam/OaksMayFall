@@ -63,14 +63,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.56222224
-        functionName: FireTryDoDamageEvent
+        functionName: OnTryDoDamageAnimEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: f6a164533c9945c8ace7bda3102ce21b, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.99115044
-        functionName: FireEndComboEvent
+      - time: 1
+        functionName: OnEndMeleeAttackAnimEvent
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: f6a164533c9945c8ace7bda3102ce21b, type: 3}
         floatParameter: 0
