@@ -10,6 +10,12 @@ Shader Graph
 
 Universal RP
 
+TextMeshPro
+
+Bolt
+
+Odin - Inspector and Serializer
+
 2.制作
 
 工作室：ThinkDifferentStudio
