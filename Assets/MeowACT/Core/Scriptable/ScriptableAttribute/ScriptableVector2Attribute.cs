@@ -1,22 +1,22 @@
 // ----------------------------------------------
 // 作者: 廉价喵
-// 创建于: 29/03/2022 14:59
-// 最后一次修改于: 31/03/2022 16:29
+// 创建于: 29/03/2022 15:04
+// 最后一次修改于: 31/03/2022 20:36
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
 
 namespace MeowACT
 {
     /// <summary>
-    /// 可资产化布尔值的引用
+    /// 可资产化二维向量角色属性
     /// </summary>
-    public class ScriptableBooleanReference
+    public class ScriptableVector2Attribute
     {
         /// <summary>
         /// 是否使用字面值
@@ -29,15 +29,15 @@ namespace MeowACT
         /// </summary>
         [ShowIf("@IsLiteral")]
         [Tooltip("字面值")]
-        public bool LiteralValue;
+        public Vector2 LiteralValue;
         
         /// <summary>
         /// 可资产化值
         /// </summary>
         [ShowIf("@!IsLiteral")]
         [Tooltip("可资产化值")]
-        public ScriptableBoolean ScriptableVariable;
-        
+        public ScriptableVector2 ScriptableVariable;
+
         /// <summary>
         /// 是否有额外的事件绑定
         /// </summary>
@@ -59,25 +59,25 @@ namespace MeowACT
         public List<object> Args = new List<object>();
         
         /// <summary>
-        /// 可资产化布尔值的引用的默认构造函数
+        /// 可资产化二维向量角色属性的默认构造函数
         /// </summary>
-        public ScriptableBooleanReference()
+        public ScriptableVector2Attribute()
         { }
 
         /// <summary>
-        /// 可资产化布尔值的引用的使用字面值的构造函数
+        /// 可资产化二维向量角色属性的使用字面值的构造函数
         /// </summary>
         /// <param name="value">字面值</param>
-        public ScriptableBooleanReference(bool value)
+        public ScriptableVector2Attribute(Vector2 value)
         {
             IsLiteral = true;
             LiteralValue = value;
         }
 
         /// <summary>
-        /// 引用所指向的值
+        /// 所指向的值
         /// </summary>
-        public bool Value
+        public Vector2 Value
         {
             get => IsLiteral ? LiteralValue : ScriptableVariable.Value;
             set
@@ -94,11 +94,11 @@ namespace MeowACT
         }
 
         /// <summary>
-        /// 从 ScriptableBooleanReference 到 bool 的隐式类型转换
+        /// 从 ScriptableVector2Attribute 到 Vector2 的隐式类型转换
         /// </summary>
         /// <param name="reference">右值</param>
         /// <returns></returns>
-        public static implicit operator bool(ScriptableBooleanReference reference)
+        public static implicit operator Vector2(ScriptableVector2Attribute reference)
         {
             return reference.Value;
         }

@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
-// 创建于: 29/03/2022 15:04
-// 最后一次修改于: 31/03/2022 16:29
+// 创建于: 29/03/2022 14:58
+// 最后一次修改于: 31/03/2022 20:36
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -14,9 +14,9 @@ using UnityEngine;
 namespace MeowACT
 {
     /// <summary>
-    /// 可资产化二维向量值的引用
+    /// 可资产化整型角色属性
     /// </summary>
-    public class ScriptableVector2Reference
+    public class ScriptableIntAttribute
     {
         /// <summary>
         /// 是否使用字面值
@@ -29,14 +29,14 @@ namespace MeowACT
         /// </summary>
         [ShowIf("@IsLiteral")]
         [Tooltip("字面值")]
-        public Vector2 LiteralValue;
+        public int LiteralValue;
         
         /// <summary>
         /// 可资产化值
         /// </summary>
         [ShowIf("@!IsLiteral")]
         [Tooltip("可资产化值")]
-        public ScriptableVector2 ScriptableVariable;
+        public ScriptableInt ScriptableVariable;
 
         /// <summary>
         /// 是否有额外的事件绑定
@@ -59,25 +59,25 @@ namespace MeowACT
         public List<object> Args = new List<object>();
         
         /// <summary>
-        /// 可资产化二维向量值的引用的默认构造函数
+        /// 可资产化整型角色属性的默认构造函数
         /// </summary>
-        public ScriptableVector2Reference()
+        public ScriptableIntAttribute()
         { }
 
         /// <summary>
-        /// 可资产化二维向量值的引用的使用字面值的构造函数
+        /// 可资产化整型角色属性的使用字面值的构造函数
         /// </summary>
         /// <param name="value">字面值</param>
-        public ScriptableVector2Reference(Vector2 value)
+        public ScriptableIntAttribute(int value)
         {
             IsLiteral = true;
             LiteralValue = value;
         }
 
         /// <summary>
-        /// 引用所指向的值
+        /// 所指向的值
         /// </summary>
-        public Vector2 Value
+        public int Value
         {
             get => IsLiteral ? LiteralValue : ScriptableVariable.Value;
             set
@@ -94,11 +94,11 @@ namespace MeowACT
         }
 
         /// <summary>
-        /// 从 ScriptableVector2Reference 到 Vector2 的隐式类型转换
+        /// 从 ScriptableIntAttribute 到 int 的隐式类型转换
         /// </summary>
         /// <param name="reference">右值</param>
         /// <returns></returns>
-        public static implicit operator Vector2(ScriptableVector2Reference reference)
+        public static implicit operator int(ScriptableIntAttribute reference)
         {
             return reference.Value;
         }

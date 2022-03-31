@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 28/03/2022 17:43
-// 最后一次修改于: 31/03/2022 19:02
+// 最后一次修改于: 31/03/2022 20:36
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -20,13 +20,13 @@ namespace MeowACT
         /// 血量
         /// </summary>
         [Tooltip("血量")] 
-        public ScriptableFloatReference HP = new ScriptableFloatReference();
+        public ScriptableFloatAttribute HP = new ScriptableFloatAttribute();
         
         /// <summary>
         /// 最大血量
         /// </summary>
         [Tooltip("最大血量")] 
-        public ScriptableFloatReference MaxHP = new ScriptableFloatReference();
+        public ScriptableFloatAttribute MaxHP = new ScriptableFloatAttribute();
 
         public UnityEvent<float> testEvent;
         

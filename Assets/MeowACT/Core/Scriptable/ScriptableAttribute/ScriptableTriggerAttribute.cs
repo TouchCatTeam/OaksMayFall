@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
-// 创建于: 29/03/2022 15:02
-// 最后一次修改于: 31/03/2022 16:29
+// 创建于: 29/03/2022 15:01
+// 最后一次修改于: 31/03/2022 20:36
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -14,9 +14,9 @@ using UnityEngine;
 namespace MeowACT
 {
     /// <summary>
-    /// 可资产化字符串值值的引用
+    /// 可资产化触发器角色属性
     /// </summary>
-    public class ScriptableStringReference
+    public class ScriptableTriggerAttribute
     {
         /// <summary>
         /// 是否使用字面值
@@ -29,14 +29,14 @@ namespace MeowACT
         /// </summary>
         [ShowIf("@IsLiteral")]
         [Tooltip("字面值")]
-        public string LiteralValue;
+        public bool LiteralValue;
         
         /// <summary>
         /// 可资产化值
         /// </summary>
         [ShowIf("@!IsLiteral")]
         [Tooltip("可资产化值")]
-        public ScriptableString ScriptableVariable;
+        public ScriptableBoolean ScriptableVariable;
 
         /// <summary>
         /// 是否有额外的事件绑定
@@ -47,10 +47,16 @@ namespace MeowACT
         /// <summary>
         /// 值改变事件
         /// </summary>
-        [ShowIf("@HaveAdditionalBindingEvent")]
-        [Tooltip("在值被改变时触发的事件")]
         public ScriptableEvent ChangeEvent;
 
+        /// <summary>
+        /// 触发器事件
+        /// 也就是从真变回假时的事件
+        /// </summary>
+        [ShowIf("@HaveAdditionalBindingEvent")]
+        [Tooltip("在值被改变时触发的事件")]
+        public ScriptableEvent TriggerEvent;
+        
         /// <summary>
         /// 事件参数
         /// </summary>
@@ -59,27 +65,41 @@ namespace MeowACT
         public List<object> Args = new List<object>();
         
         /// <summary>
-        /// 可资产化字符串值值的引用的默认构造函数
+        /// 可资产化触发器角色属性的默认构造函数
         /// </summary>
-        public ScriptableStringReference()
+        public ScriptableTriggerAttribute()
         { }
 
         /// <summary>
-        /// 可资产化字符串值值的引用的使用字面值的构造函数
+        /// 可资产化触发器角色属性的使用字面值的构造函数
         /// </summary>
         /// <param name="value">字面值</param>
-        public ScriptableStringReference(string value)
+        public ScriptableTriggerAttribute(bool value)
         {
             IsLiteral = true;
             LiteralValue = value;
         }
 
         /// <summary>
-        /// 引用所指向的值
+        /// 所指向的值
         /// </summary>
-        public string Value
+        public bool Value
         {
-            get => IsLiteral ? LiteralValue : ScriptableVariable.Value;
+            get
+            {
+                if (IsLiteral ? LiteralValue : ScriptableVariable.Value == true)
+                {
+                    // 如果触发器事件不为空，那么触发触发器事件
+                    if(TriggerEvent != null)
+                        TriggerEvent.Raise(Args);
+                    
+                    if (IsLiteral)
+                        LiteralValue = false;
+                    else
+                        ScriptableVariable.Value = false;
+                }
+                return IsLiteral ? LiteralValue : ScriptableVariable.Value;
+            }
             set
             {
                 // 如果事件不为空，并且新值与旧值不同，那么触发事件
@@ -94,11 +114,11 @@ namespace MeowACT
         }
 
         /// <summary>
-        /// 从 ScriptableStringReference 到 string 的隐式类型转换
+        /// 从 ScriptableTriggerAttribute 到 bool 的隐式类型转换
         /// </summary>
         /// <param name="reference">右值</param>
         /// <returns></returns>
-        public static implicit operator string(ScriptableStringReference reference)
+        public static implicit operator bool(ScriptableTriggerAttribute reference)
         {
             return reference.Value;
         }

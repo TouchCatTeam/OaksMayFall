@@ -1,25 +1,22 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 29/03/2022 14:48
-// 最后一次修改于: 31/03/2022 17:41
+// 最后一次修改于: 31/03/2022 20:38
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Xml.Schema;
 using Sirenix.OdinInspector;
-using Unity.Collections;
 using UnityEngine;
 
     
 namespace MeowACT
 {
     /// <summary>
-    /// 可资产化浮点值的引用
+    /// 可资产化浮点角色属性
     /// </summary>
-    public class ScriptableFloatReference
+    public class ScriptableFloatAttribute
     {
         /// <summary>
         /// 是否使用字面值
@@ -44,50 +41,50 @@ namespace MeowACT
         /// <summary>
         /// 验证值改变是否合法的委托
         /// </summary>
-        [Sirenix.OdinInspector.ReadOnly]
+        [ReadOnly]
         [FoldoutGroup("Delegate")]
         public Func<float, bool> ValidateValueChange;
 
         /// <summary>
+        /// 处理值改变的委托
+        /// </summary>
+        [ReadOnly]
+        [FoldoutGroup("Delegate")]
+        public Func<float, float> ValueChangeExpression;
+        
+        /// <summary>
         /// 值改变成功的委托
         /// </summary>
-        [Sirenix.OdinInspector.ReadOnly]
+        [ReadOnly]
         [FoldoutGroup("Delegate")]
         public Action<float> AfterValueChangeSucceeded;
         
         /// <summary>
         /// 值改变失败的委托
         /// </summary>
-        [Sirenix.OdinInspector.ReadOnly]
+        [ReadOnly]
         [FoldoutGroup("Delegate")]
         public Action<float, float> AfterValueChangeFailed;
-        
+
         /// <summary>
-        /// 处理值改变的委托
+        /// 可资产化浮点角色属性的默认构造函数
         /// </summary>
-        [Sirenix.OdinInspector.ReadOnly]
-        [FoldoutGroup("Delegate")]
-        public Func<float, float> ValueChangeExpression;
-        
-        /// <summary>
-        /// 可资产化浮点值的引用的默认构造函数
-        /// </summary>
-        public ScriptableFloatReference()
+        public ScriptableFloatAttribute()
         {
         }
 
         /// <summary>
-        /// 可资产化浮点值的引用的使用字面值的构造函数
+        /// 可资产化浮点角色属性的使用字面值的构造函数
         /// </summary>
         /// <param name="value">字面值</param>
-        public ScriptableFloatReference(float value)
+        public ScriptableFloatAttribute(float value)
         {
             IsLiteral = true;
             LiteralValue = value;
         }
 
         /// <summary>
-        /// 引用所指向的值
+        /// 所指向的值
         /// </summary>
         public float Value
         {
@@ -111,11 +108,11 @@ namespace MeowACT
         }
 
         /// <summary>
-        /// 从 ScriptableFloatReference 到 float 的隐式类型转换
+        /// 从 ScriptableFloatAttribute 到 float 的隐式类型转换
         /// </summary>
         /// <param name="reference">右值</param>
         /// <returns></returns>
-        public static implicit operator float(ScriptableFloatReference reference)
+        public static implicit operator float(ScriptableFloatAttribute reference)
         {
             return reference.Value;
         }
