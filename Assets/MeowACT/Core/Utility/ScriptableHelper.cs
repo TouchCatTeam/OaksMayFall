@@ -1,14 +1,14 @@
 // ----------------------------------------------
 // 作者: 廉价喵
-// 创建于: 27/03/2022 11:38
-// 最后一次修改于: 30/03/2022 15:14
+// 创建于: 31/03/2022 15:24
+// 最后一次修改于: 31/03/2022 15:24
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
-namespace MeowACT.Scripts.BlackBoard
+namespace MeowACT
 {
-    public interface IBlackBoard
+    public class ScriptableHelper
     {
         
     }

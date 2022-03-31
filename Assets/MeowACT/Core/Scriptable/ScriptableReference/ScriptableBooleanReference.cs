@@ -1,13 +1,14 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 29/03/2022 14:59
-// 最后一次修改于: 30/03/2022 15:15
+// 最后一次修改于: 31/03/2022 16:29
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
-using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace MeowACT
@@ -15,7 +16,6 @@ namespace MeowACT
     /// <summary>
     /// 可资产化布尔值的引用
     /// </summary>
-    [Serializable]
     public class ScriptableBooleanReference
     {
         /// <summary>
@@ -27,26 +27,36 @@ namespace MeowACT
         /// <summary>
         /// 字面值
         /// </summary>
+        [ShowIf("@IsLiteral")]
         [Tooltip("字面值")]
         public bool LiteralValue;
         
         /// <summary>
         /// 可资产化值
         /// </summary>
+        [ShowIf("@!IsLiteral")]
         [Tooltip("可资产化值")]
-        public ScriptableBoolean Variable;
-
+        public ScriptableBoolean ScriptableVariable;
+        
+        /// <summary>
+        /// 是否有额外的事件绑定
+        /// </summary>
+        [Tooltip("是否有额外的事件绑定")]
+        public bool HaveAdditionalBindingEvent;
+        
         /// <summary>
         /// 值改变事件
         /// </summary>
+        [ShowIf("@HaveAdditionalBindingEvent")]
         [Tooltip("在值被改变时触发的事件")]
         public ScriptableEvent ChangeEvent;
 
         /// <summary>
         /// 事件参数
         /// </summary>
+        [ShowIf("@HaveAdditionalBindingEvent")]
         [Tooltip("在值被改变时触发的事件所要传递的参数")]
-        public List<UnityEngine.Object> Args;
+        public List<object> Args = new List<object>();
         
         /// <summary>
         /// 可资产化布尔值的引用的默认构造函数
@@ -69,17 +79,17 @@ namespace MeowACT
         /// </summary>
         public bool Value
         {
-            get => IsLiteral ? LiteralValue : Variable.Value;
+            get => IsLiteral ? LiteralValue : ScriptableVariable.Value;
             set
             {
                 // 如果事件不为空，并且新值与旧值不同，那么触发事件
-                if(ChangeEvent != null && (IsLiteral ? LiteralValue : Variable.Value) != value)
+                if(ChangeEvent != null && (IsLiteral ? LiteralValue : ScriptableVariable.Value) != value)
                     ChangeEvent.Raise(Args);
                 
                 if (IsLiteral)
                     LiteralValue = value;
                 else
-                    Variable.Value = value;
+                    ScriptableVariable.Value = value;
             }
         }
 

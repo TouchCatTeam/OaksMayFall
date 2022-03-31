@@ -1,11 +1,12 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 29/03/2022 1:21
-// 最后一次修改于: 30/03/2022 15:14
+// 最后一次修改于: 31/03/2022 15:46
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MeowACT
@@ -14,7 +15,7 @@ namespace MeowACT
     /// 可资产化布尔值
     /// </summary>
     [CreateAssetMenu(menuName = "MeowACT/Scriptable Variable/Create Scriptable Boolean")]
-    public class ScriptableBoolean : ScriptableObject
+    public class ScriptableBoolean : SerializedScriptableObject
     {
 #if UNITY_EDITOR
         /// <summary>

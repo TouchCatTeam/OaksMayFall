@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 29/03/2022 8:20
-// 最后一次修改于: 30/03/2022 15:15
+// 最后一次修改于: 31/03/2022 16:39
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -26,7 +26,7 @@ namespace MeowACT
         /// <summary>
         /// 触发可资产化事件
         /// </summary>
-        public void Raise(List<UnityEngine.Object> args)
+        public void Raise(List<object> args)
         {
             for(int i = eventListeners.Count -1; i >= 0; i--)
                 eventListeners[i].OnEventRaised(this, args);
