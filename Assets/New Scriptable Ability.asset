@@ -12,5 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fea0d24ba38427b987d5e0e2a15f27b, type: 3}
   m_Name: New Scriptable Ability
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   DurationType: 0
   Duration: 0
+  CanBeInterrupted: 0
+  HasInterruptedExecution: 0
+  InterruptedExecutionDelay: 0
+  InterruptedExecutionType: 0
+  InterruptedEventExecution:
+  - m_PersistentCalls:
+      m_Calls: []
+  InterruptedFlowExecution:
+  - {fileID: 11400000, guid: b7e3e13680c988d488edd05bff178b3c, type: 2}
+  ConditionType: 2
+  HasMainExecution: 1
+  MainExecutionDelay: 0
+  MainExecutionType: 2
+  MainEventExecution: []
+  MainFlowExecution: []
