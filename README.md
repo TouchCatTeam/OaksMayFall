@@ -12,7 +12,9 @@ Universal RP
 
 TextMeshPro
 
-Bolt
+FlowCanvas
+
+NodeCanvas
 
 Odin - Inspector and Serializer
 
