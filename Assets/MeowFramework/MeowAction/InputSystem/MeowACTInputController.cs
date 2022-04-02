@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 14/03/2022 9:54
-// 最后一次修改于: 30/03/2022 15:14
+// 最后一次修改于: 02/04/2022 23:05
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -13,7 +13,7 @@ using UnityEngine.InputSystem;
 
 namespace MeowFramework.Core
 {
-	public class MeowFramework.CoreInputController : MonoBehaviour
+	public class InputController : MonoBehaviour
 	{
 		private Vector2 move;
 		private Vector2 look;
