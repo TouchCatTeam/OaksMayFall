@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 12/03/2022 16:08
-// 最后一次修改于: 30/03/2022 15:14
+// 最后一次修改于: 01/04/2022 8:32
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -48,7 +48,7 @@ namespace MeowACT
         /// <summary>
         /// 基准值
         /// </summary>
-        public ScriptableFloat BaseValue;
+        //public ScriptableAttribute BaseValue;
         
         /// <summary>
         /// 填充图像的填充值
@@ -68,10 +68,10 @@ namespace MeowACT
         /// 根据终点值的值变化，同时显示
         /// </summary>
         /// <param name="toValue">终点值</param>
-        public void SmoothValueAndShow(ScriptableFloat toValue)
-        {
-            SmoothValueAndShow(FillAmount, toValue.Value/BaseValue.Value);
-        }
+        // public void SmoothValueAndShow(ScriptableFloat toValue)
+        // {
+        //     SmoothValueAndShow(FillAmount, toValue.Value/BaseValue.Value);
+        // }
         
         /// <summary>
         /// 根据起点值和终点值的值变化，同时显示

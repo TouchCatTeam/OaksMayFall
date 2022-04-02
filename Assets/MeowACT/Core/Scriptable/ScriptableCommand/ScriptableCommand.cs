@@ -7,7 +7,6 @@
 // ----------------------------------------------
 
 using System.Collections.Generic;
-using Bolt;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -50,10 +49,10 @@ namespace MeowACT
         /// <summary>
         /// 指令执行内容
         /// </summary>
-        [ShowIf("@HasMainExecution && MainExecutionType != CommandExecutionType.Event")]
-        [BoxGroup("Main Execution")]
-        [Tooltip("指令执行内容为 Bolt 脚本")]
-        [ItemCanBeNull]
-        public FlowMacro MainFlowExecution;
+        // [ShowIf("@HasMainExecution && MainExecutionType != CommandExecutionType.Event")]
+        // [BoxGroup("Main Execution")]
+        // [Tooltip("指令执行内容为 Flow 脚本")]
+        // [ItemCanBeNull]
+        // public FlowMacro MainFlowExecution;
     }
 }

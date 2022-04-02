@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &23684787
+--- !u!1 &235659940
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,8 +131,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 23684789}
-  - component: {fileID: 23684788}
+  - component: {fileID: 235659943}
+  - component: {fileID: 235659942}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -140,16 +140,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &23684788
+--- !u!114 &235659942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23684787}
+  m_GameObject: {fileID: 235659940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8cc7500dd8cb5c43bb404dbcb74898f, type: 3}
+  m_Script: {fileID: 11500000, guid: 13154b4c1584413bb4de363ffbb0e7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -160,15 +160,50 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  condition: {fileID: 11400000, guid: e50960dc92eac8a44b4c11531143836b, type: 2}
---- !u!4 &23684789
+    SerializationNodes:
+    - Name: HP
+      Entry: 7
+      Data: 0|MeowACT.ActorAttribute`1[[System.Single, mscorlib]], MeowACT
+    - Name: DeveloperDescription
+      Entry: 1
+      Data: 
+    - Name: IsLiteral
+      Entry: 5
+      Data: true
+    - Name: OnGetValue
+      Entry: 6
+      Data: 
+    - Name: OnSetValue
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: MaxHP
+      Entry: 7
+      Data: 1|MeowACT.ActorAttribute`1[[System.Single, mscorlib]], MeowACT
+    - Name: DeveloperDescription
+      Entry: 1
+      Data: 
+    - Name: IsLiteral
+      Entry: 5
+      Data: true
+    - Name: OnGetValue
+      Entry: 6
+      Data: 
+    - Name: OnSetValue
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!4 &235659943
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23684787}
+  m_GameObject: {fileID: 235659940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.710651, y: 2.0854726, z: 19.472795}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -293,65 +328,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!1 &1268802581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1268802584}
-  - component: {fileID: 1268802583}
-  - component: {fileID: 1268802582}
-  m_Layer: 0
-  m_Name: Scene Variables
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1268802582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268802581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 995777834, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1268802583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268802581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1465209106, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
---- !u!4 &1268802584
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268802581}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1515715515
 GameObject:
   m_ObjectHideFlags: 0

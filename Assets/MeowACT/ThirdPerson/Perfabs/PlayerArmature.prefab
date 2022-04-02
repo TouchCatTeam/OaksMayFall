@@ -1061,7 +1061,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3893294197879345259}
-  - component: {fileID: 256265860499628427}
   - component: {fileID: -3186280652000733906}
   - component: {fileID: 6982812146204527121}
   - component: {fileID: 4416926081852918491}
@@ -1093,49 +1092,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &256265860499628427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4416926081852918481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a164533c9945c8ace7bda3102ce21b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP:
-    IsLiteral: 1
-    LiteralValue: 0
-    Variable: {fileID: 0}
-    ChangeEvent: {fileID: 0}
-    Args: []
-  MaxHP:
-    IsLiteral: 1
-    LiteralValue: 0
-    Variable: {fileID: 0}
-    ChangeEvent: {fileID: 0}
-    Args: []
-  NRG:
-    IsLiteral: 1
-    LiteralValue: 0
-    Variable: {fileID: 0}
-    ChangeEvent: {fileID: 0}
-    Args: []
-  MaxNRG:
-    IsLiteral: 1
-    LiteralValue: 0
-    Variable: {fileID: 0}
-    ChangeEvent: {fileID: 0}
-    Args: []
-  CharacterCtr: {fileID: 0}
-  Anim: {fileID: 0}
-  Input: {fileID: 0}
-  CMCameraFollowTarget: {fileID: 0}
-  PlayerFollowCamera: {fileID: 0}
-  MainCamera: {fileID: 0}
-  BattleGUI: {fileID: 0}
 --- !u!114 &-3186280652000733906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1148,23 +1104,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6ab84cd4c47388ae578a06d143183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventMap:
-  - Key: {fileID: 11400000, guid: c0b1fc4864a10ff4aa2d4897b0d56cf0, type: 2}
-    Value:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6982812146204527121}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Attack
-            m_BoolArgument: 0
-          m_CallState: 2
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: EventMapDictionary
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[MeowACT.ScriptableEvent, MeowACT],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
+        mscorlib]], mscorlib]], UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowACT.ScriptableEvent,
+        MeowACT]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!95 &6982812146204527121
 Animator:
   serializedVersion: 3
@@ -2917,25 +2885,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
---- !u!114 &3211115057058585580 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 11414536, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
-  m_PrefabInstance: {fileID: 3211115057048762340}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3211115057048786142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bcc0608685184647b097f4838a8e9f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &3211115057062169864 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 22412012, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
-  m_PrefabInstance: {fileID: 3211115057048762340}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3211115057048786142 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 107322, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
+  m_PrefabInstance: {fileID: 3211115057048762340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3211115057062169864 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 22412012, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
   m_PrefabInstance: {fileID: 3211115057048762340}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &9197256193611194575
@@ -2950,23 +2907,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6ab84cd4c47388ae578a06d143183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventMap:
-  - Key: {fileID: 11400000, guid: 6b6220bf24c66e24c987c9e8e0aef20e, type: 2}
-    Value:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3211115057058585580}
-          m_TargetAssemblyTypeName: MeowACT.UIBar, MeowACT
-          m_MethodName: SmoothValueAndShow
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 933946fcbaf1b704398e19608566dca6, type: 2}
-            m_ObjectArgumentAssemblyTypeName: MeowACT.ScriptableFloat, MeowACT
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: EventMapDictionary
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[MeowACT.ScriptableEvent, MeowACT],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
+        mscorlib]], mscorlib]], UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowACT.ScriptableEvent,
+        MeowACT]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1001 &7417038491836914297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3068,17 +3037,6 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b8bcb5cbe48c8a9428c1c60e0159af52, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62cdeeb834f097e45b9d502b102eabb9, type: 3}
---- !u!114 &5495628543102282450 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3074542636347781291, guid: 62cdeeb834f097e45b9d502b102eabb9, type: 3}
-  m_PrefabInstance: {fileID: 7417038491836914297}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417038491836954947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bcc0608685184647b097f4838a8e9f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7417038491814682773 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 22412012, guid: 62cdeeb834f097e45b9d502b102eabb9, type: 3}
@@ -3101,20 +3059,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6ab84cd4c47388ae578a06d143183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventMap:
-  - Key: {fileID: 11400000, guid: d00aebdd84d4400429503851c0b09ca4, type: 2}
-    Value:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5495628543102282450}
-          m_TargetAssemblyTypeName: MeowACT.UIBar, MeowACT
-          m_MethodName: SmoothValueAndShow
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 4d6336efd0533124597cd3ebe37273fd, type: 2}
-            m_ObjectArgumentAssemblyTypeName: MeowACT.ScriptableFloat, MeowACT
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: EventMapDictionary
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[MeowACT.ScriptableEvent, MeowACT],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
+        mscorlib]], mscorlib]], UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowACT.ScriptableEvent,
+        MeowACT]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

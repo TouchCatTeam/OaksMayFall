@@ -19,12 +19,12 @@ namespace MeowACT
         Event = 0,
         
         /// <summary>
-        /// 可资产化指令执行内容为 Bolt 脚本
+        /// 可资产化指令执行内容为 Flow 脚本
         /// </summary>
         Flow,
         
         /// <summary>
-        /// 可资产化指令执行内容为事件和 Bolt 脚本
+        /// 可资产化指令执行内容为事件和 Flow 脚本
         /// </summary>
         Both,
     }
