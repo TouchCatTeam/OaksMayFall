@@ -1,24 +1,26 @@
 // ----------------------------------------------
 // 作者: 廉价喵
-// 创建于: 25/03/2022 16:50
-// 最后一次修改于: 02/04/2022 23:05
+// 创建于: 02/04/2022 23:19
+// 最后一次修改于: 02/04/2022 23:32
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 namespace MeowFramework.Core
 {
     /// <summary>
     /// 计时器
     /// </summary>
-    public class TimerHandler
+    public class ScriptableTimer : SerializedScriptableObject
     {
         /// <summary>
         /// 是否暂停
         /// </summary>
+        [ShowInInspector]
         private bool isPasue;
         
         /// <summary>
@@ -29,6 +31,7 @@ namespace MeowFramework.Core
         /// <summary>
         /// 是否停止
         /// </summary>
+        [ShowInInspector]
         private bool isStop;
         
         /// <summary>
@@ -39,26 +42,26 @@ namespace MeowFramework.Core
         /// <summary>
         /// 流逝时间
         /// </summary>
+        [ShowInInspector]
         private float elapsedTime;
         
         /// <summary>
         /// 流逝时间
         /// </summary>
-        public float ElapsedTime
+        public float ElapsedTime 
         {
             get => elapsedTime;
             set
             {
                 if (!isStop && !isPasue) 
                     elapsedTime = value;
-                if (elapsedTime >= duration)
-                    Stop();
             }
         }
 
         /// <summary>
         /// 时长
         /// </summary>
+        [ShowInInspector]
         private float duration;
         
         /// <summary>
@@ -69,6 +72,7 @@ namespace MeowFramework.Core
         /// <summary>
         /// 是否循环
         /// </summary>
+        [ShowInInspector]
         private bool isLoop;
         
         /// <summary>
@@ -79,6 +83,7 @@ namespace MeowFramework.Core
         /// <summary>
         /// 委托回调
         /// </summary>
+        [ShowInInspector]
         private Action<object[]> callback;
         
         /// <summary>
@@ -87,18 +92,13 @@ namespace MeowFramework.Core
         private object[] args;
 
         /// <summary>
-        /// 计时器列表 可以在 ForEach 中删除元素
-        /// </summary>
-        public static List<TimerHandler> TimerHandlerList = new List<TimerHandler>();
-
-        /// <summary>
         /// 计时器的构造函数
         /// </summary>
         /// <param name="duration">时长</param>
         /// <param name="isLoop">是否循环</param>
         /// <param name="callback">委托回调</param>
         /// <param name="args">回调参数</param>
-        public TimerHandler(float duration, bool isLoop, Action<object[]> callback,
+        public ScriptableTimer(float duration, bool isLoop, Action<object[]> callback,
             params object[] args)
         {
             this.isPasue = true;
@@ -107,8 +107,6 @@ namespace MeowFramework.Core
             this.isLoop = isLoop;
             this.callback = callback;
             this.args = args;
-
-            TimerHandlerList.Add(this);
         }
 
         /// <summary>
@@ -149,7 +147,6 @@ namespace MeowFramework.Core
             {
                 isPasue = true;
                 isStop = true;
-                TimerHandlerList.Remove(this);
             }
         }
     }

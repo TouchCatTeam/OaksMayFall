@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 27/03/2022 9:51
-// 最后一次修改于: 02/04/2022 23:05
+// 最后一次修改于: 02/04/2022 23:42
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -15,7 +15,7 @@ namespace MeowFramework.Core
     /// <summary>
     /// 可素材化 Buff
     /// </summary>
-    [CreateAssetMenu(fileName = "New Scriptable Buff", menuName = "MeowFramework.Core/Create Scriptable Buff")]
+    [CreateAssetMenu(fileName = "New Scriptable Buff", menuName = "MeowFramework/Scriptable Buff/Create Scriptable Buff")]
     public class ScriptableBuff : SerializedScriptableObject
     {
         /// <summary>
@@ -82,14 +82,14 @@ namespace MeowFramework.Core
         /// Buff 元素 Tag 字典
         /// </summary>
         [Tooltip("元素标签字典")]
-        public Dictionary<Element, bool> ElementTagDictionary = new Dictionary<Element, bool>
+        public Dictionary<ElementType, bool> ElementTypeTagDictionary = new Dictionary<ElementType, bool>
         {
-            {Element.Pyro, false},
-            {Element.Hydro, false},
-            {Element.Anemo, false},
-            {Element.Electro, false},
-            {Element.Cryo, false},
-            {Element.Geo, false},
+            {ElementType.Pyro, false},
+            {ElementType.Hydro, false},
+            {ElementType.Anemo, false},
+            {ElementType.Electro, false},
+            {ElementType.Cryo, false},
+            {ElementType.Geo, false},
         };
         
         /// <summary>

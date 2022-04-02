@@ -1,12 +1,13 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 29/03/2022 8:20
-// 最后一次修改于: 02/04/2022 23:05
+// 最后一次修改于: 02/04/2022 23:54
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MeowFramework.Core
@@ -14,8 +15,8 @@ namespace MeowFramework.Core
     /// <summary>
     /// 可资产化事件
     /// </summary>
-    [CreateAssetMenu(menuName = "MeowFramework.Core/Sriptable Reflection/Create Scriptable Event")]
-    public class ScriptableEvent : ScriptableObject
+    [CreateAssetMenu(menuName = "MeowFramework/Scriptable Reflection/Create Scriptable Event")]
+    public class ScriptableEvent : SerializedScriptableObject
     {
         /// <summary>
         /// 可资产化事件的订阅者列表

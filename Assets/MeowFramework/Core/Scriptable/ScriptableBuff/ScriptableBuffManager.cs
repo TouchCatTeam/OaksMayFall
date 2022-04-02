@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
-// 创建于: 01/04/2022 22:22
-// 最后一次修改于: 02/04/2022 23:31
+// 创建于: 02/04/2022 23:41
+// 最后一次修改于: 02/04/2022 23:50
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -12,12 +12,13 @@ using UnityEngine;
 namespace MeowFramework.Core
 {
     /// <summary>
-    /// 可资产化 string 变量
+    /// 可资产化计时器管理器
     /// </summary>
     [InlineEditor]
-    [CreateAssetMenu(menuName = "MeowFramework/Scriptable Variable/Create Scriptable String Variable")]
-    public class ScriptableStringVariable : ScriptableGenericVariable<string>
+    [CreateAssetMenu(menuName = "MeowFramework/Scriptable Buff/Create Scriptable Buff Manager")]
+    public class ScriptableBuffManager : SerializedScriptableObject
+
     {
-        
+
     }
 }

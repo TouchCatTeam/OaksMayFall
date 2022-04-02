@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 30/03/2022 1:10
-// 最后一次修改于: 02/04/2022 23:05
+// 最后一次修改于: 02/04/2022 23:54
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -18,7 +18,7 @@ namespace MeowFramework.Core
     /// 可资产化指令
     /// </summary>
     [InlineEditor]
-    [CreateAssetMenu(fileName = "New Scriptable Command", menuName = "MeowFramework.Core/Create Scriptable Command")]
+    [CreateAssetMenu(fileName = "New Scriptable Command", menuName = "MeowFramework/Scriptable Command/Create Scriptable Command")]
     public class ScriptableCommand : SerializedScriptableObject
     {
         /// <summary>
