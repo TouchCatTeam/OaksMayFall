@@ -1,15 +1,19 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 28/03/2022 17:43
-// 最后一次修改于: 02/04/2022 23:05
+// 最后一次修改于: 04/04/2022 20:04
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 namespace MeowFramework.Core
 {
@@ -26,21 +30,6 @@ namespace MeowFramework.Core
         /// </summary>
         [Tooltip("最大血量")] 
         public ActorAttribute<float> MaxHP = new ActorAttribute<float>();
-
-        public bool TestFuncDebug()
-        {
-            Debug.Log("TestFunc is working in C# script");
-            return true;
-        }
-        public void ExecuteBuff()
-        {
-            
-        }
-
-        public void ExecuteAbility()
-        {
-            
-        }
 
         
     }

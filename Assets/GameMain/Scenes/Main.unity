@@ -237,6 +237,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
+--- !u!20 &822883766 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+  m_PrefabInstance: {fileID: 1297349511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1297349511
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: far clip plane
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409498, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_Name
+      value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
 --- !u!1 &1480796643
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +403,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3186280652000733906, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: -3186280652000733906, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+    - target: {fileID: 31763964048053611, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 31763964048053611, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+    - target: {fileID: 1612001106177647392, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1612001106177647392, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -381,9 +459,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4362822600041303188, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4362822600041303188, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
     - target: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_Name
       value: PlayerArmature
       objectReference: {fileID: 0}
+    - target: {fileID: 5189122428703405560, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 5189122428703405560, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: _serializedBlackboard
+      value: '{"_variables":{"MainCamera":{"_name":"MainCamera","_id":"e3d9db74-7d9e-4990-b50b-6b224ce3efba","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Camera,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"CMCameraFollowTarget":{"_name":"CMCameraFollowTarget","_id":"5d02367e-3b82-4d06-9805-4bbcf047a385","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: _objectReferences.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: _objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 822883766}
+    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: _serializedVariables.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: _serializedVariables.Array.data[0]._json
+      value: '{"_name":"MainCamera","_id":"e3d9db74-7d9e-4990-b50b-6b224ce3efba","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Camera,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: _serializedVariables.Array.data[1]._json
+      value: '{"_name":"CMCameraFollowTarget","_id":"5d02367e-3b82-4d06-9805-4bbcf047a385","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: _serializedVariables.Array.data[0]._references.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: _serializedVariables.Array.data[0]._references.Array.data[1]
+      value: 
+      objectReference: {fileID: 822883766}
+    - target: {fileID: 9023662079083244219, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9023662079083244219, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+    - target: {fileID: 9197256193611194575, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9197256193611194575, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}

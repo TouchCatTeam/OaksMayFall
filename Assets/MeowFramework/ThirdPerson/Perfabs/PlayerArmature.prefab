@@ -1061,10 +1061,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3893294197879345259}
-  - component: {fileID: -3186280652000733906}
   - component: {fileID: 6982812146204527121}
   - component: {fileID: 4416926081852918491}
   - component: {fileID: 4416926081852918493}
+  - component: {fileID: 1612001106177647392}
+  - component: {fileID: 8724067637084613076}
+  - component: {fileID: 5315925178893265757}
+  - component: {fileID: 4362822600041303188}
+  - component: {fileID: 31763964048053611}
+  - component: {fileID: 9023662079083244219}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -1092,47 +1097,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3186280652000733906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4416926081852918481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b6ab84cd4c47388ae578a06d143183, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: EventMapDictionary
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[MeowACT.ScriptableEvent, MeowACT],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
-        mscorlib]], mscorlib]], UnityEngine.CoreModule]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowACT.ScriptableEvent,
-        MeowACT]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
 --- !u!95 &6982812146204527121
 Animator:
   serializedVersion: 3
@@ -1268,6 +1232,182 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1612001106177647392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13154b4c1584413bb4de363ffbb0e7bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: HP
+      Entry: 7
+      Data: 0|MeowFramework.Core.ActorAttribute`1[[System.Single, mscorlib]], MeowFramework
+    - Name: IsLiteral
+      Entry: 5
+      Data: false
+    - Name: AfterSetValue
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: MaxHP
+      Entry: 7
+      Data: 1|MeowFramework.Core.ActorAttribute`1[[System.Single, mscorlib]], MeowFramework
+    - Name: IsLiteral
+      Entry: 5
+      Data: true
+    - Name: AfterSetValue
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!114 &8724067637084613076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98a6db0b653f764eac834f85857a9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentBlackboard: {fileID: 0}
+  _serializedBlackboard: '{"_variables":{}}'
+  _objectReferences: []
+  _serializedVariables: []
+--- !u!114 &5315925178893265757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5c3ebb24c97464da319951cafe5a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serializedExposedParameters: []
+  _boundGraphSerialization: '{"type":"FlowCanvas.FlowScript","nodes":[],"connections":[],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _boundGraphObjectReferences: []
+  _boundGraphSource:
+    _version: 3.22
+    _category: 
+    _comments: 
+    _translation: {x: 758, y: 573}
+    _zoomFactor: 1
+  _firstActivation: 0
+  _enableAction: 0
+  _disableAction: 0
+  _lockBoundGraphPrefabOverrides: 1
+  _preInitializeSubGraphs: 0
+  _updateMode: 0
+  _graph: {fileID: 0}
+  _blackboard: {fileID: 8724067637084613076}
+--- !u!114 &4362822600041303188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e087ecce43ebbff45a1b360637807d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorLocked: 1
+  cursorInputForLook: 1
+--- !u!114 &31763964048053611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61719488bd0d45dfa41eaaf18150c2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  CharacterCtr: {fileID: 4416926081852918491}
+  ACTInput: {fileID: 4362822600041303188}
+  CMCameraFollowTarget: {fileID: 8338988566280778634}
+  MainCamera: {fileID: 0}
+  HorizontalVelocity: {fileID: 11400000, guid: 36e2f2b15d4086f468811eb2ca15cafd, type: 2}
+  VerticalVelocity: {fileID: 11400000, guid: 4b789a7c90a34ac4cbd0a99fdc367497, type: 2}
+  IsFreezingMove: 0
+  walkSpeed: 7
+  walkSmoothTime: 0.2
+  rotationSmoothTime: 0.2
+  IsSprinting: 0
+  IsSprintBegin: 0
+  sprintSpeed: 15
+  sprintSmoothTime: 0.5
+  gravity: -9.8
+  terminalVelocity: 53
+  IsGrounded: 0
+  groundedOffset: -0.14
+  groundedRadius: 0.28
+  groundLayers: 1
+  IsCameraFixed: 0
+  cameraPitchOverride: 0
+  cameraRotSpeed: 25
+  topClamp: 70
+  bottomClamp: -30
+  cinemachinePitchSmoothTime: 0.1
+  cinemachineYawSmoothTime: 0.1
+--- !u!114 &9023662079083244219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c6eec9cfa94001826a2548e9683697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  LocomotionController: {fileID: 31763964048053611}
+  Anim: {fileID: 6982812146204527121}
+  moveAnimBlendSmoothTime: 0.2
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,14 +3025,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
---- !u!1 &3211115057048786142 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 107322, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
-  m_PrefabInstance: {fileID: 3211115057048762340}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3211115057062169864 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 22412012, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
+  m_PrefabInstance: {fileID: 3211115057048762340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3211115057048786142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 107322, guid: 96d2e77dd9853514da336717bd5627c0, type: 3}
   m_PrefabInstance: {fileID: 3211115057048762340}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &9197256193611194575
@@ -2918,12 +3058,13 @@ MonoBehaviour:
     SerializationNodes:
     - Name: EventMapDictionary
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[MeowACT.ScriptableEvent, MeowACT],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
+      Data: 0|System.Collections.Generic.Dictionary`2[[MeowFramework.Core.ScriptableEvent,
+        MeowFramework],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
         mscorlib]], mscorlib]], UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowACT.ScriptableEvent,
-        MeowACT]], mscorlib
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowFramework.Core.ScriptableEvent,
+        MeowFramework]], mscorlib
     - Name: 
       Entry: 8
       Data: 
@@ -3037,14 +3178,14 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b8bcb5cbe48c8a9428c1c60e0159af52, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62cdeeb834f097e45b9d502b102eabb9, type: 3}
---- !u!224 &7417038491814682773 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 22412012, guid: 62cdeeb834f097e45b9d502b102eabb9, type: 3}
-  m_PrefabInstance: {fileID: 7417038491836914297}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7417038491836954947 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 107322, guid: 62cdeeb834f097e45b9d502b102eabb9, type: 3}
+  m_PrefabInstance: {fileID: 7417038491836914297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7417038491814682773 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 22412012, guid: 62cdeeb834f097e45b9d502b102eabb9, type: 3}
   m_PrefabInstance: {fileID: 7417038491836914297}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5189122428703405560
@@ -3070,12 +3211,13 @@ MonoBehaviour:
     SerializationNodes:
     - Name: EventMapDictionary
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[MeowACT.ScriptableEvent, MeowACT],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
+      Data: 0|System.Collections.Generic.Dictionary`2[[MeowFramework.Core.ScriptableEvent,
+        MeowFramework],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
         mscorlib]], mscorlib]], UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowACT.ScriptableEvent,
-        MeowACT]], mscorlib
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowFramework.Core.ScriptableEvent,
+        MeowFramework]], mscorlib
     - Name: 
       Entry: 8
       Data: 

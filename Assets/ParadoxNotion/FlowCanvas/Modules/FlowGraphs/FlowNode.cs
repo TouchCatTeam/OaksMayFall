@@ -1,4 +1,12 @@
-﻿#define DO_EDITOR_BINDING //comment this out to test the real performance without editor binding specifics
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 02/04/2022 21:50
+// 最后一次修改于: 04/04/2022 16:47
+// 版权所有: CheapMeowStudio
+// 描述:
+// ----------------------------------------------
+
+#define DO_EDITOR_BINDING //comment this out to test the real performance without editor binding specifics
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -106,10 +114,10 @@ namespace FlowCanvas
         sealed public override void OnValidate(Graph flowGraph) { GatherPorts(); }
 
         //Sealed for future proof use
-        sealed public override void OnParentConnected(int i) { }
-        sealed public override void OnChildConnected(int i) { }
-        sealed public override void OnParentDisconnected(int i) { }
-        sealed public override void OnChildDisconnected(int i) { }
+        public override void OnParentConnected(int i) { }
+        public override void OnChildConnected(int i) { }
+        public override void OnParentDisconnected(int i) { }
+        public override void OnChildDisconnected(int i) { }
 
         ///---------------------------------------------------------------------------------------------
 

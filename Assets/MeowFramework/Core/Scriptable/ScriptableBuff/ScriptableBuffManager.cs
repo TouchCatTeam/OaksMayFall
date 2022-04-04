@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 02/04/2022 23:41
-// 最后一次修改于: 02/04/2022 23:50
+// 最后一次修改于: 04/04/2022 23:41
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -17,7 +17,6 @@ namespace MeowFramework.Core
     [InlineEditor]
     [CreateAssetMenu(menuName = "MeowFramework/Scriptable Buff/Create Scriptable Buff Manager")]
     public class ScriptableBuffManager : SerializedScriptableObject
-
     {
 
     }

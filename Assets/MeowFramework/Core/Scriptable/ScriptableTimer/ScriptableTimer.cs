@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 02/04/2022 23:19
-// 最后一次修改于: 02/04/2022 23:32
+// 最后一次修改于: 02/04/2022 23:56
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -9,12 +9,15 @@
 using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace MeowFramework.Core
 {
     /// <summary>
     /// 计时器
     /// </summary>
+    [InlineEditor]
+    [CreateAssetMenu(menuName = "MeowFramework/Scriptable Timer/Create Scriptable Timer")]
     public class ScriptableTimer : SerializedScriptableObject
     {
         /// <summary>

@@ -1,15 +1,12 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 01/04/2022 14:32
-// 最后一次修改于: 02/04/2022 23:05
+// 最后一次修改于: 04/04/2022 8:10
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -18,15 +15,8 @@ namespace MeowFramework.Core
     /// <summary>
     /// 角色属性泛型
     /// </summary>
-    public class ActorAttribute<T> where T : IComparable, IConvertible, IEquatable<T>
+    public class ActorAttribute<T>
     {
-        /// <summary>
-        /// 开发者注释
-        /// </summary>
-        [TextArea]
-        [Tooltip("开发者注释")]
-        public string DeveloperDescription = "";
-        
         /// <summary>
         /// 是否使用字面值
         /// </summary>
@@ -50,38 +40,18 @@ namespace MeowFramework.Core
 
         public T Value
         {
-            get
-            {
-                if (OnGetValue != null)
-                    return OnGetValue(this.value);
-                else
-                    return this.value;
-            }
+            get => value;
             set
             {
-                OnSetValue(this.value, ref value);
+                AfterSetValue(this.value, value);
                 this.value = value;
             }
         }
-            
-        /// <summary>
-        /// 值改变委托的委托类型
-        /// </summary>
-        [HideInInspector]
-        public delegate bool OnSetValueDelegate(T oldValue, ref T value);
         
         /// <summary>
-        /// 获取值时进行的委托
-        /// 同时承担验证验证值改变是否合法的功能
-        /// </summary>
-        [HideInInspector]
-        public Func<T,T> OnGetValue;
-
-        /// <summary>
         /// 设置值时进行的委托
-        /// 同时承担验证验证值改变是否合法的功能
         /// </summary>
         [HideInInspector]
-        public OnSetValueDelegate OnSetValue;
+        public Action<T,T> AfterSetValue;
     }
 }

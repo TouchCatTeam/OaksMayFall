@@ -1,4 +1,12 @@
-﻿using ParadoxNotion.Design;
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 02/04/2022 21:50
+// 最后一次修改于: 04/04/2022 15:46
+// 版权所有: CheapMeowStudio
+// 描述:
+// ----------------------------------------------
+
+using ParadoxNotion.Design;
 using UnityEngine;
 using System;
 using ParadoxNotion;
@@ -22,8 +30,7 @@ namespace FlowCanvas.Nodes
             get { return _type; }
             set { if ( _type != value ) { _type = new SerializedTypeInfo(value); } }
         }
-
-
+        
         private ReflectedDelegateEvent reflectedEvent;
         private ValueOutput delegatePort;
         private FlowOutput callbackPort;
