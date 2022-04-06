@@ -1,18 +1,15 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 16/03/2022 16:53
-// 最后一次修改于: 06/04/2022 17:31
+// 最后一次修改于: 07/04/2022 6:27
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
-using System;
-using System.ComponentModel;
 using Cinemachine;
 using MeowFramework.Core;
 using MeowFramework.MeowACT;
 using Sirenix.OdinInspector;
-using Unity.Collections;
 using UnityEngine;
 
 namespace MeowFramework
@@ -88,11 +85,22 @@ namespace MeowFramework
 	    [Required]
 	    [Tooltip("可资产化竖直速度")]
 	    public ScriptableFloatVariable VerticalVelocity;
+
+	    /// <summary>
+	    /// 水平速度是否被覆盖了
+	    /// </summary>
+	    [BoxGroup("Velocity")]
+	    [HorizontalGroup("Velocity/HorizontalVelocityOverride")]
+	    [ShowInInspector]
+	    [Sirenix.OdinInspector.ReadOnly]
+	    [Tooltip("水平速度覆盖值")]
+	    private bool isHorizontalVelocityOverrided;
 	    
 	    /// <summary>
 	    /// 水平速度覆盖值
 	    /// </summary>
 	    [BoxGroup("Velocity")]
+	    [HorizontalGroup("Velocity/HorizontalVelocityOverride")]
 	    [ShowInInspector]
 	    [Sirenix.OdinInspector.ReadOnly]
 	    [Tooltip("水平速度覆盖值")]
@@ -159,6 +167,7 @@ namespace MeowFramework
 	    /// 是否落地
 	    /// </summary>
 	    [BoxGroup("GroundCheck")]
+	    [Sirenix.OdinInspector.ReadOnly]
 	    [Tooltip("是否落地")]
 	    public bool IsGrounded;
 	    
@@ -324,13 +333,14 @@ namespace MeowFramework
 	        Vector3 targetDirection = GetInputDirectionBaseOnCamera();
 
 	        RotateToMoveDir(targetDirection);
-		        
-	        Vector3 targetVelocity;
-	        if (HorizontalVelocityOverride != 0)
-		        targetVelocity = HorizontalVelocityDirectionOverride * HorizontalVelocityOverride;
-	        else
-				targetVelocity = (ACTInput.Move == Vector2.zero) ? Vector3.zero : targetDirection * walkSpeed;
-
+	        
+	        // 如果有速度覆盖，则直接返回速度覆盖的结果
+	        if (isHorizontalVelocityOverrided)
+	        {
+		        return HorizontalVelocityDirectionOverride * HorizontalVelocityOverride;
+	        }
+	        // 如果没有速度覆盖，则返回 Smooth 的结果
+	        Vector3 targetVelocity = (ACTInput.Move == Vector2.zero) ? Vector3.zero : targetDirection * walkSpeed;
 	        return Vector3.SmoothDamp(HorizontalVelocity.Value, targetVelocity, ref walkSmoothVelocity, walkSmoothTime);
         }
 
@@ -339,9 +349,10 @@ namespace MeowFramework
         /// </summary>
         private void RotateToMoveDir(Vector3 inputDirection)
         {
-	        // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-	        // if there is a move input rotate player when the player is moving
-	        if (ACTInput.Move != Vector2.zero || HorizontalVelocityOverride != 0)
+	        // 有键盘输入
+	        // 或者没有键盘输入但是有速度覆盖时
+	        // 才会启用旋转
+	        if (ACTInput.Move != Vector2.zero || isHorizontalVelocityOverrided == true)
 	        {
 		        float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
 		        float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationSmoothVelocity, rotationSmoothTime);
@@ -396,14 +407,36 @@ namespace MeowFramework
 	        return targetDirection;
         }
         
-        public void SetHorizontalVelocityOverride(float speed)
+        /// <summary>
+        /// 取消速度覆盖
+        /// </summary>
+        public void CancelHorizontalVelocityOverride()
         {
-	        HorizontalVelocityOverride = speed;
-	        if(speed != 0)
-		        HorizontalVelocityDirectionOverride = GetInputDirectionBaseOnCamera();
+	        isHorizontalVelocityOverrided = false;
         }
         
+        /// <summary>
+        /// 默认速度覆盖方向为当前摄像机方向+键盘输入方向
+        /// </summary>
+        /// <param name="speed">速度</param>
+        public void SetHorizontalVelocityOverride(float speed)
+        {
+	        isHorizontalVelocityOverrided = true;
+	        HorizontalVelocityOverride = speed;
+	        HorizontalVelocityDirectionOverride = GetInputDirectionBaseOnCamera();
+        }
         
+        /// <summary>
+        /// 允许设置速度覆盖方向
+        /// </summary>
+        /// <param name="speed">速度</param>
+        /// <param name="dir">速度方向</param>
+        public void SetHorizontalVelocityOverride(float speed, Vector3 dir)
+        {
+	        isHorizontalVelocityOverrided = true;
+	        HorizontalVelocityOverride = speed;
+	        HorizontalVelocityDirectionOverride = dir;
+        }
     }
 }
 

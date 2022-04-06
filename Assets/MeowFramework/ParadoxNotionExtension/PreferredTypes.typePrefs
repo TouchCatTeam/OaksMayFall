@@ -1,4 +1,5 @@
 [
+    "MeowFramework.ThirdPersonLocomotionController",
     "MeowFramework.Core.ActorBase",
     "MeowFramework.Core.ScriptableBoolVariable",
     "MeowFramework.Core.ScriptableFloatVariable",
@@ -61,5 +62,5 @@
     "UnityEngine.SceneManagement.SceneManager",
     "UnityEngine.UI.Button",
     "UnityEngine.UI.Slider",
-    "MeowFramework.ThirdPersonLocomotionController"
+    "FlowCanvas.FlowScriptController"
 ]
