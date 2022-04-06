@@ -1,3 +1,11 @@
+// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 02/04/2022 21:50
+// 最后一次修改于: 05/04/2022 17:00
+// 版权所有: CheapMeowStudio
+// 描述:
+// ----------------------------------------------
+
 using System.Linq;
 using NodeCanvas.Framework.Internal;
 using ParadoxNotion.Design;
@@ -30,7 +38,11 @@ namespace NodeCanvas.Framework
         public static bool TryStartSubGraph(this IGraphAssignable assignable, Component agent, System.Action<bool> callback = null) {
             assignable.currentInstance = assignable.CheckInstance();
             if ( assignable.currentInstance != null ) {
+                Debug.Log("????????????");
                 assignable.TryWriteAndBindMappedVariables();
+                Debug.Log("!!!!!!!!!!!!");
+                Debug.Log(assignable.graph.blackboard.parent == null);
+                Debug.Log("?!?!?!!?!?!?!?!");
                 //we always start with the current graphs blackboard parent bb as the subgraphs parent bb
                 assignable.currentInstance.StartGraph(agent, assignable.graph.blackboard.parent, Graph.UpdateMode.Manual, (result) =>
                 {

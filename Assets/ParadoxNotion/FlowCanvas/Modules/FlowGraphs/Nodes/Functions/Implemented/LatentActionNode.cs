@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 02/04/2022 21:50
+// 最后一次修改于: 06/04/2022 9:38
+// 版权所有: CheapMeowStudio
+// 描述:
+// ----------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using ParadoxNotion.Services;
 
@@ -49,16 +57,19 @@ namespace FlowCanvas.Nodes
 
         //begins a new coroutine
         protected void Begin(IEnumerator enumerator, Flow f) {
+            // 封装传入的协程函数
             var data = new RoutineData(enumerator, f);
+            // 如果当前节点没有正在执行的协程，那么立即进入传入的协程函数
             if ( currentCoroutine == null ) {
                 currentCoroutine = parentNode.StartCoroutine(InternalCoroutine(data));
                 return;
             }
-
+            // 否则判断是否为协程队列模式，是则将传入的协程函数加入队列
             if ( routineQueue == null ) { routineQueue = new Queue<RoutineData>(); }
             if ( allowRoutineQueueing && invocationMode == InvocationMode.QueueCalls ) {
                 routineQueue.Enqueue(data);
             }
+            // 如果当前节点有正在执行的协程，并且不为协程队列模式，那么就不执行传入的协程函数，相当于起到了一个运行时筛选的功能
         }
 
         //breaks all coroutine queues

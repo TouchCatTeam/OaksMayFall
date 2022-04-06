@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 27/03/2022 9:51
-// 最后一次修改于: 02/04/2022 23:42
+// 最后一次修改于: 05/04/2022 15:45
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -13,11 +13,17 @@ using UnityEngine;
 namespace MeowFramework.Core
 {
     /// <summary>
-    /// 可素材化 Buff
+    /// 可资产化 Buff
     /// </summary>
     [CreateAssetMenu(fileName = "New Scriptable Buff", menuName = "MeowFramework/Scriptable Buff/Create Scriptable Buff")]
     public class ScriptableBuff : SerializedScriptableObject
     {
+        /// <summary>
+        /// Buff ID
+        /// </summary>
+        [Tooltip("Buff ID")]
+        public int BuffID;
+        
         /// <summary>
         /// 堆叠层数限制
         /// </summary>

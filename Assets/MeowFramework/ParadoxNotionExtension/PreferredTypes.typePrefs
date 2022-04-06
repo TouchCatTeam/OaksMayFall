@@ -7,6 +7,7 @@
     "MeowFramework.Core.ScriptableStringVariable",
     "MeowFramework.Core.ScriptableVector2Variable",
     "MeowFramework.Core.ScriptableVector3Variable",
+    "MeowFramework.MeowACT.MeowACTInputController",
     "System.Boolean",
     "System.EventHandler",
     "System.Int32",
@@ -59,5 +60,6 @@
     "UnityEngine.Events.UnityEvent",
     "UnityEngine.SceneManagement.SceneManager",
     "UnityEngine.UI.Button",
-    "UnityEngine.UI.Slider"
+    "UnityEngine.UI.Slider",
+    "MeowFramework.ThirdPersonLocomotionController"
 ]

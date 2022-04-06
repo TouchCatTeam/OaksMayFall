@@ -1,4 +1,12 @@
-﻿using System.Reflection;
+﻿// ----------------------------------------------
+// 作者: 廉价喵
+// 创建于: 02/04/2022 21:50
+// 最后一次修改于: 06/04/2022 11:01
+// 版权所有: CheapMeowStudio
+// 描述:
+// ----------------------------------------------
+
+using System.Reflection;
 using ParadoxNotion;
 
 namespace FlowCanvas.Nodes

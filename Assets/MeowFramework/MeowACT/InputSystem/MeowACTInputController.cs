@@ -1,92 +1,202 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 14/03/2022 9:54
-// 最后一次修改于: 05/04/2022 0:25
+// 最后一次修改于: 06/04/2022 16:39
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
-#endif
 
 namespace MeowFramework.MeowACT
 {
 	public class MeowACTInputController : SerializedMonoBehaviour
 	{
 		/// <summary>
+		/// 是否接受运动输入
+		/// </summary>
+		[HorizontalGroup("MoveInput")]
+		[HorizontalGroup("MoveInput/Left")]
+		[ShowInInspector]
+		[ReadOnly]
+		[Tooltip("是否接受运动输入")]
+		private bool CanMoveInput = true;
+			
+		/// <summary>
 		/// 移动
 		/// </summary>
-		[BoxGroup("Move")]
+		[HorizontalGroup("MoveInput/Right")]
+		[LabelWidth(50)]
 		[Tooltip("移动")]
 		public Vector2 Move;
 		
 		/// <summary>
+		/// 是否接受摄像机旋转输入
+		/// </summary>
+		[HorizontalGroup("LookInput")]
+		[HorizontalGroup("LookInput/Left")]
+		[ShowInInspector]
+		[ReadOnly]
+		[Tooltip("是否接受摄像机旋转输入")]
+		private bool CanLookInput = true;
+		
+		/// <summary>
 		/// 鼠标移动
 		/// </summary>
-		[BoxGroup("Move")]
+		[HorizontalGroup("LookInput/Right")]
+		[LabelWidth(50)]
 		[Tooltip("鼠标移动")]
 		public Vector2 Look;
 		
 		/// <summary>
+		/// 是否接受冲刺输入
+		/// </summary>
+		[HorizontalGroup("SprintInput")]
+		[HorizontalGroup("SprintInput/Left")]
+		[ShowInInspector]
+		[ReadOnly]
+		[Tooltip("是否接受冲刺输入")]
+		private bool CanSprintInput = true;
+		
+		/// <summary>
 		/// 冲刺
 		/// </summary>
-		[BoxGroup("Move")]
+		[HorizontalGroup("SprintInput/Right")]
+		[LabelWidth(50)]
 		[Tooltip("冲刺")]
 		public bool Sprint;
 		
 		/// <summary>
+		/// 是否接受冲刺输入
+		/// </summary>
+		[HorizontalGroup("AttackInput")]
+		[HorizontalGroup("AttackInput/Left")]
+		[ShowInInspector]
+		[ReadOnly]
+		[Tooltip("是否接受冲刺输入")]
+		private bool CanAttackInput = true;
+		
+		/// <summary>
 		/// 攻击
 		/// </summary>
-		[BoxGroup("Combat")]
+		[HorizontalGroup("AttackInput/Right")]
+		[LabelWidth(50)]
 		[Tooltip("攻击")]
 		public bool Attack;
 		
 		/// <summary>
 		/// 鼠标锁定
 		/// </summary>
-		[BoxGroup("Cursor")]
 		[Tooltip("鼠标锁定")]
 		public bool CursorLocked = true;
-		
-		/// <summary>
-		/// 鼠标控制摄像机
-		/// </summary>
-		[BoxGroup("Cursor")]
-		[Tooltip("鼠标控制摄像机")]
-		public bool CursorInputForLook = true;
 
+		/// <summary>
+		/// 移动时触发的 Action
+		/// </summary>
+		[HideInInspector] 
+		public Action<Vector2> OnMoveAction;
+
+		/// <summary>
+		/// 鼠标移动时，能够输入时触发的 Action
+		/// </summary>
+		[HideInInspector]
+		public Action<Vector2> OnLookAction;
+
+		/// <summary>
+		/// 右键冲刺时触发的 Action
+		/// </summary>
+		[HideInInspector]
+		public Action OnSprintAction;
+
+		/// <summary>
+		/// 左键攻击时触发的 Action
+		/// </summary>
+		[HideInInspector]
+		public Action OnAttackAction;
+
+		/// <summary>
+		/// 应用窗口聚焦时触发的 Action
+		/// </summary>
+		[HideInInspector]
+		public Action<bool> OnApplicationFocusAction;
+		
 		private void OnMove(InputValue value)
 		{
-			Move = value.Get<Vector2>();
+			if (CanMoveInput)
+			{
+				Move = value.Get<Vector2>();
+				OnMoveAction?.Invoke(Move);
+			}
 		}
 
 		private void OnLook(InputValue value)
 		{
-			if (CursorInputForLook)
+			if (CanLookInput)
+			{
 				Look = value.Get<Vector2>();
+				OnLookAction?.Invoke(Look);
+			}
 		}
 
 		private void OnSprint(InputValue value)
 		{
-			Sprint = value.isPressed;
+			if (CanSprintInput)
+			{
+				Sprint = value.isPressed;
+				OnSprintAction?.Invoke();
+			}
 		}
 
 		private void OnAttack(InputValue value)
 		{
-			Attack = value.isPressed;
+			if (CanAttackInput)
+			{
+				Attack = value.isPressed;
+				OnAttackAction?.Invoke();
+			}
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
-			SetCursorState(CursorLocked);
+			SetCursorState(hasFocus);
+			CursorLocked = hasFocus;
+			OnApplicationFocusAction?.Invoke(CursorLocked);
 		}
 
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		}
+
+		public void EnableMoveInput(bool shouldEnable)
+		{
+			CanMoveInput = shouldEnable;
+			// 注意清零
+			Move = Vector2.zero;
+		}
+		
+		public void EnableLookInput(bool shouldEnable)
+		{
+			CanLookInput = shouldEnable;
+			// 注意清零
+			Look = Vector2.zero;
+		}
+		
+		public void EnableSprintInput(bool shouldEnable)
+		{
+			CanSprintInput = shouldEnable;
+			// 注意清零
+			Sprint = false;
+		}
+		
+		public void EnableAttackInput(bool shouldEnable)
+		{
+			CanAttackInput = shouldEnable;
+			// 注意清零
+			Attack = false;
 		}
 	}
 	

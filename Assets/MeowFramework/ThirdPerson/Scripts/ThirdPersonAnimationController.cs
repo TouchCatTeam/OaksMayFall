@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 25/03/2022 23:24
-// 最后一次修改于: 05/04/2022 1:02
+// 最后一次修改于: 05/04/2022 1:46
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -23,6 +23,7 @@ namespace MeowFramework
         /// 第三人称运动管理器
         /// </summary>
         [BoxGroup("Component")]
+        [Required]
         [Tooltip("第三人称运动管理器")]
         public ThirdPersonLocomotionController LocomotionController;
         
@@ -30,6 +31,7 @@ namespace MeowFramework
         /// 动画控制器
         /// </summary>
         [BoxGroup("Component")]
+        [Required]
         [Tooltip("动画控制器")]
         public Animator Anim;
         
