@@ -1197,7 +1197,8 @@ MonoBehaviour:
   _parentBlackboard: {fileID: 0}
   _serializedBlackboard: '{"_variables":{"InputController":{"_value":1,"_name":"InputController","_id":"746ebeb9-982e-4c94-a488-b0f3311cece2","$type":"NodeCanvas.Framework.Variable`1[[MeowFramework.MeowACT.MeowACTInputController,
     MeowFramework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"LocomotionController":{"_value":2,"_name":"LocomotionController","_id":"d1870ecd-5f7c-42eb-bb00-0a8a8363d71a","$type":"NodeCanvas.Framework.Variable`1[[MeowFramework.ThirdPersonLocomotionController,
-    MeowFramework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
+    MeowFramework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"PlayerFollowCamera":{"_propertyPath":"MeowFramework.ThirdPersonLocomotionController.PlayerFollowCamera","_name":"PlayerFollowCamera","_id":"4649c3d9-8171-46ad-b3df-71f8ee549b3e","$type":"NodeCanvas.Framework.Variable`1[[Cinemachine.CinemachineVirtualCamera,
+    Cinemachine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences:
   - {fileID: 0}
   - {fileID: 4362822600041303188}
@@ -1213,6 +1214,9 @@ MonoBehaviour:
     _references:
     - {fileID: 0}
     - {fileID: 31763964048053611}
+  - _json: '{"_propertyPath":"MeowFramework.ThirdPersonLocomotionController.PlayerFollowCamera","_name":"PlayerFollowCamera","_id":"4649c3d9-8171-46ad-b3df-71f8ee549b3e","$type":"NodeCanvas.Framework.Variable`1[[Cinemachine.CinemachineVirtualCamera,
+      Cinemachine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references: []
 --- !u!114 &5315925178893265757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,6 +1377,9 @@ MonoBehaviour:
     - Name: OnAttackAction
       Entry: 6
       Data: 
+    - Name: OnAimAction
+      Entry: 6
+      Data: 
     - Name: OnApplicationFocusAction
       Entry: 6
       Data: 
@@ -1380,6 +1387,7 @@ MonoBehaviour:
   Look: {x: 0, y: 0}
   Sprint: 0
   Attack: 0
+  Aim: 0
   CursorLocked: 1
 --- !u!114 &31763964048053611
 MonoBehaviour:

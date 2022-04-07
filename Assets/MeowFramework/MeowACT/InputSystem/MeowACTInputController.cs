@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 14/03/2022 9:54
-// 最后一次修改于: 06/04/2022 16:39
+// 最后一次修改于: 07/04/2022 14:44
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -88,6 +88,24 @@ namespace MeowFramework.MeowACT
 		public bool Attack;
 		
 		/// <summary>
+		/// 是否接受瞄准输入
+		/// </summary>
+		[HorizontalGroup("AimInput")]
+		[HorizontalGroup("AimInput/Left")]
+		[ShowInInspector]
+		[ReadOnly]
+		[Tooltip("是否接受瞄准输入")]
+		private bool CanAimInput = true;
+		
+		/// <summary>
+		/// 瞄准
+		/// </summary>
+		[HorizontalGroup("AimInput/Right")]
+		[LabelWidth(50)]
+		[Tooltip("瞄准")]
+		public bool Aim;
+		
+		/// <summary>
 		/// 鼠标锁定
 		/// </summary>
 		[Tooltip("鼠标锁定")]
@@ -117,6 +135,12 @@ namespace MeowFramework.MeowACT
 		[HideInInspector]
 		public Action OnAttackAction;
 
+		/// <summary>
+		/// 右键按下与松开时触发的 Action
+		/// </summary>
+		[HideInInspector]
+		public Action OnAimAction;
+		
 		/// <summary>
 		/// 应用窗口聚焦时触发的 Action
 		/// </summary>
@@ -159,6 +183,15 @@ namespace MeowFramework.MeowACT
 			}
 		}
 
+		private void OnAim(InputValue value)
+		{
+			if (CanAttackInput)
+			{
+				Aim = value.isPressed;
+				OnAimAction?.Invoke();
+			}
+		}
+		
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(hasFocus);
@@ -198,6 +231,14 @@ namespace MeowFramework.MeowACT
 			// 注意清零
 			Attack = false;
 		}
+		
+		public void EnableAimInput(bool shouldEnable)
+		{
+			CanAimInput = shouldEnable;
+			// 注意清零
+			Aim = false;
+		}
+		
 	}
 	
 }

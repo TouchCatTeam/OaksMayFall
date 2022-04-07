@@ -1,13 +1,14 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 06/04/2022 15:04
-// 最后一次修改于: 06/04/2022 15:28
+// 最后一次修改于: 07/04/2022 15:57
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using UnityEngine;
 using MeowFramework.MeowACT;
+using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 
 namespace FlowCanvas.Nodes
@@ -18,7 +19,10 @@ namespace FlowCanvas.Nodes
     {
         private FlowOutput raised;
 
-        private ValueInput<MeowACTInputController> actionInput;
+        /// <summary>
+        /// 输入控制器
+        /// </summary>
+        public BBParameter<MeowACTInputController> InputController;
 
         /// <summary>
         /// 输入 Action 的参数
@@ -30,20 +34,21 @@ namespace FlowCanvas.Nodes
         public override void OnGraphStarted()
         {
             // 订阅事件
-            actionInput.value.OnLookAction += EventRaised;
+            if(InputController.value != null)
+                InputController.value.OnLookAction += EventRaised;
         }
 
         public override void OnGraphStoped()
         {
             // 取消订阅事件
-            actionInput.value.OnLookAction -= EventRaised;
+            if(InputController.value != null)
+                InputController.value.OnLookAction -= EventRaised;
         }
 
         //Register the output flow port or any other port
         protected override void RegisterPorts()
         {
             raised = AddFlowOutput("Out");
-            actionInput = AddValueInput<MeowACTInputController>("InputController");
             Value = AddValueOutput<Vector2>("Value", () => { return value; });
         }
 

@@ -1,5 +1,5 @@
 {
-    "name": "OaksMayFallInputAction",
+    "name": "MeowACTInputAction",
     "maps": [
         {
             "name": "Player",
@@ -36,6 +36,15 @@
                     "name": "Attack",
                     "type": "PassThrough",
                     "id": "4d4b808a-f447-4f84-8555-1f916ccff7f4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "PassThrough",
+                    "id": "7b72457d-9eaf-4784-b29d-a1e7cda2ab67",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -205,6 +214,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d69a7bf-e934-476d-b0f1-c183b9bf9037",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
