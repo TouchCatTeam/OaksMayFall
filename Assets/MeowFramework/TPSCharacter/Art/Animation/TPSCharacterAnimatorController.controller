@@ -347,7 +347,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 55cd2cc2ae0fcdf41b4d39b13f76e5e3, type: 3}
     m_Threshold: 0.16666667
-    m_Position: {x: 0, y: 0.5}
+    m_Position: {x: 0, y: 3}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: ForwardSpeed
@@ -355,7 +355,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: bcf82e431bf566b4aa5ca9f8b6ece71c, type: 3}
     m_Threshold: 0.33333334
-    m_Position: {x: 0, y: -0.5}
+    m_Position: {x: 0, y: -3}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: ForwardSpeed
@@ -363,7 +363,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 0d2ee2780f5bf3344a2b3efd45453c2b, type: 3}
     m_Threshold: 0.5
-    m_Position: {x: 0, y: 1}
+    m_Position: {x: 0, y: 10}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: ForwardSpeed
@@ -371,7 +371,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 545cd133e3ddf0148a68c407d0e1e8de, type: 3}
     m_Threshold: 0.6666667
-    m_Position: {x: 0, y: -1}
+    m_Position: {x: 0, y: -10}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: ForwardSpeed
@@ -379,7 +379,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: fcb8408b525886e4fbb39a16a802452c, type: 3}
     m_Threshold: 0.8333333
-    m_Position: {x: -1, y: 0}
+    m_Position: {x: -7, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: ForwardSpeed
@@ -387,12 +387,12 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 194276566435d9746a5a1ae829eddeef, type: 3}
     m_Threshold: 1
-    m_Position: {x: 1, y: 0}
+    m_Position: {x: 7, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: ForwardSpeed
     m_Mirror: 0
-  m_BlendParameter: LeftSpeed
+  m_BlendParameter: RightSpeed
   m_BlendParameterY: ForwardSpeed
   m_MinThreshold: 0
   m_MaxThreshold: 1

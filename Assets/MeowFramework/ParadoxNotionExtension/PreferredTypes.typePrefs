@@ -11,6 +11,7 @@
     "MeowFramework.TPSCharacter.TPSCharacterAnimationController",
     "MeowFramework.TPSCharacter.TPSCharacterInputController",
     "MeowFramework.TPSCharacter.TPSCharacterLocomotionController",
+    "MeowFramework.TPSCharacter.TPSCharacterUIController",
     "System.Boolean",
     "System.EventHandler",
     "System.Int32",
@@ -64,5 +65,5 @@
     "UnityEngine.SceneManagement.SceneManager",
     "UnityEngine.UI.Button",
     "UnityEngine.UI.Slider",
-    "MeowFramework.TPSCharacter.TPSCharacterUIController"
+    "MeowFramework.TPSCharacter.TPSCharacterBehaviourMode"
 ]

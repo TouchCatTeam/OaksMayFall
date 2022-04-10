@@ -1,12 +1,13 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 14/03/2022 9:54
-// 最后一次修改于: 10/04/2022 10:23
+// 最后一次修改于: 10/04/2022 20:46
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System;
+using System.ComponentModel;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,19 +17,29 @@ namespace MeowFramework.TPSCharacter
 	public class TPSCharacterInputController : SerializedMonoBehaviour
 	{
 		/// <summary>
+		/// 行动模式
+		/// </summary>
+		[BoxGroup("Mode")]
+		[ShowInInspector]
+		[Sirenix.OdinInspector.ReadOnly]
+		[Description("行动模式")]
+		private TPSCharacterBehaviourMode mode;
+		
+		/// <summary>
 		/// 是否接受运动输入
 		/// </summary>
-		[HorizontalGroup("MoveInput")]
-		[HorizontalGroup("MoveInput/Left")]
+		[BoxGroup("InputValue")]
+		[HorizontalGroup("InputValue/MoveInput")]
+		[HorizontalGroup("InputValue/MoveInput/Left")]
 		[ShowInInspector]
-		[ReadOnly]
+		[Sirenix.OdinInspector.ReadOnly]
 		[Tooltip("是否接受运动输入")]
 		private bool CanMoveInput = true;
 			
 		/// <summary>
 		/// 移动
 		/// </summary>
-		[HorizontalGroup("MoveInput/Right")]
+		[HorizontalGroup("InputValue/MoveInput/Right")]
 		[LabelWidth(50)]
 		[Tooltip("移动")]
 		public Vector2 Move;
@@ -36,17 +47,17 @@ namespace MeowFramework.TPSCharacter
 		/// <summary>
 		/// 是否接受摄像机旋转输入
 		/// </summary>
-		[HorizontalGroup("LookInput")]
-		[HorizontalGroup("LookInput/Left")]
+		[HorizontalGroup("InputValue/LookInput")]
+		[HorizontalGroup("InputValue/LookInput/Left")]
 		[ShowInInspector]
-		[ReadOnly]
+		[Sirenix.OdinInspector.ReadOnly]
 		[Tooltip("是否接受摄像机旋转输入")]
 		private bool CanLookInput = true;
 		
 		/// <summary>
 		/// 鼠标移动
 		/// </summary>
-		[HorizontalGroup("LookInput/Right")]
+		[HorizontalGroup("InputValue/LookInput/Right")]
 		[LabelWidth(50)]
 		[Tooltip("鼠标移动")]
 		public Vector2 Look;
@@ -54,17 +65,17 @@ namespace MeowFramework.TPSCharacter
 		/// <summary>
 		/// 是否接受冲刺输入
 		/// </summary>
-		[HorizontalGroup("SprintInput")]
-		[HorizontalGroup("SprintInput/Left")]
+		[HorizontalGroup("InputValue/SprintInput")]
+		[HorizontalGroup("InputValue/SprintInput/Left")]
 		[ShowInInspector]
-		[ReadOnly]
+		[Sirenix.OdinInspector.ReadOnly]
 		[Tooltip("是否接受冲刺输入")]
 		private bool CanSprintInput = true;
 		
 		/// <summary>
 		/// 冲刺
 		/// </summary>
-		[HorizontalGroup("SprintInput/Right")]
+		[HorizontalGroup("InputValue/SprintInput/Right")]
 		[LabelWidth(50)]
 		[Tooltip("冲刺")]
 		public bool Sprint;
@@ -72,17 +83,17 @@ namespace MeowFramework.TPSCharacter
 		/// <summary>
 		/// 是否接受冲刺输入
 		/// </summary>
-		[HorizontalGroup("AttackInput")]
-		[HorizontalGroup("AttackInput/Left")]
+		[HorizontalGroup("InputValue/AttackInput")]
+		[HorizontalGroup("InputValue/AttackInput/Left")]
 		[ShowInInspector]
-		[ReadOnly]
+		[Sirenix.OdinInspector.ReadOnly]
 		[Tooltip("是否接受冲刺输入")]
 		private bool CanAttackInput = true;
 		
 		/// <summary>
 		/// 攻击
 		/// </summary>
-		[HorizontalGroup("AttackInput/Right")]
+		[HorizontalGroup("InputValue/AttackInput/Right")]
 		[LabelWidth(50)]
 		[Tooltip("攻击")]
 		public bool Attack;
@@ -90,17 +101,17 @@ namespace MeowFramework.TPSCharacter
 		/// <summary>
 		/// 是否接受瞄准输入
 		/// </summary>
-		[HorizontalGroup("AimInput")]
-		[HorizontalGroup("AimInput/Left")]
+		[HorizontalGroup("InputValue/AimInput")]
+		[HorizontalGroup("InputValue/AimInput/Left")]
 		[ShowInInspector]
-		[ReadOnly]
+		[Sirenix.OdinInspector.ReadOnly]
 		[Tooltip("是否接受瞄准输入")]
 		private bool CanAimInput = true;
 		
 		/// <summary>
 		/// 瞄准
 		/// </summary>
-		[HorizontalGroup("AimInput/Right")]
+		[HorizontalGroup("InputValue/AimInput/Right")]
 		[LabelWidth(50)]
 		[Tooltip("瞄准")]
 		public bool Aim;
@@ -108,6 +119,7 @@ namespace MeowFramework.TPSCharacter
 		/// <summary>
 		/// 鼠标锁定
 		/// </summary>
+		[BoxGroup("InputValue")]
 		[Tooltip("鼠标锁定")]
 		public bool CursorLocked = true;
 
@@ -239,6 +251,22 @@ namespace MeowFramework.TPSCharacter
 			Aim = false;
 		}
 		
+		/// <summary>
+		/// 设置输入模式
+		/// </summary>
+		public void SetInputMode(TPSCharacterBehaviourMode mode)
+		{
+			this.mode = mode;
+			switch (mode)
+			{
+				case TPSCharacterBehaviourMode.NoWeapon:
+					EnableSprintInput(true);
+					break;
+				case TPSCharacterBehaviourMode.Rifle:
+					EnableSprintInput(false);
+					break;
+			}
+		}
 	}
 	
 }

@@ -491,51 +491,6 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 6057294972463837461, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-    - target: {fileID: 7815118690699484210, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927345001175244717, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927345001175244717, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927345001175244717, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: m_BlocksRaycasts
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: _serializedBlackboard
-      value: '{"_variables":{}}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: _objectReferences.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: _objectReferences.Array.data[1]
-      value: 
-      objectReference: {fileID: 1787517986}
-    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: _serializedVariables.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: _serializedVariables.Array.data[0]._json
-      value: '{"_value":1,"_name":"myTransform","_id":"32b490bd-67e5-481f-af33-96f09cc23e83","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Transform,
-        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: _serializedVariables.Array.data[0]._references.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: _serializedVariables.Array.data[0]._references.Array.data[1]
-      value: 
-      objectReference: {fileID: 1787517986}
     - target: {fileID: 9023662079083244219, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: serializationData.Prefab
       value: 

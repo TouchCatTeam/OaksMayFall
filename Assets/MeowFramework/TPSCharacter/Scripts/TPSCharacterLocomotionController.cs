@@ -1,11 +1,13 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 16/03/2022 16:53
-// 最后一次修改于: 10/04/2022 15:00
+// 最后一次修改于: 10/04/2022 22:09
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
+using System.Collections;
+using System.ComponentModel;
 using Cinemachine;
 using MeowFramework.Core;
 using Sirenix.OdinInspector;
@@ -67,6 +69,73 @@ namespace MeowFramework.TPSCharacter
 	    [Tooltip("跟随主角的摄像机")]
 	    public CinemachineVirtualCamera PlayerFollowCamera;
 	    
+	    // 模式
+	    
+	    /// <summary>
+	    /// 行动模式
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Sirenix.OdinInspector.ReadOnly]
+	    [Description("行动模式")]
+	    private TPSCharacterBehaviourMode mode;
+
+	    /// <summary>
+	    /// 切换模式的过渡时间
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("切换模式的过渡时间")]
+	    private float modeTransitionTime = 1f;
+
+	    /// <summary>
+	    /// 没有武器时摄像机的 FOV
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("摄像机的目标 FOV")]
+	    private float noWeaponFOV = 40f;
+	    
+	    /// <summary>
+	    /// 持步枪时摄像机的 FOV
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("摄像机的目标 FOV")]
+	    private float rifleFOV = 30f;
+	    
+	    /// <summary>
+	    /// 摄像机的 FOV 的平滑时间
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("摄像机的目标 FOV 的平滑时间")]
+	    private float fovSmoothTime = 0.2f;
+        
+	    /// <summary>
+	    /// 没有武器时摄像机的侧向位置
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("摄像机的目标侧向位置")]
+	    private float noWeaponSide = 0.5f;
+
+	    /// <summary>
+	    /// 持步枪时摄像机的侧向位置
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("摄像机的目标侧向位置")]
+	    private float rifleSide = 1f;
+	    
+	    /// <summary>
+	    /// 摄像机侧向位置的平滑时间
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("摄像机侧向位置的平滑时间")]
+	    private float cameraSideSmoothTime = 0.2f;
+	    
 	    // 运动相关
 	    
 	    /// <summary>
@@ -103,46 +172,34 @@ namespace MeowFramework.TPSCharacter
 	    [ShowInInspector]
 	    [Sirenix.OdinInspector.ReadOnly]
 	    [Tooltip("水平速度覆盖值")]
-	    private float HorizontalVelocityOverride;
+	    private float horizontalVelocityOverride;
 
-	    /// <summary>
-	    /// 水平速度方向覆盖值
-	    /// </summary>
-	    private Vector3 HorizontalVelocityDirectionOverride;
-	    
 	    // 行走相关
 
 	    /// <summary>
 	    /// 移动速度
 	    /// </summary>
 	    [BoxGroup("Walk")]
+	    [ShowInInspector]
 	    [Tooltip("移动速度")]
-	    public float walkSpeed = 7f;
+	    private float walkSpeed = 7f;
 
-	    /// <summary>
-	    /// 行走速度的过渡速度
-	    /// </summary>
-	    private Vector3 walkSmoothVelocity;
-	    
 	    /// <summary>
 	    /// 玩家行走的过渡时间
 	    /// </summary>
 	    [BoxGroup("Walk")]
+	    [ShowInInspector]
 	    [Tooltip("玩家行走的过渡时间")]
-	    public float walkSmoothTime = 0.2f;
-	    
-	    /// <summary>
-	    /// 旋转角的过渡速度
-	    /// </summary>
-	    private float rotationSmoothVelocity;
-	    
+	    private float walkSmoothTime = 0.2f;
+
 	    /// <summary>
 	    /// 玩家旋转的过渡时间
 	    /// 如果这个值过大，由于使用了 SmoothDamp，会让镜头移动出现明显的粘滞感
 	    /// </summary>
 	    [BoxGroup("Walk")]
+	    [ShowInInspector]
 	    [Tooltip("玩家旋转的过渡时间")]
-	    public float rotationSmoothTime = 0.1f;
+	    private float rotationSmoothTime = 0.1f;
 
 	    // 物理相关
 	    
@@ -150,15 +207,17 @@ namespace MeowFramework.TPSCharacter
 	    /// 重力系数
 	    /// </summary>
 	    [BoxGroup("Gravity")]
+	    [ShowInInspector]
 	    [Tooltip("重力系数")]
-	    public float gravity = -9.8f;
+	    private float gravity = -9.8f;
 	    
 	    /// <summary>
 	    /// 最大下落速度
 	    /// </summary>
 	    [BoxGroup("Gravity")]
+	    [ShowInInspector]
 	    [Tooltip("最大下落速度")]
-	    public float terminalVelocity = 53f;
+	    private float terminalVelocity = 53f;
 	    
 	    // 落地相关
 
@@ -166,30 +225,39 @@ namespace MeowFramework.TPSCharacter
 	    /// 是否落地
 	    /// </summary>
 	    [BoxGroup("GroundCheck")]
+	    [ShowInInspector]
 	    [Sirenix.OdinInspector.ReadOnly]
 	    [Tooltip("是否落地")]
-	    public bool IsGrounded;
+	    private bool isGrounded;
+
+	    /// <summary>
+	    /// 是否落地
+	    /// </summary>
+	    public bool IsGrounded => isGrounded;
 	    
 	    /// <summary>
 	    /// 落地球形碰撞检测中心点的竖向偏移量
 	    /// </summary>
 	    [BoxGroup("GroundCheck")]
+	    [ShowInInspector]
 	    [Tooltip("落地球形碰撞检测中心点的竖向偏移量")]
-	    public float groundedOffset = -0.14f;
+	    private float groundedOffset = -0.14f;
 	    
 	    /// <summary>
 	    /// 落地球形碰撞检测的半径
 	    /// </summary>
 	    [BoxGroup("GroundCheck")]
+	    [ShowInInspector]
 	    [Tooltip("落地球形碰撞检测的半径")]
-	    public float groundedRadius = 0.28f;
+	    private float groundedRadius = 0.28f;
 	    
 	    /// <summary>
 	    /// 落地球形碰撞检测的层级
 	    /// </summary>
 	    [BoxGroup("GroundCheck")]
+	    [ShowInInspector]
 	    [Tooltip("落地球形碰撞检测的层级")]
-	    public int groundLayers = 1;
+	    private int groundLayers = 1;
 
 	    // 摄像机相关
 		
@@ -197,53 +265,84 @@ namespace MeowFramework.TPSCharacter
 	    /// 摄像机是否固定
 	    /// </summary>
 	    [BoxGroup("Camera")]
+	    [ShowInInspector]
+	    [Sirenix.OdinInspector.ReadOnly]
 	    [Tooltip("摄像机是否固定")]
-	    public bool IsCameraFixed = false;
+	    private bool IsCameraFixed = false;
 	    
 	    /// <summary>
 	    /// 摄像机俯仰角覆盖值
 	    /// </summary>
 		[BoxGroup("Camera")]
+		[ShowInInspector]
 	    [Tooltip("摄像机俯仰角覆盖值")]
-	    public float cameraPitchOverride = 0f;
+	    private float cameraPitchOverride = 0f;
 		
 	    /// <summary>
 	    /// 摄像机转动速度
 	    /// </summary>
 	    [BoxGroup("Camera")]
+	    [ShowInInspector]
 	    [Tooltip("摄像机转动速度")]
-	    public float cameraRotSpeed = 25f;
+	    private float cameraRotSpeed = 25f;
 	    
 	    /// <summary>
 	    /// 摄像机最大俯仰角
 	    /// </summary>
 	    [BoxGroup("Camera")]
 	    [PropertyRange(0,90)]
+	    [ShowInInspector]
 	    [Tooltip("摄像机最大俯仰角")]
-	    public float topClamp = 70f; 
+	    private float topClamp = 70f; 
 	    
 	    /// <summary>
 	    /// 摄像机最小俯仰角
 	    /// </summary>
 	    [BoxGroup("Camera")]
 	    [PropertyRange(-90,0)]
+	    [ShowInInspector]
 	    [Tooltip("摄像机最小俯仰角")]
-	    public float bottomClamp = -30f;
+	    private float bottomClamp = -30f;
 	    
 	    /// <summary>
 	    /// 摄像机跟随点的当前俯仰角的过渡时间
 	    /// </summary>
 	    [BoxGroup("Camera")]
+	    [ShowInInspector]
 	    [Tooltip("摄像机跟随点的当前俯仰角的过渡时间")]
-	    public float cinemachinePitchSmoothTime = 0.1f;
+	    private float cinemachinePitchSmoothTime = 0.1f;
 	    
 	    /// <summary>
 	    /// 摄像机跟随点的当前偏航角的过渡时间
 	    /// </summary>
 	    [BoxGroup("Camera")]
+	    [ShowInInspector]
 	    [Tooltip("摄像机跟随点的当前偏航角的过渡时间")]
-	    public float cinemachineYawSmoothTime = 0.1f;
+	    private float cinemachineYawSmoothTime = 0.1f;
 
+	    // 缓存
+	    
+	    // 缓存 - 速度覆盖
+	    
+	    /// <summary>
+	    /// 水平速度方向覆盖值
+	    /// </summary>
+	    private Vector3 horizontalVelocityDirectionOverride;
+	    
+	    // 缓存 - 玩家行走
+	    
+	    /// <summary>
+	    /// 行走速度的过渡速度
+	    /// </summary>
+	    private Vector3 walkSmoothVelocity;
+	    
+	    /// <summary>
+	    /// 旋转角的过渡速度
+	    /// </summary>
+	    private float rotationSmoothVelocity;
+	    
+	    // 缓存 - 摄像机旋转
+	    
 	    /// <summary>
 	    /// 摄像机跟随点的期望俯仰角
 	    /// </summary>
@@ -268,7 +367,24 @@ namespace MeowFramework.TPSCharacter
 	    /// 摄像机跟随点的当前俯仰角的过渡速度
 	    /// </summary>
 	    private float cinemachineYawSmoothVelocity;
+	    
+	    // 缓存 - 运动模式
 
+	    /// <summary>
+	    /// 模式改变协程
+	    /// </summary>
+	    private Coroutine modeChangeCoroutine;
+	    
+	    /// <summary>
+	    /// 摄像机的目标 FOV 平滑速度
+	    /// </summary>
+	    private float fovSmoothVelocity;
+	    
+	    /// <summary>
+	    /// 摄像机侧向位置的平滑速度
+	    /// </summary>
+	    private float cameraSideSmoothVelocity;
+	    
 	    public void Awake()
 	    {
 		    MainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -302,7 +418,7 @@ namespace MeowFramework.TPSCharacter
 	    private void GroundedCheck()
         {
 	        var spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
-            IsGrounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers, QueryTriggerInteraction.Ignore);
+            isGrounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers, QueryTriggerInteraction.Ignore);
         }
 	    
 	    /// <summary>
@@ -310,7 +426,7 @@ namespace MeowFramework.TPSCharacter
 	    /// </summary>
         private void ApplyGravity()
         {
-	        if (IsGrounded && VerticalVelocity.Value < 0.0f)
+	        if (isGrounded && VerticalVelocity.Value < 0.0f)
 		        VerticalVelocity.Value = -2f;
 	        else if (VerticalVelocity.Value < terminalVelocity)
 		        VerticalVelocity.Value += gravity * Time.deltaTime;
@@ -334,7 +450,7 @@ namespace MeowFramework.TPSCharacter
 	        RotateToMoveDir(targetDirection);
 
 			// 如果有速度覆盖，则直接返回速度覆盖的结果
-	        float targetSpeed = isHorizontalVelocityOverrided ? HorizontalVelocityOverride : walkSpeed;
+	        float targetSpeed = isHorizontalVelocityOverrided ? horizontalVelocityOverride : walkSpeed;
 	        
 	        // 如果没有速度覆盖，则返回 Smooth 的结果
 	        Vector3 targetVelocity = (ACTInput.Move == Vector2.zero && isHorizontalVelocityOverrided == false) ? Vector3.zero : targetDirection * targetSpeed;
@@ -420,7 +536,7 @@ namespace MeowFramework.TPSCharacter
         public void SetHorizontalVelocityOverride(float speed)
         {
 	        isHorizontalVelocityOverrided = true;
-	        HorizontalVelocityOverride = speed;
+	        horizontalVelocityOverride = speed;
         }
         
         // 后面这个可能会有强制初始方向和强制始终一个方向
@@ -439,14 +555,62 @@ namespace MeowFramework.TPSCharacter
         // }
 
         /// <summary>
-        /// 改变运动风格
+        /// 开始模式改变的协程函数
         /// </summary>
-        /// <param name="walkSpeed">步行速度</param>
-        /// <param name="cameraRotSpeed">摄像机旋转速度</param>
-        public void SetStyle(float walkSpeed, float cameraRotSpeed)
+        /// <param name="targetFOV">目标 FOV</param>
+        /// <param name="targetSide">目标侧向位置</param>
+        /// <returns></returns>
+        private IEnumerator StartModeChange(float targetFOV, float targetSide)
         {
-	        this.walkSpeed = walkSpeed;
-	        this.cameraRotSpeed = cameraRotSpeed;
+	        // 摄像机第三人称跟随组件
+	        var camera3rdPersonFollow =
+		        PlayerFollowCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+
+	        // 初始化计时器
+	        var timeLeft = modeTransitionTime;
+            
+	        // 在给定时间内平滑
+	        // 平滑时间结束时，被平滑项接近终点值但不是终点值
+	        // 因此最后需要给被平滑项赋终点值，这可能产生一个抖动
+	        // 因此平滑时间需要在保证效果的同时尽可能小，才能让最后的抖动变小
+	        while (timeLeft > 0)
+	        {
+		        timeLeft -= Time.deltaTime;
+		        PlayerFollowCamera.m_Lens.FieldOfView = Mathf.SmoothDamp(PlayerFollowCamera.m_Lens.FieldOfView,
+			        targetFOV, ref fovSmoothVelocity, fovSmoothTime);
+		        camera3rdPersonFollow.CameraSide = Mathf.SmoothDamp(camera3rdPersonFollow.CameraSide, targetSide,
+			        ref cameraSideSmoothVelocity, cameraSideSmoothTime);
+		        
+		        yield return null;
+	        }
+	        
+	        // 摄像机焦距设置赋终点值
+	        PlayerFollowCamera.m_Lens.FieldOfView = targetFOV;
+	        // 摄像机侧向位置赋终点值
+	        camera3rdPersonFollow.CameraSide = targetSide;
+            
+	        yield return null;
+	        
+        }
+        
+        /// <summary>
+        /// 改变运动模式
+        /// </summary>
+        /// <param name="mode">模式</param>
+        public void SetLocomotionMode(TPSCharacterBehaviourMode mode)
+        {
+	        this.mode = mode;
+	        if(modeChangeCoroutine != null)
+				StopCoroutine(modeChangeCoroutine);
+	        switch (mode)
+	        {
+		        case TPSCharacterBehaviourMode.NoWeapon:
+			        modeChangeCoroutine = StartCoroutine(StartModeChange(noWeaponFOV, noWeaponSide));
+			        break;
+		        case TPSCharacterBehaviourMode.Rifle:
+			        modeChangeCoroutine = StartCoroutine(StartModeChange(rifleFOV, rifleSide));
+			        break;
+	        }
         }
     }
 }

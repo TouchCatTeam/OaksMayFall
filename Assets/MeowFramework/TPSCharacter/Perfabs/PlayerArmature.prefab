@@ -1399,22 +1399,6 @@ MonoBehaviour:
   PlayerFollowCamera: {fileID: 0}
   HorizontalVelocity: {fileID: 11400000, guid: 36e2f2b15d4086f468811eb2ca15cafd, type: 2}
   VerticalVelocity: {fileID: 11400000, guid: 4b789a7c90a34ac4cbd0a99fdc367497, type: 2}
-  walkSpeed: 7
-  walkSmoothTime: 0.2
-  rotationSmoothTime: 0.2
-  gravity: -9.8
-  terminalVelocity: 53
-  IsGrounded: 0
-  groundedOffset: -0.14
-  groundedRadius: 0.28
-  groundLayers: 1
-  IsCameraFixed: 0
-  cameraPitchOverride: 0
-  cameraRotSpeed: 25
-  topClamp: 70
-  bottomClamp: -30
-  cinemachinePitchSmoothTime: 0.1
-  cinemachineYawSmoothTime: 0.1
 --- !u!114 &9023662079083244219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1438,7 +1422,6 @@ MonoBehaviour:
     SerializationNodes: []
   LocomotionController: {fileID: 31763964048053611}
   Anim: {fileID: 6982812146204527121}
-  moveAnimBlendSmoothTime: 0.2
 --- !u!114 &6057294972463837461
 MonoBehaviour:
   m_ObjectHideFlags: 0
