@@ -1,14 +1,12 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 07/04/2022 14:44
-// 最后一次修改于: 07/04/2022 15:57
+// 最后一次修改于: 10/04/2022 10:23
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
-using UnityEngine;
-using MeowFramework.MeowACT;
-using NodeCanvas.Framework;
+using MeowFramework.TPSCharacter;
 using ParadoxNotion.Design;
 
 namespace FlowCanvas.Nodes
@@ -22,26 +20,27 @@ namespace FlowCanvas.Nodes
         /// <summary>
         /// 输入控制器
         /// </summary>
-        public BBParameter<MeowACTInputController> InputController;
+        private ValueInput<TPSCharacterInputController> inputController;
         
         public override void OnGraphStarted()
         {
             // 订阅事件
-            if(InputController.value != null)
-                InputController.value.OnAimAction += EventRaised;
+            if(inputController.value != null)
+                inputController.value.OnAimAction += EventRaised;
         }
 
         public override void OnGraphStoped()
         {
             // 取消订阅事件
-            if(InputController.value != null)
-                InputController.value.OnAimAction -= EventRaised;
+            if(inputController.value != null)
+                inputController.value.OnAimAction -= EventRaised;
         }
 
         //Register the output flow port or any other port
         protected override void RegisterPorts()
         {
             raised = AddFlowOutput("Out");
+            inputController = AddValueInput<TPSCharacterInputController>("InputController");
         }
 
         //Fire output flow

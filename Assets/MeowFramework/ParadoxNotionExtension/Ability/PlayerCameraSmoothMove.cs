@@ -1,15 +1,14 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 07/04/2022 10:23
-// 最后一次修改于: 07/04/2022 16:24
+// 最后一次修改于: 10/04/2022 10:25
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System.Collections;
 using Cinemachine;
-using MeowFramework;
-using MeowFramework.MeowACT;
+using MeowFramework.TPSCharacter;
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
@@ -18,26 +17,8 @@ namespace FlowCanvas.Nodes
 {
     [Category("MeowFramework/Ability")]
     [Description("玩家摄像机平滑移动")]
-    public class PlayerCameraSmoothMove : LatentActionNode
+    public class PlayerCameraSmoothMove : LatentActionNode<TPSCharacterLocomotionController>
     {
-        /// <summary>
-        /// 输入控制器
-        /// </summary>
-        [Description("输入控制器")]
-        public BBParameter<MeowACTInputController> InputController;
-
-        /// <summary>
-        /// 移动控制器
-        /// </summary>
-        [Description("移动控制器")]
-        public BBParameter<ThirdPersonLocomotionController> LocomotionController;
-
-        /// <summary>
-        /// 玩家摄像机
-        /// </summary>
-        [Description("玩家摄像机")]
-        public BBParameter<CinemachineVirtualCamera> playerCamera;
-        
         /// <summary>
         /// 时间比尺
         /// </summary>
@@ -89,11 +70,13 @@ namespace FlowCanvas.Nodes
         /// </summary>
         private float timeLeft { get; set; }
 
-        public override IEnumerator Invoke()
+        public override IEnumerator Invoke(TPSCharacterLocomotionController locomotionController)
         {
+            CinemachineVirtualCamera playerCamera = locomotionController.PlayerFollowCamera;
+            
             // 摄像机第三人称跟随组件
             var camera3rdPersonFollow =
-                playerCamera.value.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+                playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
             
             // 初始化计时器
             timeLeft = CameraMoveTransitionTime.value;
@@ -104,7 +87,7 @@ namespace FlowCanvas.Nodes
             // 因此平滑时间需要在保证效果的同时尽可能小，才能让最后的抖动变小
             while ( timeLeft > 0 ) {
                 timeLeft -= Time.deltaTime * TimeScale.value;
-                playerCamera.value.m_Lens.FieldOfView = Mathf.SmoothDamp(playerCamera.value.m_Lens.FieldOfView, TargetFOV.value,
+                playerCamera.m_Lens.FieldOfView = Mathf.SmoothDamp(playerCamera.m_Lens.FieldOfView, TargetFOV.value,
                     ref FOVSmoothVelocity, FOVSmoothTime.value);
                 camera3rdPersonFollow.CameraSide = Mathf.SmoothDamp(camera3rdPersonFollow.CameraSide, TargetSide.value,
                     ref cameraSideSmoothVelocity, CameraSideSmoothTime.value);
@@ -112,7 +95,7 @@ namespace FlowCanvas.Nodes
             }
 
             // 摄像机焦距设置赋终点值
-            playerCamera.value.m_Lens.FieldOfView = TargetFOV.value;
+            playerCamera.m_Lens.FieldOfView = TargetFOV.value;
             // 摄像机侧向位置赋终点值
             camera3rdPersonFollow.CameraSide = TargetSide.value;
             
