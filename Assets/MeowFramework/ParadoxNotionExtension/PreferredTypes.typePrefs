@@ -1,5 +1,5 @@
 [
-    "MeowFramework.ThirdPersonLocomotionController",
+    "FlowCanvas.FlowScriptController",
     "MeowFramework.Core.ActorBase",
     "MeowFramework.Core.ScriptableBoolVariable",
     "MeowFramework.Core.ScriptableFloatVariable",
@@ -8,7 +8,6 @@
     "MeowFramework.Core.ScriptableStringVariable",
     "MeowFramework.Core.ScriptableVector2Variable",
     "MeowFramework.Core.ScriptableVector3Variable",
-    "MeowFramework.MeowACT.MeowACTInputController",
     "System.Boolean",
     "System.EventHandler",
     "System.Int32",
@@ -62,5 +61,7 @@
     "UnityEngine.SceneManagement.SceneManager",
     "UnityEngine.UI.Button",
     "UnityEngine.UI.Slider",
-    "FlowCanvas.FlowScriptController"
+    "MeowFramework.TPSCharacter.TPSCharacterAnimationController",
+    "MeowFramework.TPSCharacter.TPSCharacterInputController",
+    "MeowFramework.TPSCharacter.TPSCharacterLocomotionController"
 ]
