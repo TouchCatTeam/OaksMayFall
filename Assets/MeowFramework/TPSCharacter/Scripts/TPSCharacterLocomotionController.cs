@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 16/03/2022 16:53
-// 最后一次修改于: 10/04/2022 10:23
+// 最后一次修改于: 10/04/2022 15:00
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -337,7 +337,7 @@ namespace MeowFramework.TPSCharacter
 	        float targetSpeed = isHorizontalVelocityOverrided ? HorizontalVelocityOverride : walkSpeed;
 	        
 	        // 如果没有速度覆盖，则返回 Smooth 的结果
-	        Vector3 targetVelocity = (ACTInput.Move == Vector2.zero) ? Vector3.zero : targetDirection * targetSpeed;
+	        Vector3 targetVelocity = (ACTInput.Move == Vector2.zero && isHorizontalVelocityOverrided == false) ? Vector3.zero : targetDirection * targetSpeed;
 	        
 	        return Vector3.SmoothDamp(HorizontalVelocity.Value, targetVelocity, ref walkSmoothVelocity, walkSmoothTime);
         }

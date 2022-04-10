@@ -8,6 +8,9 @@
     "MeowFramework.Core.ScriptableStringVariable",
     "MeowFramework.Core.ScriptableVector2Variable",
     "MeowFramework.Core.ScriptableVector3Variable",
+    "MeowFramework.TPSCharacter.TPSCharacterAnimationController",
+    "MeowFramework.TPSCharacter.TPSCharacterInputController",
+    "MeowFramework.TPSCharacter.TPSCharacterLocomotionController",
     "System.Boolean",
     "System.EventHandler",
     "System.Int32",
@@ -61,7 +64,5 @@
     "UnityEngine.SceneManagement.SceneManager",
     "UnityEngine.UI.Button",
     "UnityEngine.UI.Slider",
-    "MeowFramework.TPSCharacter.TPSCharacterAnimationController",
-    "MeowFramework.TPSCharacter.TPSCharacterInputController",
-    "MeowFramework.TPSCharacter.TPSCharacterLocomotionController"
+    "MeowFramework.TPSCharacter.TPSCharacterUIController"
 ]

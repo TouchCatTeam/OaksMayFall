@@ -487,6 +487,26 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 5189122428703405560, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+    - target: {fileID: 6057294972463837461, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6057294972463837461, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+    - target: {fileID: 7815118690699484210, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7927345001175244717, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7927345001175244717, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7927345001175244717, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8724067637084613076, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: _serializedBlackboard
       value: '{"_variables":{}}'
