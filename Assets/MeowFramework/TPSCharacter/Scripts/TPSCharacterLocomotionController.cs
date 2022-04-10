@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 16/03/2022 16:53
-// 最后一次修改于: 10/04/2022 22:09
+// 最后一次修改于: 10/04/2022 23:26
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -88,6 +88,22 @@ namespace MeowFramework.TPSCharacter
 	    [Description("切换模式的过渡时间")]
 	    private float modeTransitionTime = 1f;
 
+	    /// <summary>
+	    /// 没有武器时角色移动速度
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("没有武器时角色移动速度")]
+	    private float noWeaponWalkSpeed = 7f;
+
+	    /// <summary>
+	    /// 持步枪时角色移动速度
+	    /// </summary>
+	    [BoxGroup("Mode")]
+	    [ShowInInspector]
+	    [Description("持步枪时角色移动速度")]
+	    private float rifleWalkSpeed = 2f;
+	    
 	    /// <summary>
 	    /// 没有武器时摄像机的 FOV
 	    /// </summary>
@@ -445,15 +461,24 @@ namespace MeowFramework.TPSCharacter
         private Vector3 GetSpeed()
         {
 	        // 基于摄像机方向，向键盘输入方向移动的方向
-	        Vector3 targetDirection = GetInputDirectionBaseOnCamera();
+	        Vector3	targetMoveDirection = GetInputDirectionBaseOnCamera();
 
-	        RotateToMoveDir(targetDirection);
+	        // 期望旋转方向
+	        Vector3 targetRotateDirection;
+	        // 摄像机的前方向
+	        if (mode == TPSCharacterBehaviourMode.Rifle)
+		        targetRotateDirection = Camera.main.transform.forward;
+	        else
+		        targetRotateDirection = targetMoveDirection;
+
+	        // 向期望移动方向旋转
+	        RotateTo(targetRotateDirection);
 
 			// 如果有速度覆盖，则直接返回速度覆盖的结果
 	        float targetSpeed = isHorizontalVelocityOverrided ? horizontalVelocityOverride : walkSpeed;
 	        
 	        // 如果没有速度覆盖，则返回 Smooth 的结果
-	        Vector3 targetVelocity = (ACTInput.Move == Vector2.zero && isHorizontalVelocityOverrided == false) ? Vector3.zero : targetDirection * targetSpeed;
+	        Vector3 targetVelocity = (ACTInput.Move == Vector2.zero && isHorizontalVelocityOverrided == false) ? Vector3.zero : targetMoveDirection * targetSpeed;
 	        
 	        return Vector3.SmoothDamp(HorizontalVelocity.Value, targetVelocity, ref walkSmoothVelocity, walkSmoothTime);
         }
@@ -461,7 +486,7 @@ namespace MeowFramework.TPSCharacter
         /// <summary>
         /// 向移动方向旋转
         /// </summary>
-        private void RotateToMoveDir(Vector3 inputDirection)
+        private void RotateTo(Vector3 inputDirection)
         {
 	        // 有键盘输入
 	        // 或者没有键盘输入但是有速度覆盖时
@@ -560,8 +585,10 @@ namespace MeowFramework.TPSCharacter
         /// <param name="targetFOV">目标 FOV</param>
         /// <param name="targetSide">目标侧向位置</param>
         /// <returns></returns>
-        private IEnumerator StartModeChange(float targetFOV, float targetSide)
+        private IEnumerator StartModeChange(float targetWalkSpeed, float targetFOV, float targetSide)
         {
+	        walkSpeed = targetWalkSpeed;
+	        
 	        // 摄像机第三人称跟随组件
 	        var camera3rdPersonFollow =
 		        PlayerFollowCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
@@ -605,10 +632,10 @@ namespace MeowFramework.TPSCharacter
 	        switch (mode)
 	        {
 		        case TPSCharacterBehaviourMode.NoWeapon:
-			        modeChangeCoroutine = StartCoroutine(StartModeChange(noWeaponFOV, noWeaponSide));
+			        modeChangeCoroutine = StartCoroutine(StartModeChange(noWeaponWalkSpeed, noWeaponFOV, noWeaponSide));
 			        break;
 		        case TPSCharacterBehaviourMode.Rifle:
-			        modeChangeCoroutine = StartCoroutine(StartModeChange(rifleFOV, rifleSide));
+			        modeChangeCoroutine = StartCoroutine(StartModeChange(rifleWalkSpeed, rifleFOV, rifleSide));
 			        break;
 	        }
         }
