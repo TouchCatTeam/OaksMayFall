@@ -10,7 +10,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MeowFramework.Core
+namespace MeowFramework.Core.Utility
 {
     public static class UIUtility
     {

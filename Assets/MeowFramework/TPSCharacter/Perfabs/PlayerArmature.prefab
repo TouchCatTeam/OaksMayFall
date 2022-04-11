@@ -1150,18 +1150,17 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 9d5471b35c9708c4eaa50e826017eeeb, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Blackboard
-      Entry: 6
-      Data: 
     - Name: HP
       Entry: 7
-      Data: 0|MeowFramework.Core.ActorAttribute`1[[System.Single, mscorlib]], MeowFramework
+      Data: 0|MeowFramework.Core.Actor.ActorAttribute`1[[System.Single, mscorlib]],
+        MeowFramework
     - Name: IsLiteral
       Entry: 5
       Data: false
@@ -1173,12 +1172,61 @@ MonoBehaviour:
       Data: 
     - Name: MaxHP
       Entry: 7
-      Data: 1|MeowFramework.Core.ActorAttribute`1[[System.Single, mscorlib]], MeowFramework
+      Data: 1|MeowFramework.Core.Actor.ActorAttribute`1[[System.Single, mscorlib]],
+        MeowFramework
     - Name: IsLiteral
       Entry: 5
       Data: true
     - Name: AfterSetValue
       Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: availableAbilityDictionary
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[MeowFramework.Core.Scriptable.ScriptableAbility,
+        MeowFramework]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: bornBuffDictionary
+      Entry: 7
+      Data: 4|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[MeowFramework.Core.Scriptable.ScriptableBuff,
+        MeowFramework]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 3
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
       Data: 
     - Name: 
       Entry: 8
@@ -1226,7 +1274,7 @@ MonoBehaviour:
   _lockBoundGraphPrefabOverrides: 1
   _preInitializeSubGraphs: 0
   _updateMode: 0
-  _graph: {fileID: 11400000, guid: ce55b1788468ea4479b8995e69b04633, type: 2}
+  _graph: {fileID: 11400000, guid: 0503031ff21bd8f46b1d85eb56f429a2, type: 2}
   _blackboard: {fileID: 8724067637084613076}
 --- !u!114 &4416926081852918493
 MonoBehaviour:
@@ -3112,12 +3160,12 @@ MonoBehaviour:
     SerializationNodes:
     - Name: EventMapDictionary
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[MeowFramework.Core.ScriptableEvent,
+      Data: 0|System.Collections.Generic.Dictionary`2[[MeowFramework.Core.Scriptable.ScriptableEvent,
         MeowFramework],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
         mscorlib]], mscorlib]], UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowFramework.Core.ScriptableEvent,
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowFramework.Core.Scriptable.ScriptableEvent,
         MeowFramework]], mscorlib
     - Name: 
       Entry: 8
@@ -3265,12 +3313,12 @@ MonoBehaviour:
     SerializationNodes:
     - Name: EventMapDictionary
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[MeowFramework.Core.ScriptableEvent,
+      Data: 0|System.Collections.Generic.Dictionary`2[[MeowFramework.Core.Scriptable.ScriptableEvent,
         MeowFramework],[UnityEngine.Events.UnityEvent`1[[System.Collections.Generic.List`1[[System.Object,
         mscorlib]], mscorlib]], UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowFramework.Core.ScriptableEvent,
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[MeowFramework.Core.Scriptable.ScriptableEvent,
         MeowFramework]], mscorlib
     - Name: 
       Entry: 8

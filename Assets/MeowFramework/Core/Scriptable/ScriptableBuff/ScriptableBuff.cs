@@ -1,16 +1,18 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 27/03/2022 9:51
-// 最后一次修改于: 05/04/2022 15:45
+// 最后一次修改于: 11/04/2022 23:56
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System.Collections.Generic;
+using FlowCanvas;
+using MeowFramework.Core.FrameworkComponent;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace MeowFramework.Core
+namespace MeowFramework.Core.Scriptable
 {
     /// <summary>
     /// 可资产化 Buff
@@ -21,8 +23,22 @@ namespace MeowFramework.Core
         /// <summary>
         /// Buff ID
         /// </summary>
+        [ValidateInput("IDValidate")]
         [Tooltip("Buff ID")]
         public int BuffID;
+        
+        /// <summary>
+        /// 俗名
+        /// </summary>
+        [Tooltip("俗名")]
+        public string FriendlyName;
+        
+        /// <summary>
+        /// 概述
+        /// </summary>
+        [TextArea]
+        [Tooltip("概述")]
+        public string Description = "";
         
         /// <summary>
         /// 堆叠层数限制
@@ -55,12 +71,12 @@ namespace MeowFramework.Core
         [EnumToggleButtons]
         [BoxGroup("Time")]
         [Tooltip("指令持续时间种类")]
-        public CommandDurationType DurationType;
+        public BuffDurationType DurationType;
 
         /// <summary>
         /// 指令持续时间
         /// </summary>
-        [ShowIf("DurationType",CommandDurationType.Durable)]
+        [ShowIf("DurationType",BuffDurationType.Durable)]
         [BoxGroup("Time")]
         [ValidateInput("DurationValidate")]
         [Tooltip("指令持续时间")]
@@ -70,7 +86,7 @@ namespace MeowFramework.Core
         /// 什么时候应该重置 ElapsedTime
         /// </summary>
         [EnumToggleButtons]
-        [ShowIf("@DurationType == CommandDurationType.Durable || DurationType == CommandDurationType.Infinite")]
+        [ShowIf("@DurationType == BuffDurationType.Durable || DurationType == BuffDurationType.Infinite")]
         [BoxGroup("Time")]
         [Tooltip("什么时候应该重置已流逝时间")]
         public BuffResetElapsedTimeType WhenShouldResetElapsedTimeType;
@@ -78,11 +94,10 @@ namespace MeowFramework.Core
         /// <summary>
         /// 是否能够被打断
         /// </summary>
-        [ShowIf("@DurationType == CommandDurationType.Durable || DurationType == CommandDurationType.Infinite")]
+        [ShowIf("@DurationType == BuffDurationType.Durable || DurationType == BuffDurationType.Infinite")]
         [BoxGroup("Time")]
         [Tooltip("是否能够被打断")]
         public bool CanBeInterrupted;
-
         
         /// <summary>
         /// Buff 元素 Tag 字典
@@ -99,16 +114,32 @@ namespace MeowFramework.Core
         };
         
         /// <summary>
-        /// 指令
+        /// Buff FlowScript
         /// </summary>
-        [Tooltip("指令")]
-        public ScriptableCommand Command;
+        [Tooltip("FlowScript")]
+        public FlowScript BuffFlowScript;
+
+        /// <summary>
+        /// 初始时注册 Buff ID
+        /// </summary>
+        private void OnEnable()
+        {
+            // 根据新的 ID 添加键值对
+            BuffComponent.ScriptableBuffDictionary[BuffID] = this;
+        }
+
+        /// <summary>
+        /// 验证函数：是否为非负数
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private bool IDValidate(int value) => value >= 0;
         
         /// <summary>
         /// 验证函数：是否为非负数
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private bool DurationValidate(float value) => MathUtility.IsntNegative(value);
+        private bool DurationValidate(float value) => value >= 0;
     }
 }

@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 29/03/2022 8:20
-// 最后一次修改于: 02/04/2022 23:54
+// 最后一次修改于: 11/04/2022 10:31
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace MeowFramework.Core
+namespace MeowFramework.Core.Scriptable
 {
     /// <summary>
     /// 可资产化事件

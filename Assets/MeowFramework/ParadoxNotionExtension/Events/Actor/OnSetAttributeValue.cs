@@ -1,12 +1,12 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 06/04/2022 9:51
-// 最后一次修改于: 06/04/2022 15:06
+// 最后一次修改于: 11/04/2022 21:13
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
-using MeowFramework.Core;
+using MeowFramework.Core.Entity;
 using ParadoxNotion.Design;
 
 namespace FlowCanvas.Nodes{

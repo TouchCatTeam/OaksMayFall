@@ -8,7 +8,7 @@
 
 using UnityEngine;
 
-namespace MeowFramework.Core
+namespace MeowFramework.Core.Utility
 {
     public static class PhysicsUtility
     {

@@ -9,9 +9,8 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using UnityEngine;
 
-namespace MeowFramework.Core
+namespace MeowFramework.Core.Utility
 {
     /// <summary>
     /// AI 工具类。

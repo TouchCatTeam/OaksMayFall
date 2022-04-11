@@ -1,14 +1,15 @@
 [
     "FlowCanvas.FlowScriptController",
-    "MeowFramework.Core.ActorBase",
-    "MeowFramework.Core.ScriptableBoolVariable",
-    "MeowFramework.Core.ScriptableFloatVariable",
-    "MeowFramework.Core.ScriptableIntVariable",
-    "MeowFramework.Core.ScriptableQuaternionVariable",
-    "MeowFramework.Core.ScriptableStringVariable",
-    "MeowFramework.Core.ScriptableVector2Variable",
-    "MeowFramework.Core.ScriptableVector3Variable",
+    "MeowFramework.Core.Entity.ActorBase",
+    "MeowFramework.Core.Scriptable.ScriptableBoolVariable",
+    "MeowFramework.Core.Scriptable.ScriptableFloatVariable",
+    "MeowFramework.Core.Scriptable.ScriptableIntVariable",
+    "MeowFramework.Core.Scriptable.ScriptableQuaternionVariable",
+    "MeowFramework.Core.Scriptable.ScriptableStringVariable",
+    "MeowFramework.Core.Scriptable.ScriptableVector2Variable",
+    "MeowFramework.Core.Scriptable.ScriptableVector3Variable",
     "MeowFramework.TPSCharacter.TPSCharacterAnimationController",
+    "MeowFramework.TPSCharacter.TPSCharacterBehaviourMode",
     "MeowFramework.TPSCharacter.TPSCharacterInputController",
     "MeowFramework.TPSCharacter.TPSCharacterLocomotionController",
     "MeowFramework.TPSCharacter.TPSCharacterUIController",
@@ -65,5 +66,5 @@
     "UnityEngine.SceneManagement.SceneManager",
     "UnityEngine.UI.Button",
     "UnityEngine.UI.Slider",
-    "MeowFramework.TPSCharacter.TPSCharacterBehaviourMode"
+    "MeowFramework.Core.Utility.BuffUtility"
 ]
