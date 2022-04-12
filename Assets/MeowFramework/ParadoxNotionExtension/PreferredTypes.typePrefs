@@ -1,6 +1,5 @@
 [
     "FlowCanvas.FlowScriptController",
-    "MeowFramework.Core.Entity.ActorBase",
     "MeowFramework.Core.Scriptable.ScriptableBoolVariable",
     "MeowFramework.Core.Scriptable.ScriptableFloatVariable",
     "MeowFramework.Core.Scriptable.ScriptableIntVariable",
@@ -66,5 +65,5 @@
     "UnityEngine.SceneManagement.SceneManager",
     "UnityEngine.UI.Button",
     "UnityEngine.UI.Slider",
-    "MeowFramework.Core.Utility.BuffUtility"
+    "MeowFramework.Core.Entity.BuffEntity"
 ]
