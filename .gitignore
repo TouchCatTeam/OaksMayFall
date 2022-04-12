@@ -9,6 +9,7 @@
 
 *.vsconfig
 *.csproj
+*.csproj.DotSettings
 *.unityproj
 *.booproj
 *.sln
