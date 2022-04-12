@@ -1072,7 +1072,7 @@ GameObject:
   - component: {fileID: 9023662079083244219}
   - component: {fileID: 6057294972463837461}
   m_Layer: 8
-  m_Name: PlayerArmature
+  m_Name: TPSCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1144,93 +1144,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 4416926081852918481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13154b4c1584413bb4de363ffbb0e7bc, type: 3}
+  m_Script: {fileID: 11500000, guid: fb3ca1541ecd49248fb0a7e51e4a5865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 9d5471b35c9708c4eaa50e826017eeeb, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: HP
-      Entry: 7
-      Data: 0|MeowFramework.Core.Actor.ActorAttribute`1[[System.Single, mscorlib]],
-        MeowFramework
-    - Name: IsLiteral
-      Entry: 5
-      Data: false
-    - Name: AfterSetValue
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: MaxHP
-      Entry: 7
-      Data: 1|MeowFramework.Core.Actor.ActorAttribute`1[[System.Single, mscorlib]],
-        MeowFramework
-    - Name: IsLiteral
-      Entry: 5
-      Data: true
-    - Name: AfterSetValue
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: availableAbilityDictionary
-      Entry: 7
-      Data: 2|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[MeowFramework.Core.Scriptable.ScriptableAbility,
-        MeowFramework]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 3|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 0
-    - Name: $v
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: bornBuffDictionary
-      Entry: 7
-      Data: 4|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[MeowFramework.Core.Scriptable.ScriptableBuff,
-        MeowFramework]], mscorlib
-    - Name: comparer
-      Entry: 9
-      Data: 3
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
+  flowScriptController: {fileID: 5315925178893265757}
+  bornBuffList: 
+  HP: {fileID: 11400000, guid: 933946fcbaf1b704398e19608566dca6, type: 2}
+  MaxHP: {fileID: 11400000, guid: dc8bd3100e2f02b43b89c6b45a36d1ac, type: 2}
 --- !u!114 &8724067637084613076
 MonoBehaviour:
   m_ObjectHideFlags: 0

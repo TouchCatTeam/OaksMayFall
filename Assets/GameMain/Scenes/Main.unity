@@ -481,11 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 4362822600041303188, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
     - target: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_Name
-      value: PlayerArmature
-      objectReference: {fileID: 0}
-    - target: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
-      propertyPath: m_TagString
-      value: Player
+      value: TPSCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5189122428703405560, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: serializationData.Prefab

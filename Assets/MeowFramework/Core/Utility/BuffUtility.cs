@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 11/04/2022 23:27
-// 最后一次修改于: 12/04/2022 0:19
+// 最后一次修改于: 12/04/2022 14:46
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -22,7 +22,7 @@ namespace MeowFramework.Core.Utility
         /// <param name="receiver">Buff 接受者</param>
         /// <param name="buffIndex"> Buff ID</param>
         /// <returns>Buff 实体</returns>
-        public static BuffEntity TryAddBuff(ActorBase caster, ActorBase receiver, int buffIndex)
+        public static BuffEntity TryAddBuff(ActorEntity caster, ActorEntity receiver, int buffIndex)
         {
             // 如果没有这个 Buff，就返回空
             if (!BuffComponent.ScriptableBuffDictionary.ContainsKey(buffIndex))

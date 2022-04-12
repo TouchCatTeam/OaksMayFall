@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 11/04/2022 23:41
-// 最后一次修改于: 12/04/2022 0:17
+// 最后一次修改于: 12/04/2022 14:46
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -23,7 +23,7 @@ namespace MeowFramework.Core.Entity
         [ShowInInspector]
         [Sirenix.OdinInspector.ReadOnly]
         [Tooltip("Buff 释放者")]
-        private ActorBase caster;
+        private ActorEntity caster;
 
         /// <summary>
         /// Buff 接受者
@@ -31,12 +31,12 @@ namespace MeowFramework.Core.Entity
         [ShowInInspector]
         [Sirenix.OdinInspector.ReadOnly]
         [Tooltip("Buff 接受者")]
-        private ActorBase receiver;
+        private ActorEntity receiver;
         
         /// <summary>
         /// 初始化 Buff
         /// </summary>
-        public void BuffInitialize(ActorBase caster, ActorBase receiver, ScriptableBuff scriptableBuff)
+        public void BuffInitialize(ActorEntity caster, ActorEntity receiver, ScriptableBuff scriptableBuff)
         {
             this.caster = caster;
             this.receiver = receiver;

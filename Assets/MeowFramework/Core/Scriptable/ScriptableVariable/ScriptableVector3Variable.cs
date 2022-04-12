@@ -1,11 +1,12 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 01/04/2022 22:23
-// 最后一次修改于: 11/04/2022 10:31
+// 最后一次修改于: 12/04/2022 15:07
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -16,8 +17,31 @@ namespace MeowFramework.Core.Scriptable
     /// </summary>
     [InlineEditor]
     [CreateAssetMenu(menuName = "MeowFramework/Scriptable Variable/Create Scriptable Vector3 Variable")]
-    public class ScriptableVector3Variable : ScriptableGenericVariable<Vector3>
+    public class ScriptableVector3Variable : SerializedScriptableObject
     {
+        /// <summary>
+        /// 值
+        /// </summary>
+        [ShowInInspector]
+        private Vector3 value;
         
+        /// <summary>
+        /// 值
+        /// </summary>
+        public Vector3 Value
+        {
+            get => value;
+            set
+            {
+                AfterSetValue?.Invoke(this.value, value);
+                this.value = value;
+            }
+        }
+        
+        /// <summary>
+        /// 设置值时进行的委托
+        /// </summary>
+        [HideInInspector]
+        public Action<Vector3,Vector3> AfterSetValue; 
     }
 }
