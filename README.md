@@ -8,6 +8,8 @@ Input System
 
 Shader Graph
 
+Visual Effect Graph
+
 Universal RP
 
 TextMeshPro
