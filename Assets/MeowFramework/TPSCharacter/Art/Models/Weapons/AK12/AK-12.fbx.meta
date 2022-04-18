@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 2519d7f38355db641a33877d211e41e0
+timeCreated: 1579274971
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Barrel
+    100004: Bolt carrier
+    100006: Buffer Tube
+    100008: Collapsible Stock
+    100010: Fire Selector
+    100012: Front Sight
+    100014: Gas Tube
+    100016: Grip
+    100018: Hand Guard
+    100020: Magazine
+    100022: Muzzle Brake
+    100024: Rails 1
+    100026: Rails 2
+    100028: Rails 3
+    100030: Rear Sight
+    100032: Receiver & Cover
+    100034: Trigger
+    100036: Trigger Guard
+    400000: //RootNode
+    400002: Barrel
+    400004: Bolt carrier
+    400006: Buffer Tube
+    400008: Collapsible Stock
+    400010: Fire Selector
+    400012: Front Sight
+    400014: Gas Tube
+    400016: Grip
+    400018: Hand Guard
+    400020: Magazine
+    400022: Muzzle Brake
+    400024: Rails 1
+    400026: Rails 2
+    400028: Rails 3
+    400030: Rear Sight
+    400032: Receiver & Cover
+    400034: Trigger
+    400036: Trigger Guard
+    2300000: Barrel
+    2300002: Bolt carrier
+    2300004: Buffer Tube
+    2300006: Collapsible Stock
+    2300008: Fire Selector
+    2300010: Front Sight
+    2300012: Gas Tube
+    2300014: Grip
+    2300016: Hand Guard
+    2300018: Magazine
+    2300020: Muzzle Brake
+    2300022: Rails 1
+    2300024: Rails 2
+    2300026: Rails 3
+    2300028: Rear Sight
+    2300030: Receiver & Cover
+    2300032: Trigger
+    2300034: Trigger Guard
+    3300000: Barrel
+    3300002: Bolt carrier
+    3300004: Buffer Tube
+    3300006: Collapsible Stock
+    3300008: Fire Selector
+    3300010: Front Sight
+    3300012: Gas Tube
+    3300014: Grip
+    3300016: Hand Guard
+    3300018: Magazine
+    3300020: Muzzle Brake
+    3300022: Rails 1
+    3300024: Rails 2
+    3300026: Rails 3
+    3300028: Rear Sight
+    3300030: Receiver & Cover
+    3300032: Trigger
+    3300034: Trigger Guard
+    4300000: Barrel
+    4300002: Bolt carrier
+    4300004: Buffer Tube
+    4300006: Collapsible Stock
+    4300008: Fire Selector
+    4300010: Front Sight
+    4300012: Gas Tube
+    4300014: Grip
+    4300016: Hand Guard
+    4300018: Magazine
+    4300020: Muzzle Brake
+    4300022: Rails 1
+    4300024: Rails 2
+    4300026: Rails 3
+    4300028: Rear Sight
+    4300030: Receiver & Cover
+    4300032: Trigger
+    4300034: Trigger Guard
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

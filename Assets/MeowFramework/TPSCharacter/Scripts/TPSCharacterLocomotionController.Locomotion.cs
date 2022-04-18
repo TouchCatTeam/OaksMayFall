@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 12/04/2022 15:46
-// 最后一次修改于: 12/04/2022 15:54
+// 最后一次修改于: 18/04/2022 15:34
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -65,7 +65,7 @@ namespace MeowFramework.TPSCharacter
 	    [BoxGroup("Walk")]
 	    [ShowInInspector]
 	    [Tooltip("移动速度")]
-	    private float walkSpeed = 7f;
+	    private float walkSpeed = 4f;
 
 	    /// <summary>
 	    /// 玩家行走的过渡时间

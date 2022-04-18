@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 12/04/2022 15:54
-// 最后一次修改于: 12/04/2022 15:55
+// 最后一次修改于: 17/04/2022 16:44
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -21,15 +21,6 @@ namespace MeowFramework.TPSCharacter
     /// </summary>
     public partial class TPSCharacterAnimationController
     {
-	    /// <summary>
-        /// 向前的速度
-        /// </summary>
-        [BoxGroup("AnimatorParameter")]
-        [Sirenix.OdinInspector.ReadOnly]
-        [ShowInInspector]
-        [Description("向前的速度")]
-        private float forwardSpeed;
-
         /// <summary>
         /// 向右的速度
         /// </summary>
@@ -39,6 +30,22 @@ namespace MeowFramework.TPSCharacter
         [Description("向右的速度")]
         private float rightSpeed;
 
+        /// <summary>
+        /// 向前的速度
+        /// </summary>
+        [BoxGroup("AnimatorParameter")]
+        [Sirenix.OdinInspector.ReadOnly]
+        [ShowInInspector]
+        [Description("向前的速度")]
+        private float forwardSpeed;
+
+        /// <summary>
+        /// 基准速度
+        /// </summary>
+        [BoxGroup("AnimatorParameter")]
+        [Description("基准速度")]
+        public float StandardSpeed = 10f;
+        
         // 缓存
         
         // 缓存 - 动画机参数计算
@@ -107,24 +114,17 @@ namespace MeowFramework.TPSCharacter
             else
                 Anim.SetBool(animIDFreeFall, true);
 
-            // 移动
-            if (mode == TPSCharacterBehaviourMode.NoWeapon)
-            {
-	            forwardSpeed = LocomotionController.HorizontalVelocity.Value.magnitude;
+            // 摄像机方向
+            cameraForward = Camera.main.transform.forward;
+            cameraRight = Camera.main.transform.right;
+            cameraForward.y = 0;
+            
+            // 移动速度
+            rightSpeed = Vector3.Dot(LocomotionController.HorizontalVelocity.Value, cameraRight);
+            forwardSpeed = Vector3.Dot(LocomotionController.HorizontalVelocity.Value, cameraForward);
 
-	            Anim.SetFloat(animIDForwardSpeed, forwardSpeed);
-            }
-            else if (mode == TPSCharacterBehaviourMode.Rifle)
-            {
-	            cameraForward = Camera.main.transform.forward;
-	            cameraRight = Camera.main.transform.right;
-	            cameraForward.y = 0;
-	            forwardSpeed = Vector3.Dot(LocomotionController.HorizontalVelocity.Value, cameraForward);
-	            rightSpeed = Vector3.Dot(LocomotionController.HorizontalVelocity.Value, cameraRight);
-
-	            Anim.SetFloat(animIDForwardSpeed, forwardSpeed);
-	            Anim.SetFloat(animIDRightSpeed, rightSpeed);
-            }
+            Anim.SetFloat(animIDRightSpeed, rightSpeed/StandardSpeed);
+            Anim.SetFloat(animIDForwardSpeed, forwardSpeed/StandardSpeed);
         }
 
         private void OnBeginMeleeAttack()

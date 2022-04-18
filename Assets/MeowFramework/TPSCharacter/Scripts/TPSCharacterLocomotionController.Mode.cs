@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 12/04/2022 15:48
-// 最后一次修改于: 12/04/2022 15:50
+// 最后一次修改于: 18/04/2022 15:34
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -44,7 +44,7 @@ namespace MeowFramework.TPSCharacter
 	    [BoxGroup("Mode")]
 	    [ShowInInspector]
 	    [Description("没有武器时角色移动速度")]
-	    private float noWeaponWalkSpeed = 7f;
+	    private float noWeaponWalkSpeed = 4f;
 
 	    /// <summary>
 	    /// 持步枪时角色移动速度
@@ -127,10 +127,8 @@ namespace MeowFramework.TPSCharacter
         /// <param name="targetFOV">目标 FOV</param>
         /// <param name="targetSide">目标侧向位置</param>
         /// <returns></returns>
-        private IEnumerator StartModeChange(float targetWalkSpeed, float targetFOV, float targetSide)
+        private IEnumerator StartModeChange(float targetFOV, float targetSide)
         {
-	        walkSpeed = targetWalkSpeed;
-	        
 	        // 摄像机第三人称跟随组件
 	        var camera3rdPersonFollow =
 		        PlayerFollowCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
@@ -174,10 +172,10 @@ namespace MeowFramework.TPSCharacter
 	        switch (mode)
 	        {
 		        case TPSCharacterBehaviourMode.NoWeapon:
-			        modeChangeCoroutine = StartCoroutine(StartModeChange(noWeaponWalkSpeed, noWeaponFOV, noWeaponSide));
+			        modeChangeCoroutine = StartCoroutine(StartModeChange(noWeaponFOV, noWeaponSide));
 			        break;
 		        case TPSCharacterBehaviourMode.Rifle:
-			        modeChangeCoroutine = StartCoroutine(StartModeChange(rifleWalkSpeed, rifleFOV, rifleSide));
+			        modeChangeCoroutine = StartCoroutine(StartModeChange(rifleFOV, rifleSide));
 			        break;
 	        }
         }
