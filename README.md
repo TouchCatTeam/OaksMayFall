@@ -2,6 +2,8 @@
 
 1.Unity Package 依赖列表
 
+Animation Rigging
+
 Cinemachine
 
 Input System
