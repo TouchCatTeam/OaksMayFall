@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 16/03/2022 16:53
-// 最后一次修改于: 12/04/2022 15:54
+// 最后一次修改于: 26/04/2022 9:49
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -70,19 +70,16 @@ namespace MeowFramework.TPSCharacter
 	    {
 		    MainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		    PlayerFollowCamera = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
-	    }
-
-	    public void Start()
-	    {
 		    PlayerFollowCamera.Follow = CMCameraFollowTarget.transform;
-		    
+		    InitSwitchableList();
+	    }
+	    
+	    protected void Update()
+	    {
 		    // 之所以不使用订阅委托的方式调用 Move RotateToMoveDir CameraRotate
 		    // 是因为他们有着 Update LateUpdate 的先后顺序要求
 		    // 同时平滑功能也要求它们是每帧调用的
-	    }
-
-	    protected void Update()
-	    {
+		    
 		    ApplyGravity();
 		    GroundedCheck();
 		    Move();

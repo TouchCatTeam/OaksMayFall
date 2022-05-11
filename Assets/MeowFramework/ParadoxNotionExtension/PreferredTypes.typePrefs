@@ -65,5 +65,5 @@
     "UnityEngine.SceneManagement.SceneManager",
     "UnityEngine.UI.Button",
     "UnityEngine.UI.Slider",
-    "UnityEngine.VFX.VisualEffect"
+    "UnityEngine.Animations.Rigging.RigBuilder"
 ]

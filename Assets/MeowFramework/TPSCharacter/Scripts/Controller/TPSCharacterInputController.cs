@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 14/03/2022 9:54
-// 最后一次修改于: 10/04/2022 20:46
+// 最后一次修改于: 20/04/2022 17:57
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -260,9 +260,10 @@ namespace MeowFramework.TPSCharacter
 			switch (mode)
 			{
 				case TPSCharacterBehaviourMode.NoWeapon:
+				case TPSCharacterBehaviourMode.RifleIdle:
 					EnableSprintInput(true);
 					break;
-				case TPSCharacterBehaviourMode.Rifle:
+				case TPSCharacterBehaviourMode.RifleAiming:
 					EnableSprintInput(false);
 					break;
 			}

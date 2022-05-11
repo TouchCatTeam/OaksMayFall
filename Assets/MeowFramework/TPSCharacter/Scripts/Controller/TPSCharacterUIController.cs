@@ -1,7 +1,7 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 10/04/2022 14:04
-// 最后一次修改于: 12/04/2022 0:20
+// 最后一次修改于: 26/04/2022 10:10
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -43,6 +43,11 @@ namespace MeowFramework.TPSCharacter
         [BoxGroup("Component")]
         [Description("体力条 UI")]
         public GameObject NRGUI;
+        
+        private void Awake()
+        {
+            InitSwitchableList();
+        }
         
     }
 }

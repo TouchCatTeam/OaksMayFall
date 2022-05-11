@@ -1,17 +1,15 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 25/03/2022 23:24
-// 最后一次修改于: 17/04/2022 16:47
+// 最后一次修改于: 26/04/2022 9:30
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
 using System;
 using System.Collections;
-using System.ComponentModel;
-using MeowFramework.Core;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Unity.Collections;
 using UnityEngine;
 
 namespace MeowFramework.TPSCharacter
@@ -39,14 +37,16 @@ namespace MeowFramework.TPSCharacter
         [Tooltip("动画控制器")]
         public Animator Anim;
 
-        public void Start()
+        private void Awake()
         {
             AssignAnimationIDs();
+            InitSwitchableList();
         }
 
-        public void Update()
+        private void Update()
         {
-            SetAnimatorValue();
+            UpdateAnimatorValue();
+            UpdateRig();
         }
     }
 }

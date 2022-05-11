@@ -658,7 +658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4477928686355906}
   m_Layer: 0
-  m_Name: AK-12
+  m_Name: AK12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -867,7 +867,7 @@ GameObject:
   - component: {fileID: 4314492300271326}
   - component: {fileID: 33623290213502418}
   m_Layer: 0
-  m_Name: Magazine
+  m_Name: Magazine Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

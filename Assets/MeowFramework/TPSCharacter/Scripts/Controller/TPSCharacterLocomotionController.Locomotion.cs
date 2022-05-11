@@ -1,7 +1,7 @@
 ﻿// ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 12/04/2022 15:46
-// 最后一次修改于: 18/04/2022 15:34
+// 最后一次修改于: 26/04/2022 10:16
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
@@ -289,7 +289,7 @@ namespace MeowFramework.TPSCharacter
 	        // 期望旋转方向
 	        Vector3 targetRotateDirection;
 	        // 摄像机的前方向
-	        if (mode == TPSCharacterBehaviourMode.Rifle)
+	        if (ShouldRotateToCameraForward.Value)
 		        targetRotateDirection = Camera.main.transform.forward;
 	        else
 		        targetRotateDirection = targetMoveDirection;

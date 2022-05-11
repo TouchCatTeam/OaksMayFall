@@ -1,17 +1,13 @@
 // ----------------------------------------------
 // 作者: 廉价喵
 // 创建于: 12/04/2022 15:54
-// 最后一次修改于: 17/04/2022 16:44
+// 最后一次修改于: 22/04/2022 14:43
 // 版权所有: CheapMeowStudio
 // 描述:
 // ----------------------------------------------
 
-using System;
-using System.Collections;
 using System.ComponentModel;
-using MeowFramework.Core;
 using Sirenix.OdinInspector;
-using Unity.Collections;
 using UnityEngine;
 
 namespace MeowFramework.TPSCharacter
@@ -59,7 +55,7 @@ namespace MeowFramework.TPSCharacter
         /// 摄像机的右方
         /// </summary>
         private Vector3 cameraRight;
-        
+
         // 缓存 - id
 	    
         /// <summary>
@@ -81,28 +77,22 @@ namespace MeowFramework.TPSCharacter
         /// 动画状态机的自由落体参数的 id
         /// </summary>
         private int animIDFreeFall;
-        
-        /// <summary>
-        /// 动画状态机的近战攻击参数的 id
-        /// </summary>
-        private int animIDMeleeAttack;
 
         /// <summary>
         /// 初始化动画状态机参数
         /// </summary>
-        public void AssignAnimationIDs()
+        private void AssignAnimationIDs()
         {
             animIDForwardSpeed = Animator.StringToHash("ForwardSpeed");
             animIDRightSpeed = Animator.StringToHash("RightSpeed");
             animIDGrounded = Animator.StringToHash("Grounded");
             animIDFreeFall = Animator.StringToHash("FreeFall");
-            animIDMeleeAttack = Animator.StringToHash("Attack");
         }
 
         /// <summary>
         /// 设置动画状态机参数
         /// </summary>
-        public void SetAnimatorValue()
+        private void UpdateAnimatorValue()
         {
             // 着地
             Anim.SetBool(animIDGrounded, LocomotionController.IsGrounded);
@@ -125,11 +115,6 @@ namespace MeowFramework.TPSCharacter
 
             Anim.SetFloat(animIDRightSpeed, rightSpeed/StandardSpeed);
             Anim.SetFloat(animIDForwardSpeed, forwardSpeed/StandardSpeed);
-        }
-
-        private void OnBeginMeleeAttack()
-        {
-            Anim.SetTrigger(animIDMeleeAttack);
         }
     }
 }
